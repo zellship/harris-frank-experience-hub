@@ -106,7 +106,17 @@ function DemoCatalog({ onSelect }: { onSelect: (id: ExperienceId) => void }) {
           <img src="/brand/harris-frank-logo.png" alt="Harris & Frank" />
           <span>Capability Demo</span>
         </div>
-        <span className="demo-sample-label">Muestra de integración · 3 superficies</span>
+        <div className="demo-catalog-secondary">
+          <span className="demo-sample-label">Muestra de integración · 3 superficies</span>
+          <a
+            href="https://pos.hf.zellship.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Abrir demo externa de Zellship POS en una pestaña nueva"
+          >
+            Demo Zellship POS <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </header>
 
       <section className="demo-catalog-intro">
