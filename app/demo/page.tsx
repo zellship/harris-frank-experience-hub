@@ -27,7 +27,8 @@ const experiences: Experience[] = [
     family: "Customer & Commerce",
     origin: "Demo propietaria",
     authority: "Demo congelada 9f6402e",
-    disposition: "Reutilización directa · snapshot para validar integración",
+    disposition:
+      "Piloto visual en modo Showcase, sin shell nativo · snapshot para validar presentación; la ruta propietaria real todavía no fue modificada",
     mode: "snapshot",
     image: "/demo/sales-terminal.webp",
   },
