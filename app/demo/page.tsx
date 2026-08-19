@@ -3,13 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./demo.css";
 
-const SHOWCASE_ENTRY = "/harris-frank-capability-showcase/#/presentation-run";
+const SHOWCASE_ENTRY = "/harris-frank-capability-showcase/#/demo";
 
 export default function DemoPage() {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const detachBridgeRef = useRef<(() => void) | null>(null);
   const [ready, setReady] = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
 
   const connectHubBridge = useCallback(() => {
     detachBridgeRef.current?.();
@@ -49,30 +48,16 @@ export default function DemoPage() {
   }, [connectHubBridge]);
 
   useEffect(() => {
-    const handleFullscreenChange = () => setFullscreen(Boolean(document.fullscreenElement));
     const loadingFallback = window.setTimeout(() => {
       setReady(true);
       connectHubBridge();
     }, 1400);
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
       window.clearTimeout(loadingFallback);
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
       detachBridgeRef.current?.();
     };
   }, [connectHubBridge]);
-
-  async function toggleFullscreen() {
-    const stage = document.querySelector<HTMLElement>(".demo-integration");
-    if (!stage) return;
-
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    } else {
-      await stage.requestFullscreen();
-    }
-  }
 
   return (
     <main className={`demo-integration${ready ? " is-ready" : ""}`}>
@@ -80,7 +65,7 @@ export default function DemoPage() {
         <span className="demo-loading-mark">OS</span>
         <div>
           <strong>Harris &amp; Frank Experience Hub</strong>
-          <small>Preparando recorrido ejecutivo</small>
+          <small>Preparando experiencias seleccionadas</small>
         </div>
       </div>
 
@@ -88,32 +73,11 @@ export default function DemoPage() {
         ref={frameRef}
         className="demo-frame"
         src={SHOWCASE_ENTRY}
-        title="Recorrido ejecutivo de capacidades Harris & Frank"
+        title="Demo seleccionada de capacidades Harris & Frank"
         allow="fullscreen"
         allowFullScreen
         onLoad={handleFrameLoad}
       />
-
-      <aside className="demo-utilities" aria-label="Accesos complementarios de la demo">
-        <button
-          type="button"
-          onClick={toggleFullscreen}
-          aria-label={fullscreen ? "Salir de pantalla completa" : "Ver demo en pantalla completa"}
-          title={fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
-        >
-          <span aria-hidden="true">{fullscreen ? "↙" : "⛶"}</span>
-        </button>
-        <a
-          href="https://pos.hf.zellship.com/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Abrir demo secundaria de Zellship POS en una pestaña nueva"
-          title="Demo secundaria de Zellship POS"
-        >
-          <span>Zellship POS</span>
-          <b aria-hidden="true">↗</b>
-        </a>
-      </aside>
     </main>
   );
 }
