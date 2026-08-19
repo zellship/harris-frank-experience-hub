@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "./propuesta.css";
 
@@ -341,6 +341,45 @@ const foundationExcludes = [
   "Paridad total con LS Retail, automatización o inteligencia avanzada",
 ];
 
+type ProposalTrack = "blueprint" | "project";
+
+const proposalTracks = {
+  blueprint: {
+    shortLabel: "Blueprint consultivo",
+    eyebrow: "Resultado consultivo · activo ya construido",
+    title: "El entendimiento operativo convertido en un activo arquitectónico.",
+    lead:
+      "Hallazgos, definiciones, modelos y evidencia que explican cómo debe organizarse la operación antes de decidir qué construir.",
+    definition:
+      "Documenta lo que ya se entendió y definió. Orienta decisiones futuras, pero no equivale por sí mismo al alcance contratado.",
+    chapters: [
+      ["proposal-top", "Portada"],
+      ["principles", "Principios"],
+      ["discoveries", "Hallazgos"],
+      ["architecture", "Arquitectura"],
+      ["model", "Modelo ejecutable"],
+      ["evidence", "Evidencia"],
+    ],
+  },
+  project: {
+    shortLabel: "Propuesta de proyecto",
+    eyebrow: "Ejecución futura · sujeta a contrato",
+    title: "Una trayectoria inicial y una capacidad anual para evolucionar.",
+    lead:
+      "Foundation Release, gobierno, inversión y términos para convertir prioridades acordadas en versiones utilizables del Business OS.",
+    definition:
+      "Describe lo que se propone contratar: alcance inicial, forma de trabajo, inversión, condiciones y responsabilidades.",
+    chapters: [
+      ["proposal-top", "Portada"],
+      ["programa", "Programa"],
+      ["foundation", "Foundation"],
+      ["gobierno", "Gobierno"],
+      ["terminos", "Términos"],
+      ["decision", "Decisión"],
+    ],
+  },
+} as const;
+
 function AccountModel() {
   return (
     <div className="account-model" aria-label="Modelo visual de cuenta y partidas">
@@ -454,10 +493,151 @@ function PromiseModel() {
 export default function ProposalBlueprintPage() {
   const [activeModel, setActiveModel] = useState<"account" | "triage" | "promise">("account");
   const [activeCapabilityId, setActiveCapabilityId] = useState("passport");
+  const [activeTrack, setActiveTrack] = useState<ProposalTrack>("blueprint");
+  const [activeChapter, setActiveChapter] = useState("proposal-top");
+  const [controlsVisible, setControlsVisible] = useState(true);
+  const [indexOpen, setIndexOpen] = useState(false);
+  const hideControlsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeCapability =
     allStrategicCapabilities.find(
       (capability) => capability.id === activeCapabilityId,
     ) ?? allStrategicCapabilities[0];
+  const track = proposalTracks[activeTrack];
+  const chapters = track.chapters;
+  const activeChapterIndex = Math.max(
+    0,
+    chapters.findIndex(([id]) => id === activeChapter),
+  );
+
+  const revealControls = useCallback(() => {
+    setControlsVisible(true);
+    if (hideControlsTimer.current) clearTimeout(hideControlsTimer.current);
+    hideControlsTimer.current = setTimeout(() => {
+      setControlsVisible(false);
+      setIndexOpen(false);
+    }, 2800);
+  }, []);
+
+  const goToChapter = useCallback(
+    (id: string, behavior: ScrollBehavior = "smooth") => {
+      setActiveChapter(id);
+      const hash = id === "proposal-top" ? activeTrack : `${activeTrack}-${id}`;
+      window.history.replaceState(null, "", `#${hash}`);
+      document.getElementById(id)?.scrollIntoView({ behavior, block: "start" });
+      setIndexOpen(false);
+      revealControls();
+    },
+    [activeTrack, revealControls],
+  );
+
+  const chooseTrack = useCallback(
+    (nextTrack: ProposalTrack) => {
+      setActiveTrack(nextTrack);
+      setActiveChapter("proposal-top");
+      window.history.replaceState(null, "", `#${nextTrack}`);
+      requestAnimationFrame(() => {
+        document
+          .getElementById("proposal-top")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      setIndexOpen(false);
+      revealControls();
+    },
+    [revealControls],
+  );
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const requestedTrack: ProposalTrack = hash.startsWith("project")
+      ? "project"
+      : "blueprint";
+    const requestedId = hash.replace(`${requestedTrack}-`, "");
+    const validId = proposalTracks[requestedTrack].chapters.some(
+      ([id]) => id === requestedId,
+    )
+      ? requestedId
+      : "proposal-top";
+    requestAnimationFrame(() => {
+      setActiveTrack(requestedTrack);
+      setActiveChapter(validId);
+      window.setTimeout(() => {
+        setActiveChapter(validId);
+        document.getElementById(validId)?.scrollIntoView({ block: "start" });
+      }, 80);
+    });
+    hideControlsTimer.current = setTimeout(() => {
+      setControlsVisible(false);
+      setIndexOpen(false);
+    }, 2800);
+    return () => {
+      if (hideControlsTimer.current) clearTimeout(hideControlsTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateActiveChapter = () => {
+      const viewportFocus = window.innerHeight * 0.42;
+      let closestId = chapters[0][0];
+      let closestDistance = Number.POSITIVE_INFINITY;
+      chapters.forEach(([id]) => {
+        const element = document.getElementById(id);
+        if (!element) return;
+        const rect = element.getBoundingClientRect();
+        const distance = Math.abs(rect.top - viewportFocus);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestId = id;
+        }
+      });
+      setActiveChapter(closestId);
+    };
+    updateActiveChapter();
+    window.addEventListener("scroll", updateActiveChapter, { passive: true });
+    window.addEventListener("resize", updateActiveChapter);
+    return () => {
+      window.removeEventListener("scroll", updateActiveChapter);
+      window.removeEventListener("resize", updateActiveChapter);
+    };
+  }, [chapters]);
+
+  useEffect(() => {
+    const handleKeyboard = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (
+        target?.closest(
+          "input, textarea, select, summary, [contenteditable='true'], .model-tabs, .capability-stack, .term-details-grid",
+        )
+      ) {
+        return;
+      }
+      revealControls();
+      if (["ArrowRight", "ArrowDown", "PageDown"].includes(event.key)) {
+        event.preventDefault();
+        const next = Math.min(activeChapterIndex + 1, chapters.length - 1);
+        goToChapter(chapters[next][0]);
+      } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        const previous = Math.max(activeChapterIndex - 1, 0);
+        goToChapter(chapters[previous][0]);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        goToChapter(chapters[0][0]);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        goToChapter(chapters[chapters.length - 1][0]);
+      } else if (event.key.toLowerCase() === "i") {
+        setIndexOpen((current) => !current);
+      }
+    };
+    window.addEventListener("keydown", handleKeyboard);
+    window.addEventListener("pointermove", revealControls, { passive: true });
+    window.addEventListener("pointerdown", revealControls, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", handleKeyboard);
+      window.removeEventListener("pointermove", revealControls);
+      window.removeEventListener("pointerdown", revealControls);
+    };
+  }, [activeChapterIndex, chapters, goToChapter, revealControls]);
 
   return (
     <main className="proposal-shell">
@@ -469,45 +649,90 @@ export default function ProposalBlueprintPage() {
           <span>Propuesta ejecutiva</span>
         </div>
         <nav aria-label="Navegación de la propuesta">
-          <a href="#programa">Programa</a>
-          <a href="#foundation">Foundation</a>
-          <a href="#gobierno">Gobierno</a>
-          <a href="#terminos">Términos</a>
-          <a href="#architecture">Arquitectura</a>
+          <button
+            type="button"
+            className={activeTrack === "blueprint" ? "is-active" : ""}
+            onClick={() => chooseTrack("blueprint")}
+          >
+            Blueprint consultivo
+          </button>
+          <button
+            type="button"
+            className={activeTrack === "project" ? "is-active" : ""}
+            onClick={() => chooseTrack("project")}
+          >
+            Propuesta de proyecto
+          </button>
         </nav>
       </header>
 
-      <section className="proposal-hero">
+      <section className={`proposal-hero track-${activeTrack}`} id="proposal-top">
         <div className="blueprint-grid" aria-hidden="true" />
         <div className="hero-orbit orbit-one" aria-hidden="true" />
         <div className="hero-orbit orbit-two" aria-hidden="true" />
         <div className="proposal-hero-copy">
-          <div className="draft-label"><i /> Propuesta comercial vigente · sujeta a contrato</div>
-          <p className="proposal-eyebrow">Business OS · Programa anual</p>
-          <h1>
-            De una operación extraordinaria
-            <span>a una capacidad que evoluciona.</span>
-          </h1>
-          <p className="proposal-lead">
-            Un programa de doce meses para convertir prioridades en procesos
-            estandarizados, capacidades ejecutables y versiones utilizables del
-            Business OS.
-          </p>
-          <a className="explore-link" href="#programa">Explorar la propuesta <span>↓</span></a>
+          <div className="proposal-track-selector" aria-label="Seleccionar documento">
+            <button
+              type="button"
+              className={activeTrack === "blueprint" ? "is-active" : ""}
+              onClick={() => chooseTrack("blueprint")}
+            >
+              <i>01</i>
+              <span>Blueprint consultivo<small>Lo ya entendido y definido</small></span>
+            </button>
+            <button
+              type="button"
+              className={activeTrack === "project" ? "is-active" : ""}
+              onClick={() => chooseTrack("project")}
+            >
+              <i>02</i>
+              <span>Propuesta de proyecto<small>Lo que se propone ejecutar</small></span>
+            </button>
+          </div>
+          <div className="draft-label"><i /> {track.eyebrow}</div>
+          <p className="proposal-eyebrow">Harris &amp; Frank · Business OS</p>
+          <h1>{track.title}</h1>
+          <p className="proposal-lead">{track.lead}</p>
+          <div className="track-definition">
+            <strong>Frontera del documento</strong>
+            <span>{track.definition}</span>
+          </div>
+          <button
+            className="explore-link"
+            type="button"
+            onClick={() => goToChapter(chapters[1][0])}
+          >
+            {activeTrack === "blueprint" ? "Explorar el resultado consultivo" : "Explorar la propuesta de ejecución"}
+            <span>↓</span>
+          </button>
         </div>
 
         <div className="proposal-metrics" aria-label="Estructura del programa">
-          <div><strong>12</strong><span>meses de compromiso inicial</span></div>
-          <div><strong>8</strong><span>semanas de Foundation Release</span></div>
-          <div><strong>20</strong><span>sprints de evolución estimados</span></div>
-          <div><strong>1</strong><span>sucursal piloto por definir</span></div>
+          {activeTrack === "project" ? (
+            <>
+              <div><strong>12</strong><span>meses de compromiso inicial</span></div>
+              <div><strong>8</strong><span>semanas de Foundation Release</span></div>
+              <div><strong>20</strong><span>sprints de evolución estimados</span></div>
+              <div><strong>1</strong><span>sucursal piloto por definir</span></div>
+            </>
+          ) : (
+            <>
+              <div><strong>6</strong><span>principios de diseño operativo</span></div>
+              <div><strong>4</strong><span>hallazgos convertidos en decisiones</span></div>
+              <div><strong>12</strong><span>capacidades estratégicas conectadas</span></div>
+              <div><strong>6</strong><span>artefactos de evidencia y soporte</span></div>
+            </>
+          )}
         </div>
       </section>
+
+      {activeTrack === "project" && (
+        <div className="proposal-track-content track-content-project">
 
       <section className="commercial-section" id="programa">
         <div className="section-intro is-light commercial-heading">
           <p>La decisión comercial</p>
-          <h2>No una bolsa abierta de desarrollo.<br />Una capacidad continua de evolución.</h2>
+          <h2>Una capacidad continua de evolución con alcance gobernado.</h2>
           <span>
             La visión anual orienta el programa. Cada alcance concreto se decide
             dentro de la capacidad contratada, con criterios y evidencia.
@@ -565,7 +790,7 @@ export default function ProposalBlueprintPage() {
       <section className="foundation-section" id="foundation">
         <div className="section-intro">
           <p>Foundation Release</p>
-          <h2>Una trayectoria completa.<br />No una colección de pantallas.</h2>
+          <h2>Una trayectoria operativa completa que llega a piloto.</h2>
           <span>
             El arranque protege una promesa de principio a fin y deja la base
             para evolucionar con menor riesgo.
@@ -774,10 +999,26 @@ export default function ProposalBlueprintPage() {
         </p>
       </section>
 
+      <section className="proposal-close" id="decision">
+        <p>Decisión solicitada</p>
+        <h2>Activar el Foundation Release y gobernar la evolución durante doce meses.</h2>
+        <div>
+          <Link href="/demo">Ver el sistema en acción <span>→</span></Link>
+          <button type="button" className="secondary" onClick={() => chooseTrack("blueprint")}>Revisar Blueprint consultivo</button>
+          <Link href="/presentacion/scrollytelling" className="secondary">Ver presentación</Link>
+        </div>
+        <small>Propuesta comercial vigente sujeta al contrato definitivo.</small>
+      </section>
+        </div>
+      )}
+
+      {activeTrack === "blueprint" && (
+        <div className="proposal-track-content track-content-blueprint">
+
       <section className="principles-section" id="principles">
         <div className="section-intro">
           <p>Por qué podemos hacerlo</p>
-          <h2>Seis decisiones que cambian cómo se diseña el sistema</h2>
+          <h2>Seis decisiones que orientan el diseño del sistema</h2>
           <span>
             Principios derivados del entendimiento operativo; no una lista de
             funciones de software.
@@ -796,10 +1037,10 @@ export default function ProposalBlueprintPage() {
         </div>
       </section>
 
-      <section className="discoveries-section">
+      <section className="discoveries-section" id="discoveries">
         <div className="section-intro is-light">
           <p>Hallazgos convertidos en diseño</p>
-          <h2>La operación extraordinaria exige definiciones extraordinariamente claras</h2>
+          <h2>Definiciones operativas que orientan decisiones de diseño</h2>
         </div>
         <div className="discoveries-list">
           {discoveries.map((discovery, index) => (
@@ -817,7 +1058,7 @@ export default function ProposalBlueprintPage() {
         <div className="architecture-heading">
           <div className="section-intro">
             <p>Una estrategia conectada</p>
-            <h2>No es un catálogo de funciones.<br />Es una arquitectura de capacidades.</h2>
+            <h2>Una arquitectura de capacidades conectadas.</h2>
             <span>
               Doce decisiones estratégicas organizadas alrededor de cuatro
               familias. Selecciona una capacidad para explorar su fundamento.
@@ -874,6 +1115,40 @@ export default function ProposalBlueprintPage() {
             <i>Blueprint operativo</i>
           </footer>
         </article>
+
+        <article className="semantic-foundation">
+          <div className="semantic-foundation-copy">
+            <span>Activo arquitectónico transversal</span>
+            <h3>Taxonomía, ontología y semántica compartida</h3>
+            <p>
+              Definir con precisión conceptos, entidades, relaciones, estados y
+              eventos reduce ambigüedad entre personas, procesos, datos e
+              integraciones.
+            </p>
+          </div>
+          <div className="semantic-foundation-grid">
+            <div>
+              <i>01</i>
+              <strong>Taxonomía</strong>
+              <p>Ordena el vocabulario y las clasificaciones del negocio.</p>
+            </div>
+            <div>
+              <i>02</i>
+              <strong>Ontología</strong>
+              <p>Define qué existe y cómo se relaciona dentro de la operación.</p>
+            </div>
+            <div>
+              <i>03</i>
+              <strong>Semántica</strong>
+              <p>Conserva significados comunes en reglas, datos y eventos.</p>
+            </div>
+          </div>
+          <footer>
+            Esta base facilita incorporar IA con menor dependencia de un proveedor
+            o modelo específico; no implica una capacidad de IA incluida
+            automáticamente en Foundation.
+          </footer>
+        </article>
       </section>
 
       <section className="model-section" id="model">
@@ -926,15 +1201,96 @@ export default function ProposalBlueprintPage() {
         </div>
       </section>
 
-      <section className="proposal-close">
-        <p>Decisión solicitada</p>
-        <h2>Activar el Foundation Release.<br />Evolucionar con evidencia durante doce meses.</h2>
+      <section className="proposal-close blueprint-close">
+        <p>Siguiente lectura</p>
+        <h2>Del activo consultivo a una trayectoria de ejecución delimitada.</h2>
         <div>
-          <Link href="/demo">Ver el sistema en acción <span>→</span></Link>
-          <Link href="/presentacion/scrollytelling" className="secondary">Ver presentación</Link>
+          <button type="button" onClick={() => chooseTrack("project")}>Revisar propuesta de proyecto <span>→</span></button>
           <Link href="/" className="secondary">Volver al Hub</Link>
         </div>
+        <small>El Blueprint orienta la propuesta; no amplía automáticamente el alcance de ejecución.</small>
       </section>
+        </div>
+      )}
+
+      <aside
+        className={`proposal-rail ${controlsVisible ? "is-visible" : "is-hidden"}`}
+        aria-label={`Capítulos de ${track.shortLabel}`}
+        aria-hidden={!controlsVisible}
+      >
+        {chapters.map(([id, label], index) => (
+          <button
+            key={id}
+            type="button"
+            className={activeChapter === id ? "is-active" : ""}
+            onClick={() => goToChapter(id)}
+            tabIndex={controlsVisible ? 0 : -1}
+            aria-label={`Ir a ${label}`}
+          >
+            <i>{String(index + 1).padStart(2, "0")}</i>
+            <span>{label}</span>
+          </button>
+        ))}
+      </aside>
+
+      <div
+        className={`proposal-controller ${controlsVisible ? "is-visible" : "is-hidden"}`}
+        aria-hidden={!controlsVisible}
+      >
+        <button
+          type="button"
+          onClick={() => goToChapter(chapters[Math.max(activeChapterIndex - 1, 0)][0])}
+          disabled={activeChapterIndex === 0}
+          tabIndex={controlsVisible ? 0 : -1}
+          aria-label="Capítulo anterior"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          className="proposal-controller-index"
+          onClick={() => setIndexOpen((current) => !current)}
+          tabIndex={controlsVisible ? 0 : -1}
+          aria-expanded={indexOpen}
+        >
+          <span>{track.shortLabel}</span>
+          <strong>{chapters[activeChapterIndex][1]}</strong>
+          <i>{activeChapterIndex + 1} / {chapters.length}</i>
+        </button>
+        <button
+          type="button"
+          onClick={() => goToChapter(chapters[Math.min(activeChapterIndex + 1, chapters.length - 1)][0])}
+          disabled={activeChapterIndex === chapters.length - 1}
+          tabIndex={controlsVisible ? 0 : -1}
+          aria-label="Capítulo siguiente"
+        >
+          →
+        </button>
+      </div>
+
+      {indexOpen && controlsVisible && (
+        <div className="proposal-index" role="dialog" aria-label="Índice de la propuesta">
+          <header>
+            <span>{track.shortLabel}</span>
+            <button type="button" onClick={() => setIndexOpen(false)} aria-label="Cerrar índice">×</button>
+          </header>
+          <div>
+            {chapters.map(([id, label], index) => (
+              <button
+                type="button"
+                key={id}
+                className={activeChapter === id ? "is-active" : ""}
+                onClick={() => goToChapter(id)}
+              >
+                <i>{String(index + 1).padStart(2, "0")}</i>
+                <span>{label}</span>
+                <em>→</em>
+              </button>
+            ))}
+          </div>
+          <footer>← → · avanzar &nbsp; I · índice &nbsp; Home / End · inicio / cierre</footer>
+        </div>
+      )}
     </main>
   );
 }
