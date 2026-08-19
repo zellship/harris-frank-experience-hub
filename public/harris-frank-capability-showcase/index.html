@@ -13,8 +13,57 @@
     <title>Harris &amp; Frank Capability Showcase</title>
     <script type="module" crossorigin src="./assets/index-DLz7N4wM.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-ZSxzqibb.css">
+    <style>
+      @media (min-width: 961px) {
+        .hfld-secondary nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="showcase-root"></div>
+    <script>
+      (() => {
+        const retailDemoUrl =
+          "https://zellship.github.io/zellship-maintenance-os-demo/retail/";
+
+        const addRetailDemoAccess = () => {
+          const secondaryNavigation = document.querySelector(
+            ".hfld-secondary nav",
+          );
+          if (
+            !secondaryNavigation ||
+            secondaryNavigation.querySelector("[data-retail-demo-link]")
+          ) {
+            return;
+          }
+
+          const link = document.createElement("a");
+          link.href = retailDemoUrl;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          link.dataset.retailDemoLink = "true";
+          link.setAttribute(
+            "aria-label",
+            "Abrir demo operativa Retail en una pestaña nueva",
+          );
+
+          const icon = document.createElement("span");
+          icon.setAttribute("aria-hidden", "true");
+          icon.textContent = "↗";
+
+          link.append(icon, " Demo operativa Retail");
+          secondaryNavigation.insertBefore(
+            link,
+            secondaryNavigation.children[1] || null,
+          );
+        };
+
+        const observer = new MutationObserver(addRetailDemoAccess);
+        observer.observe(document.body, { childList: true, subtree: true });
+        addRetailDemoAccess();
+      })();
+    </script>
   </body>
 </html>
