@@ -154,6 +154,8 @@ export default function Home() {
     setActivePortal(title);
     if (title === "Presentación") {
       window.location.assign("/presentacion");
+    } else if (title === "Demo") {
+      window.location.assign("/demo");
     }
   }
 
