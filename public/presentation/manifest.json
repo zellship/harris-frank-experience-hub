@@ -1,0 +1,24 @@
+{
+  "title": "Harris & Frank · Programa de Evolución Operativa",
+  "versionLabel": "Versión provisional v4.0",
+  "status": "draft",
+  "slides": [
+    { "id": "01", "title": "Portada", "src": "/presentation/slides/slide-01.webp" },
+    { "id": "02", "title": "Extraordinario por diseño", "src": "/presentation/slides/slide-02.webp" },
+    { "id": "03", "title": "Tesis", "src": "/presentation/slides/slide-03.webp" },
+    { "id": "04", "title": "Evidencia", "src": "/presentation/slides/slide-04.webp" },
+    { "id": "05", "title": "Una categoría distinta", "src": "/presentation/slides/slide-05.webp" },
+    { "id": "06", "title": "Comparación Blue Ocean", "src": "/presentation/slides/slide-06.webp" },
+    { "id": "07", "title": "El servicio completo", "src": "/presentation/slides/slide-07.webp" },
+    { "id": "08", "title": "Activos recibidos", "src": "/presentation/slides/slide-08.webp" },
+    { "id": "09", "title": "Equipo extendido", "src": "/presentation/slides/slide-09.webp" },
+    { "id": "10", "title": "Showcase", "src": "/presentation/slides/slide-10.webp" },
+    { "id": "11", "title": "Valor temprano", "src": "/presentation/slides/slide-11.webp" },
+    { "id": "12", "title": "Waves y gates", "src": "/presentation/slides/slide-12.webp" },
+    { "id": "13", "title": "Mitigación de riesgo", "src": "/presentation/slides/slide-13.webp" },
+    { "id": "14", "title": "Control y continuidad", "src": "/presentation/slides/slide-14.webp" },
+    { "id": "15", "title": "Alcance claro", "src": "/presentation/slides/slide-15.webp" },
+    { "id": "16", "title": "Inversión y gobierno", "src": "/presentation/slides/slide-16.webp" },
+    { "id": "17", "title": "Cierre", "src": "/presentation/slides/slide-17.webp" }
+  ]
+}

@@ -28,6 +28,583 @@ button {
   font: inherit;
 }
 
+/* Presentation player */
+.presentation-player {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 68px minmax(0, 1fr) 88px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(92, 58, 156, 0.2), transparent 38%),
+    linear-gradient(145deg, #07050b, #11091b 52%, #08050e);
+}
+
+.presentation-player::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: 0.24;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.player-header {
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 0 clamp(18px, 3vw, 46px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 6, 14, 0.72);
+  backdrop-filter: blur(22px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.player-back,
+.player-header-actions button,
+.index-trigger,
+.player-controls button,
+.index-heading button {
+  color: inherit;
+}
+
+.player-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: max-content;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.player-back:hover {
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+.player-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.player-title img {
+  width: 154px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.player-title span {
+  padding-left: 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.player-header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 10px;
+}
+
+.version-chip {
+  padding: 7px 10px;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 999px;
+  color: #dec478;
+  background: rgba(201, 168, 76, 0.08);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.player-header-actions button,
+.index-trigger {
+  padding: 9px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.player-header-actions button:hover,
+.index-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.slide-workspace {
+  display: grid;
+  min-height: 0;
+  place-items: center;
+  padding: clamp(18px, 3vh, 34px) clamp(18px, 4vw, 64px) 12px;
+}
+
+.slide-stage {
+  position: relative;
+  width: min(100%, calc((100vh - 190px) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 38px 100px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.025);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.active-slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: slide-reveal 340ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.player-controls {
+  z-index: 5;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 140px minmax(140px, 190px) 140px;
+  align-items: center;
+  padding: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  background: rgba(15, 10, 23, 0.82);
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(22px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.player-controls button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.control-direction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 42px;
+  border-radius: 10px !important;
+  color: rgba(255, 255, 255, 0.76) !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.control-direction:hover:not(:disabled) {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.control-direction:disabled {
+  opacity: 0.24;
+  cursor: default;
+}
+
+.slide-position {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.slide-position i {
+  position: relative;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.slide-position i::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.7);
+}
+
+.index-trigger {
+  position: fixed;
+  z-index: 6;
+  right: clamp(18px, 3vw, 44px);
+  bottom: 28px;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.slide-index {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: visibility 0s linear 280ms, opacity 240ms ease;
+}
+
+.slide-index.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.index-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: rgba(3, 2, 6, 0.78);
+  backdrop-filter: blur(10px);
+  cursor: default;
+}
+
+.index-panel {
+  position: absolute;
+  inset: clamp(18px, 4vw, 56px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  max-width: 1180px;
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  background: rgba(16, 11, 24, 0.96);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.55);
+  transform: translateY(16px) scale(0.985);
+  transition: transform 280ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.slide-index.is-open .index-panel {
+  transform: translateY(0) scale(1);
+}
+
+.index-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.index-heading span {
+  color: #c8a94f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.index-heading h2 {
+  margin: 5px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+}
+
+.index-heading button {
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.055);
+  cursor: pointer;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px 28px 34px;
+  overflow-y: auto;
+}
+
+.thumbnail-grid > button {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.035);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.thumbnail-grid > button:hover,
+.thumbnail-grid > button.is-current {
+  border-color: rgba(201, 168, 76, 0.5);
+  background: rgba(201, 168, 76, 0.08);
+  transform: translateY(-2px);
+}
+
+.thumbnail-image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.thumbnail-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-label {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 7px;
+  padding: 0 3px 4px;
+}
+
+.thumbnail-label small {
+  color: #c8a94f;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.thumbnail-label strong {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.presentation-player.is-fullscreen {
+  grid-template-rows: 0 minmax(0, 1fr) 0;
+}
+
+.presentation-player.is-fullscreen .player-header {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+}
+
+.presentation-player.is-fullscreen .slide-workspace {
+  padding: 0;
+}
+
+.presentation-player.is-fullscreen .slide-stage {
+  width: min(100vw, calc(100vh * 16 / 9));
+  max-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+.presentation-player.is-fullscreen .player-controls,
+.presentation-player.is-fullscreen .index-trigger {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+}
+
+.presentation-player.is-fullscreen .player-controls {
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 12px);
+}
+
+.presentation-player.is-fullscreen.controls-visible .player-controls,
+.presentation-player.is-fullscreen.controls-visible .index-trigger {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.presentation-player.is-fullscreen.controls-visible .player-controls {
+  transform: translate(-50%, 0);
+}
+
+.presentation-player.is-fullscreen.controls-visible .index-trigger {
+  transform: translateY(0);
+}
+
+.presentation-status {
+  display: grid;
+  min-height: 100svh;
+  place-content: center;
+  justify-items: center;
+  gap: 18px;
+  padding: 24px;
+  background: radial-gradient(circle, #1c1031, #08050d 58%);
+  text-align: center;
+}
+
+.presentation-status p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.presentation-status a {
+  color: #d6bb6d;
+}
+
+.presentation-loader {
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: loader-spin 800ms linear infinite;
+}
+
+@keyframes slide-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.994);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 920px) {
+  .player-header {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .player-title {
+    justify-self: center;
+  }
+
+  .player-title span,
+  .version-chip {
+    display: none;
+  }
+
+  .thumbnail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .presentation-player {
+    grid-template-rows: 58px minmax(0, 1fr) 76px;
+  }
+
+  .player-header {
+    padding: 0 14px;
+  }
+
+  .player-title img {
+    width: 122px;
+  }
+
+  .player-header-actions button {
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    padding: 0;
+    color: transparent;
+    white-space: nowrap;
+  }
+
+  .player-header-actions button::after {
+    content: "↗";
+    display: grid;
+    height: 100%;
+    place-items: center;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .slide-workspace {
+    padding: 14px 10px 6px;
+  }
+
+  .slide-stage {
+    width: 100%;
+    border-radius: 7px;
+  }
+
+  .player-controls {
+    grid-template-columns: 54px minmax(112px, 150px) 54px;
+  }
+
+  .control-direction {
+    font-size: 0;
+  }
+
+  .control-direction span {
+    font-size: 18px;
+  }
+
+  .index-trigger {
+    right: 14px;
+    bottom: 20px;
+    padding: 8px 10px;
+    font-size: 9px;
+  }
+
+  .index-panel {
+    inset: 8px;
+    border-radius: 15px;
+  }
+
+  .index-heading {
+    padding: 18px 16px 15px;
+  }
+
+  .index-heading h2 {
+    font-size: 23px;
+  }
+
+  .thumbnail-grid {
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .thumbnail-label {
+    grid-template-columns: 21px minmax(0, 1fr);
+  }
+}
+
 .hub-shell {
   --pointer-x: 0;
   --pointer-y: 0;

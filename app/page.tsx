@@ -150,6 +150,13 @@ export default function Home() {
     shell.style.setProperty("--pointer-y", y.toFixed(3));
   }
 
+  function openPortal(title: string) {
+    setActivePortal(title);
+    if (title === "Presentación") {
+      window.location.assign("/presentacion");
+    }
+  }
+
   return (
     <main
       ref={shellRef}
@@ -219,7 +226,7 @@ export default function Home() {
                 "--portal-delay": `${680 + index * 90}ms`,
               } as React.CSSProperties
             }
-            onClick={() => setActivePortal(portal.title)}
+            onClick={() => openPortal(portal.title)}
             aria-label={`Abrir ${portal.title}`}
           >
             <span className="portal-number">{portal.number}</span>
