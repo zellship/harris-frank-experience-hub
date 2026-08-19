@@ -133,19 +133,23 @@ button {
 }
 
 .player-header-actions button,
-.index-trigger {
+.index-trigger,
+.scrolly-preview-link {
   padding: 9px 13px;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 9px;
+  color: rgba(255, 255, 255, 0.82);
   background: rgba(255, 255, 255, 0.055);
   font-size: 11px;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   transition: border-color 180ms ease, background 180ms ease;
 }
 
 .player-header-actions button:hover,
-.index-trigger:hover {
+.index-trigger:hover,
+.scrolly-preview-link:hover {
   border-color: rgba(255, 255, 255, 0.3);
   background: rgba(255, 255, 255, 0.1);
 }
