@@ -54,6 +54,7 @@ const teamRoles = [
 
 export default function ScrollytellingPresentation() {
   const shellRef = useRef<HTMLElement>(null);
+  const controlsTimerRef = useRef<number | null>(null);
   const [activeChapter, setActiveChapter] = useState(0);
   const [domain, setDomain] = useState(1);
   const [approach, setApproach] = useState(2);
@@ -61,12 +62,25 @@ export default function ScrollytellingPresentation() {
   const [capability, setCapability] = useState(0);
   const [indexOpen, setIndexOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(true);
 
   const goToChapter = useCallback((index: number) => {
     const next = Math.max(0, Math.min(chapters.length - 1, index));
+    setActiveChapter(next);
+    window.history.replaceState(null, "", `#${chapters[next].id}`);
     document.getElementById(chapters[next].id)?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     setIndexOpen(false);
   }, []);
+
+  const revealControls = useCallback(() => {
+    setControlsVisible(true);
+    if (controlsTimerRef.current) window.clearTimeout(controlsTimerRef.current);
+    if (indexOpen) return;
+    controlsTimerRef.current = window.setTimeout(() => {
+      const focusedControl = document.querySelector(".story-controller:focus-within, .chapter-rail:focus-within");
+      if (!focusedControl) setControlsVisible(false);
+    }, 2400);
+  }, [indexOpen]);
 
   useEffect(() => {
     let frame = 0;
@@ -93,15 +107,49 @@ export default function ScrollytellingPresentation() {
 
   useEffect(() => {
     const sections = chapters.map(({ id }) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      const index = chapters.findIndex(({ id }) => id === visible.target.id);
-      if (index >= 0) { setActiveChapter(index); window.history.replaceState(null, "", `#${chapters[index].id}`); }
-    }, { threshold: [0.38, 0.55, 0.72] });
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    let frame = 0;
+    const syncVisibleChapter = () => {
+      frame = 0;
+      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      const index = sections.reduce((closest, section, sectionIndex) => {
+        const sectionCenter = section.offsetTop + section.offsetHeight / 2;
+        const closestSection = sections[closest];
+        const closestCenter = closestSection.offsetTop + closestSection.offsetHeight / 2;
+        return Math.abs(sectionCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? sectionIndex : closest;
+      }, 0);
+      setActiveChapter(index);
+      if (window.location.hash !== `#${chapters[index].id}`) window.history.replaceState(null, "", `#${chapters[index].id}`);
+    };
+    const requestSync = () => {
+      if (!frame) frame = window.requestAnimationFrame(syncVisibleChapter);
+    };
+    requestSync();
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
+    return () => {
+      window.removeEventListener("scroll", requestSync);
+      window.removeEventListener("resize", requestSync);
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!indexOpen) {
+      controlsTimerRef.current = window.setTimeout(() => {
+        const focusedControl = document.querySelector(".story-controller:focus-within, .chapter-rail:focus-within");
+        if (!focusedControl) setControlsVisible(false);
+      }, 2400);
+    }
+    window.addEventListener("pointermove", revealControls, { passive: true });
+    window.addEventListener("pointerdown", revealControls, { passive: true });
+    window.addEventListener("keydown", revealControls);
+    return () => {
+      window.removeEventListener("pointermove", revealControls);
+      window.removeEventListener("pointerdown", revealControls);
+      window.removeEventListener("keydown", revealControls);
+      if (controlsTimerRef.current) window.clearTimeout(controlsTimerRef.current);
+    };
+  }, [indexOpen, revealControls]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -138,15 +186,15 @@ export default function ScrollytellingPresentation() {
   async function toggleFullscreen() { if (document.fullscreenElement) await document.exitFullscreen(); else await shellRef.current?.requestFullscreen(); }
 
   return (
-    <main ref={shellRef} className="story-shell">
+    <main ref={shellRef} className={`story-shell ${controlsVisible ? "controls-visible" : "controls-hidden"}`}>
       <header className="story-header">
         <Link href="/presentacion" className="story-back"><span aria-hidden="true">←</span> Presentación actual</Link>
         <div className="story-brand"><img src="/brand/harris-frank-logo.png" alt="Harris & Frank" /><span>Presentación narrativa</span></div>
-        <div className="story-header-actions"><span className="story-draft">Síntesis v1–v4</span><button type="button" onClick={() => void toggleFullscreen()}>{isFullscreen ? "Salir" : "Pantalla completa"}</button></div>
+        <div className="story-header-actions"><button type="button" onClick={() => void toggleFullscreen()}>{isFullscreen ? "Salir" : "Pantalla completa"}</button></div>
       </header>
 
-      <nav className="chapter-rail" aria-label="Capítulos de la presentación">
-        {chapters.map((chapter, index) => <button key={chapter.id} className={index === activeChapter ? "is-active" : ""} type="button" onClick={() => goToChapter(index)} aria-label={`Ir a ${chapter.label}`} aria-current={index === activeChapter ? "step" : undefined}><i /><span>{chapter.number}</span><strong>{chapter.label}</strong></button>)}
+      <nav className="chapter-rail" aria-label="Capítulos de la presentación" aria-hidden={!controlsVisible}>
+        {chapters.map((chapter, index) => <button key={chapter.id} className={index === activeChapter ? "is-active" : ""} type="button" onClick={() => goToChapter(index)} aria-label={`Ir a ${chapter.label}`} aria-current={index === activeChapter ? "step" : undefined} tabIndex={controlsVisible ? 0 : -1}><i /><span>{chapter.number}</span><strong>{chapter.label}</strong></button>)}
       </nav>
 
       <section id="extraordinario" className="story-chapter chapter-hero">
@@ -217,10 +265,10 @@ export default function ScrollytellingPresentation() {
 
       <section id="decision" className="story-chapter chapter-close">
         <div className="close-asset"><img src="/brand/hf-os-suite-exploded.webp" alt="" /></div>
-        <div className="story-content close-copy"><span className="story-kicker">La decisión</span><h2>Proteger lo extraordinario.<em>Hacerlo ejecutable. Evolucionarlo juntos.</em></h2><p>El Foundation Release activa un primer núcleo controlado; el programa anual lo convierte en una capacidad que aprende y evoluciona con evidencia.</p><div className="decision-steps"><span><i>01</i>Aprobar el programa anual</span><span><i>02</i>Congelar alcance y contrato</span><span><i>03</i>Activar Foundation Release</span></div><div className="close-actions"><Link className="primary" href="/demo">Recorrer la Demo <span>↗</span></Link><Link href="/propuesta">Explorar la propuesta</Link><Link href="/">Volver al Hub</Link></div><small className="prototype-note">Narrativa consolidada de las versiones 1–4 · términos comerciales vigentes sujetos al contrato definitivo.</small></div>
+        <div className="story-content close-copy"><span className="story-kicker">La decisión</span><h2>Proteger lo extraordinario.<em>Hacerlo ejecutable. Evolucionarlo juntos.</em></h2><p>El Foundation Release activa un primer núcleo controlado; el programa anual lo convierte en una capacidad que aprende y evoluciona con evidencia.</p><div className="decision-steps"><span><i>01</i>Aprobar el programa anual</span><span><i>02</i>Congelar alcance y contrato</span><span><i>03</i>Activar Foundation Release</span></div><div className="close-actions"><Link className="primary" href="/demo">Recorrer la Demo <span>↗</span></Link><Link href="/propuesta">Explorar la propuesta</Link><Link href="/">Volver al Hub</Link></div><small className="prototype-note">Términos comerciales vigentes sujetos al contrato definitivo.</small></div>
       </section>
 
-      <nav className="story-controller" aria-label="Control de capítulos"><button type="button" onClick={() => goToChapter(activeChapter - 1)} disabled={activeChapter === 0}>← <span>Anterior</span></button><button type="button" className="story-position" onClick={() => setIndexOpen(true)}><span>{chapters[activeChapter].number}</span><i><b style={{ width: `${((activeChapter + 1) / chapters.length) * 100}%` } as CSSProperties} /></i><span>{String(chapters.length).padStart(2, "0")}</span></button><button type="button" onClick={() => goToChapter(activeChapter + 1)} disabled={activeChapter === chapters.length - 1}><span>Siguiente</span> →</button></nav>
+      <nav className="story-controller" aria-label="Control de capítulos" aria-hidden={!controlsVisible}><button type="button" onClick={() => goToChapter(activeChapter - 1)} disabled={activeChapter === 0} tabIndex={controlsVisible ? 0 : -1}>← <span>Anterior</span></button><button type="button" className="story-position" onClick={() => setIndexOpen(true)} tabIndex={controlsVisible ? 0 : -1} aria-label={`Abrir índice. Capítulo ${activeChapter + 1} de ${chapters.length}`}><span>{chapters[activeChapter].number}</span><i><b style={{ width: `${((activeChapter + 1) / chapters.length) * 100}%` } as CSSProperties} /></i><span>{String(chapters.length).padStart(2, "0")}</span></button><button type="button" onClick={() => goToChapter(activeChapter + 1)} disabled={activeChapter === chapters.length - 1} tabIndex={controlsVisible ? 0 : -1}><span>Siguiente</span> →</button></nav>
 
       <div className={`story-index ${indexOpen ? "is-open" : ""}`} aria-hidden={!indexOpen}><button className="story-index-backdrop" type="button" onClick={() => setIndexOpen(false)} aria-label="Cerrar índice" tabIndex={indexOpen ? 0 : -1} /><section className="story-index-panel"><header><div><span>Recorrido ejecutivo</span><h2>Presentación narrativa</h2></div><button type="button" onClick={() => setIndexOpen(false)}>Cerrar ×</button></header><div>{chapters.map((chapter, index) => <button key={chapter.id} type="button" className={index === activeChapter ? "is-current" : ""} onClick={() => goToChapter(index)} tabIndex={indexOpen ? 0 : -1}><span>{chapter.number}</span><strong>{chapter.label}</strong><i>→</i></button>)}</div></section></div>
     </main>
