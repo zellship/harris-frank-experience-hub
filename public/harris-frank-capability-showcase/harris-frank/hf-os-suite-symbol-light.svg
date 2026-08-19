@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="-340 -302 680 680" role="img" aria-labelledby="title desc">
+  <title id="title">Harris &amp; Frank OS Suite 360 orbit translucent symbol with subtle outline for light backgrounds</title>
+  <desc id="desc">Transparent standalone application for light backgrounds. Eight translucent color planes overlap around a denser purple OS tile; each plane uses a restrained tonal outline and the tile has no corner seam.</desc>
+  <g id="hf-os-suite-360-orbit-translucent-subtle-outline-light" stroke-linejoin="round">
+    <g id="ecosystem-layers-subtle-outline">
+      <g transform="translate(0 -64) rotate(0 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#E3A600" fill-opacity="0.16" stroke="#E3A600" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(45.255 -45.255) rotate(45 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#8D1027" fill-opacity="0.16" stroke="#8D1027" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(64 0) rotate(90 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#093B78" fill-opacity="0.16" stroke="#093B78" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(45.255 45.255) rotate(135 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#116448" fill-opacity="0.16" stroke="#116448" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(0 64) rotate(180 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#008E8C" fill-opacity="0.16" stroke="#008E8C" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(-45.255 45.255) rotate(225 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#D45B00" fill-opacity="0.16" stroke="#D45B00" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(-64 0) rotate(270 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#2B57B4" fill-opacity="0.16" stroke="#2B57B4" stroke-opacity="0.32" stroke-width="5"/></g>
+      <g transform="translate(-45.255 -45.255) rotate(315 0 38)"><rect x="-210" y="-172" width="420" height="420" rx="58" fill="#00A6C2" fill-opacity="0.16" stroke="#00A6C2" stroke-opacity="0.32" stroke-width="5"/></g>
+    </g>
+    <rect id="os-tile" x="-210" y="-172" width="420" height="420" rx="50" fill="#260F52" fill-opacity="0.72" stroke="#260F52" stroke-width="11"/>
+    <g id="os-monogram-solid" fill="#FFFFFF" stroke="none" transform="translate(0 91)">
+      <path d="m -54.907227,-117.85547 q -19.121093,0 -30.419921,14.25391 -11.211914,14.253904 -11.211914,38.850583 0,24.509766 11.211914,38.763672 11.298828,14.253907 30.419921,14.253907 19.121094,0 30.246094,-14.253907 11.211914,-14.253906 11.211914,-38.763672 0,-24.596679 -11.211914,-38.850583 -11.125,-14.25391 -30.246094,-14.25391 z m 0,-14.2539 q 27.291016,0 43.63086,18.33886 16.3398436,18.251955 16.3398436,49.019533 0,30.680665 -16.3398436,49.019532 -16.339844,18.2519528 -43.63086,18.2519528 -27.377929,0 -43.804687,-18.2519528 -16.339846,-18.251953 -16.339846,-49.019532 0,-30.767578 16.339846,-49.019533 16.426758,-18.33886 43.804687,-18.33886 z"/>
+      <path d="m 107.31641,-125.50391 v 17.12207 q -9.995121,-4.78027 -18.860355,-7.12695 -8.865235,-2.34668 -17.122071,-2.34668 -14.34082,0 -22.163086,5.5625 -7.735351,5.5625 -7.735351,15.818361 0,8.604492 5.12793,13.037109 5.214843,4.345703 19.642578,7.040039 l 10.603515,2.172852 q 19.642578,3.737304 28.94238,13.210937 9.38672,9.386719 9.38672,25.205078 0,18.860352 -12.68945,28.5947268 -12.60254,9.734375 -37.025392,9.734375 -9.212891,0 -19.642578,-2.08593749 Q 35.438477,-1.6513672 24.313477,-5.7363281 V -23.814453 q 10.690429,5.99707 20.946289,9.039062 10.255859,3.041993 20.164062,3.041993 15.036133,0 23.206055,-5.910157 8.169922,-5.910156 8.169922,-16.861328 0,-9.560547 -5.910157,-14.949219 -5.823242,-5.388671 -19.208007,-8.083007 l -10.69043,-2.085938 Q 41.348633,-63.53418 32.570312,-71.87793 q -8.77832,-8.34375 -8.77832,-23.206054 0,-17.208986 12.081055,-27.117186 12.167969,-9.9082 33.461914,-9.9082 9.125976,0 18.599609,1.65136 9.473633,1.65137 19.38184,4.9541 z"/>
+    </g>
+  </g>
+</svg>

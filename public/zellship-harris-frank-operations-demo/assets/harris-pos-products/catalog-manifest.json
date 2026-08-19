@@ -1,0 +1,29 @@
+{
+  "catalog": "Harris & Frank POS Product Thumbnails",
+  "version": "1.0",
+  "intended_use": "demo_pos",
+  "disclaimer": "Representaciones visuales generadas. No sustituyen fotografía oficial ni validación física del SKU.",
+  "formats": {
+    "master": { "type": "png", "width": 1024, "height": 1024, "directory": "png-1024" },
+    "pos": { "type": "webp", "width": 800, "height": 800, "directory": "webp-800" }
+  },
+  "items": [
+    { "id": "HF-POS-TH-001", "category": "Traje", "product": "Traje Marino Essential", "sku": "HFTT0101", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/01_traje_marino_essential.png", "webp": "webp-800/01_traje_marino_essential.webp" },
+    { "id": "HF-POS-TH-002", "category": "Smoking", "product": "Smoking negro", "sku": "HFSMT0101", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/02_smoking_negro.png", "webp": "webp-800/02_smoking_negro.webp" },
+    { "id": "HF-POS-TH-003", "category": "Pantalón", "product": "Pantalón Essential Negro", "sku": "HFPT0103", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/03_pantalon_essential_negro.png", "webp": "webp-800/03_pantalon_essential_negro.webp" },
+    { "id": "HF-POS-TH-004", "category": "Camisa Básica", "product": "Camisa smoking", "sku": "HFCT0103", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/04_camisa_smoking_blanca.png", "webp": "webp-800/04_camisa_smoking_blanca.webp" },
+    { "id": "HF-POS-TH-005", "category": "T-shirt Básica", "product": "T-shirt blanca manga corta cuello redondo 95/5", "sku": "HFTS0101", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/05_tshirt_blanca_manga_corta.png", "webp": "webp-800/05_tshirt_blanca_manga_corta.webp" },
+    { "id": "HF-POS-TH-006", "category": "Playera", "product": "Playera Polo Pique Blanca", "sku": "POR_VALIDAR", "evidence": "producto_confirmado_sku_pendiente", "visual_fidelity": "representativo", "png": "png-1024/06_playera_polo_pique_blanca.png", "webp": "webp-800/06_playera_polo_pique_blanca.webp" },
+    { "id": "HF-POS-TH-007", "category": "Bermuda", "product": "Bermuda algodón stone grey", "sku": "POR_VALIDAR", "evidence": "producto_confirmado_sku_pendiente", "visual_fidelity": "representativo", "png": "png-1024/07_bermuda_stone_grey.png", "webp": "webp-800/07_bermuda_stone_grey.webp" },
+    { "id": "HF-POS-TH-008", "category": "Jeans", "product": "Jeans azul claro", "sku": "POR_VALIDAR", "evidence": "pedido_confirmado_sku_pendiente", "visual_fidelity": "representativo", "png": "png-1024/08_jeans_azul_claro.png", "webp": "webp-800/08_jeans_azul_claro.webp" },
+    { "id": "HF-POS-TH-009", "category": "Chamarra", "product": "Chamarra Trevor 1051", "sku": "POR_VALIDAR", "evidence": "pedido_confirmado_sku_pendiente", "visual_fidelity": "representativo", "png": "png-1024/09_chamarra_trevor_1051.png", "webp": "webp-800/09_chamarra_trevor_1051.webp" },
+    { "id": "HF-POS-TH-010", "category": "Chaleco", "product": "Chaleco de vestir", "sku": "POR_VALIDAR", "evidence": "categoria_confirmada_nombre_inferido", "visual_fidelity": "conceptual", "png": "png-1024/10_chaleco_de_vestir.png", "webp": "webp-800/10_chaleco_de_vestir.webp" },
+    { "id": "HF-POS-TH-011", "category": "Calceta formal", "product": "Calcetín formal azul marino", "sku": "HFSOCK0103", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/11_calcetin_formal_azul_marino.png", "webp": "webp-800/11_calcetin_formal_azul_marino.webp" },
+    { "id": "HF-POS-TH-012", "category": "Tines", "product": "Tin Seville Navy", "sku": "HFSOCK0105", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/12_tin_seville_navy.png", "webp": "webp-800/12_tin_seville_navy.webp" },
+    { "id": "HF-POS-TH-013", "category": "Corbatas", "product": "Corbata Seda Azul", "sku": "HFCOR0101", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/13_corbata_seda_azul.png", "webp": "webp-800/13_corbata_seda_azul.webp" },
+    { "id": "HF-POS-TH-014", "category": "Mini tin", "product": "Mini Tin Monaco Blanco", "sku": "HFSOCKAW2112", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/14_mini_tin_monaco_blanco.png", "webp": "webp-800/14_mini_tin_monaco_blanco.webp" },
+    { "id": "HF-POS-TH-015", "category": "Mancuernillas", "product": "Mancuernilla Esfera Plata", "sku": "HFMC0101", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/15_mancuernilla_esfera_plata.png", "webp": "webp-800/15_mancuernilla_esfera_plata.webp" },
+    { "id": "HF-POS-TH-016", "category": "Moños", "product": "Moño Seda Negro 3 pulgadas", "sku": "HFMN0102", "evidence": "confirmado", "visual_fidelity": "representativo", "png": "png-1024/16_mono_seda_negro_3in.png", "webp": "webp-800/16_mono_seda_negro_3in.webp" },
+    { "id": "HF-POS-TH-017", "category": "Zapato", "product": "Zapato negro", "sku": "POR_VALIDAR", "evidence": "producto_confirmado_modelo_visual_inferido", "visual_fidelity": "conceptual", "png": "png-1024/17_zapato_oxford_negro.png", "webp": "webp-800/17_zapato_oxford_negro.webp" }
+  ]
+}

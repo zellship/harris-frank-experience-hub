@@ -1,0 +1,76 @@
+{
+  "catalog": "Harris & Frank POS Catalog Inventory",
+  "version": "1.0",
+  "intended_use": "demo_pos_inventory",
+  "disclaimer": "Disponibilidad determinística para demostración. No representa inventario oficial ni una consulta productiva.",
+  "items": [
+    {
+      "product_id": "HF-POS-TH-001",
+      "locations": { "Polanco": 2, "Santa Fe": 3, "Perisur": 1, "Almacén Centro": 6 }
+    },
+    {
+      "product_id": "HF-POS-TH-002",
+      "locations": { "Polanco": 1, "Santa Fe": 1, "Perisur": 0, "Almacén Centro": 2 }
+    },
+    {
+      "product_id": "HF-POS-TH-003",
+      "locations": { "Polanco": 4, "Santa Fe": 2, "Perisur": 3, "Almacén Centro": 8 }
+    },
+    {
+      "product_id": "HF-POS-TH-004",
+      "locations": { "Polanco": 0, "Santa Fe": 2, "Perisur": 1, "Almacén Centro": 5 }
+    },
+    {
+      "product_id": "HF-POS-TH-005",
+      "locations": { "Polanco": 6, "Santa Fe": 4, "Perisur": 3, "Almacén Centro": 10 }
+    },
+    {
+      "product_id": "HF-POS-TH-006",
+      "locations": { "Polanco": 3, "Santa Fe": 2, "Perisur": 2, "Almacén Centro": 7 }
+    },
+    {
+      "product_id": "HF-POS-TH-007",
+      "locations": { "Polanco": 2, "Santa Fe": 1, "Perisur": 3, "Almacén Centro": 4 }
+    },
+    {
+      "product_id": "HF-POS-TH-008",
+      "locations": { "Polanco": 5, "Santa Fe": 4, "Perisur": 2, "Almacén Centro": 9 }
+    },
+    {
+      "product_id": "HF-POS-TH-009",
+      "locations": { "Polanco": 1, "Santa Fe": 0, "Perisur": 2, "Almacén Centro": 3 }
+    },
+    {
+      "product_id": "HF-POS-TH-010",
+      "locations": { "Polanco": 0, "Santa Fe": 1, "Perisur": 0, "Almacén Centro": 2 }
+    },
+    {
+      "product_id": "HF-POS-TH-011",
+      "locations": { "Polanco": 8, "Santa Fe": 6, "Perisur": 5, "Almacén Centro": 18 }
+    },
+    {
+      "product_id": "HF-POS-TH-012",
+      "locations": { "Polanco": 7, "Santa Fe": 5, "Perisur": 6, "Almacén Centro": 14 }
+    },
+    {
+      "product_id": "HF-POS-TH-013",
+      "locations": { "Polanco": 4, "Santa Fe": 3, "Perisur": 2, "Almacén Centro": 11 }
+    },
+    {
+      "product_id": "HF-POS-TH-014",
+      "locations": { "Polanco": 6, "Santa Fe": 4, "Perisur": 4, "Almacén Centro": 16 }
+    },
+    {
+      "product_id": "HF-POS-TH-015",
+      "locations": { "Polanco": 3, "Santa Fe": 2, "Perisur": 1, "Almacén Centro": 8 }
+    },
+    {
+      "product_id": "HF-POS-TH-016",
+      "locations": { "Polanco": 2, "Santa Fe": 3, "Perisur": 1, "Almacén Centro": 6 }
+    },
+    {
+      "product_id": "HF-POS-TH-017",
+      "locations": { "Polanco": 1, "Santa Fe": 2, "Perisur": 1, "Almacén Centro": 4 }
+    }
+  ]
+}
