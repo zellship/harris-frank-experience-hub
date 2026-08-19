@@ -97,6 +97,197 @@ const discoveries = [
   },
 ];
 
+const capabilityFamilies = [
+  {
+    id: "customer",
+    number: "01",
+    title: "Customer & Commerce",
+    description: "Una relación continua, independientemente del canal.",
+    tone: "violet",
+    capabilities: [
+      {
+        id: "passport",
+        title: "Client Passport + Mi Passport",
+        short: "Continuidad interna y externa del cliente",
+        insight:
+          "La relación no termina cuando se registra la venta; pedidos, citas, medidas, documentos y compromisos deben conservar contexto.",
+        manifestation:
+          "Una vista interna para el equipo y una experiencia externa separada para el cliente, conectadas por la misma identidad y sus compromisos.",
+        value:
+          "Servicio consistente, menor dependencia de personas y visibilidad del avance para el cliente.",
+        tags: ["Cliente", "Pedidos", "Citas", "Continuidad"],
+      },
+      {
+        id: "omnichannel",
+        title: "Continuidad omnicanal",
+        short: "Tienda, ecommerce y atención bajo un contexto común",
+        insight:
+          "El canal de origen no debería fragmentar la relación ni obligar a reconstruir el contexto en cada interacción.",
+        manifestation:
+          "Cuenta, cliente, orden y seguimiento permanecen conectados cuando una interacción comienza en Shopify, WhatsApp o boutique.",
+        value:
+          "Menos fricción entre canales y una experiencia coherente para clientes y asesores.",
+        tags: ["Shopify", "Boutique", "Handoff", "Cuenta"],
+      },
+      {
+        id: "transactional-messaging",
+        title: "Notificaciones transaccionales",
+        short: "WhatsApp como extensión de los eventos del sistema",
+        insight:
+          "La comunicación relevante debe originarse en un cambio operativo verificable, no depender de seguimientos manuales aislados.",
+        manifestation:
+          "Mensajes de confirmación, avance, cita, incidencia o entrega disparados por eventos y vinculados al compromiso correspondiente.",
+        value:
+          "Comunicación oportuna, menor carga manual y trazabilidad sobre lo informado.",
+        tags: ["WhatsApp", "Eventos", "Confirmación", "Seguimiento"],
+      },
+    ],
+  },
+  {
+    id: "product",
+    number: "02",
+    title: "Product & Brand",
+    description: "Producto, configuración y colección como conocimiento vivo.",
+    tone: "blue",
+    capabilities: [
+      {
+        id: "mtm-bom",
+        title: "BOM relacional para MTM",
+        short: "Configuración, materiales y ejecución conectados",
+        insight:
+          "Una prenda MTM no es solamente un SKU: combina medidas, opciones, materiales, componentes y operaciones que cambian según el flujo.",
+        manifestation:
+          "Una BOM relacional vincula configuración, insumos, dependencias y rutas de trabajo sin convertir cada variante en un producto aislado.",
+        value:
+          "Mayor control sobre factibilidad, costeo, producción y trazabilidad de cada configuración.",
+        tags: ["MTM", "BOM", "Materiales", "Rutas"],
+      },
+      {
+        id: "collection-lifecycle",
+        title: "Collection Studio",
+        short: "La colección como sistema de compromisos",
+        insight:
+          "Modelos, muestras, materiales, margen, contenido y lanzamiento forman una misma ruta crítica.",
+        manifestation:
+          "Un expediente vivo conecta brief, productos, hitos, incidencias, documentos y responsables hasta el lanzamiento.",
+        value:
+          "Visibilidad anticipada sobre integridad, rentabilidad y cumplimiento de la colección.",
+        tags: ["Colección", "Ruta crítica", "Margen", "Expediente"],
+      },
+      {
+        id: "operational-profiles",
+        title: "Perfiles operativos 360°",
+        short: "La información relevante reunida alrededor de cada entidad",
+        insight:
+          "Productos, colecciones, clientes y proveedores necesitan una identidad enriquecida por relaciones, historial y contexto.",
+        manifestation:
+          "Perfiles que integran atributos, vínculos, desempeño, documentos, actividad y señales sin duplicar información entre módulos.",
+        value:
+          "Decisiones con contexto y una fuente común de conocimiento operativo.",
+        tags: ["Entity Engine", "Relaciones", "Historial", "Contexto"],
+      },
+    ],
+  },
+  {
+    id: "supply",
+    number: "03",
+    title: "Supply & Service Operations",
+    description: "Inventario, terceros y ejecución coordinados como red.",
+    tone: "cyan",
+    capabilities: [
+      {
+        id: "network-inventory",
+        title: "Inventario integrado en red",
+        short: "Disponibilidad útil y cross-docking coordinado",
+        insight:
+          "La existencia distribuida sólo crea valor cuando puede convertirse en una promesa y una ruta de suministro realizable.",
+        manifestation:
+          "Boutiques, almacenes, reservas, transferencias y cross-docking se leen como una red conectada a la misma orden.",
+        value:
+          "Mejor aprovechamiento del inventario y menor pérdida de ventas por fragmentación.",
+        tags: ["ATP", "Cross-docking", "Transferencia", "Red"],
+      },
+      {
+        id: "tokenized-collaboration",
+        title: "Colaboración mediante URLs tokenizadas",
+        short: "Confirmaciones de terceros sin desplegar otra aplicación",
+        insight:
+          "Proveedores y terceros necesitan confirmar, aportar evidencia o responder sin convertirse necesariamente en usuarios completos.",
+        manifestation:
+          "Enlaces únicos y acotados permiten confirmar disponibilidad, fechas, incidencias o documentos dentro de un contexto específico.",
+        value:
+          "Menor fricción de adopción y respuestas externas vinculadas directamente al proceso.",
+        tags: ["Terceros", "Token", "Confirmación", "Evidencia"],
+      },
+      {
+        id: "rfid-traceability",
+        title: "Identidad y trazabilidad RFID",
+        short: "Cada movimiento conserva producto, lugar y propósito",
+        insight:
+          "La trazabilidad requiere distinguir identidad, disponibilidad, reserva y movimiento; una lectura física aislada no es suficiente.",
+        manifestation:
+          "RFID se conecta con entidades, ubicaciones, partidas, eventos y evidencia para interpretar qué ocurrió y por qué.",
+        value:
+          "Mayor certeza operativa, conciliación y visibilidad sobre el recorrido de cada pieza.",
+        tags: ["RFID", "Movimientos", "Identidad", "Evidencia"],
+      },
+    ],
+  },
+  {
+    id: "enterprise",
+    number: "04",
+    title: "Enterprise Control",
+    description: "El sistema adapta la atención, no sólo la interfaz.",
+    tone: "gold",
+    capabilities: [
+      {
+        id: "contextual-experiences",
+        title: "Experiencias adaptadas por contexto",
+        short: "La información correcta para el momento y la responsabilidad",
+        insight:
+          "Una misma pantalla no sirve igual para un asesor, una especialista MTM, compras, almacén o dirección.",
+        manifestation:
+          "Workspaces, acciones y señales cambian según entidad, rol, establecimiento, tarea y compromiso en contexto.",
+        value:
+          "Menor saturación, decisiones más rápidas y adopción más natural para cada equipo.",
+        tags: ["Context Engine", "Rol", "Workspace", "Siguiente acción"],
+      },
+      {
+        id: "kanban-commitments",
+        title: "Órdenes y compromisos en Kanban",
+        short: "Estado visible con riesgo como condición transversal",
+        insight:
+          "El flujo debe mostrar dónde está el trabajo sin confundir el estado con urgencia, riesgo o incumplimiento.",
+        manifestation:
+          "Tableros por estado, responsables y compromiso permiten operar colas, incidencias y recuperación con trazabilidad.",
+        value:
+          "Control diario, balance de cargas y atención anticipada de excepciones.",
+        tags: ["Kanban", "Órdenes", "Riesgo", "Responsables"],
+      },
+      {
+        id: "integration-capability",
+        title: "Conectividad como capacidad",
+        short: "Eventos y contratos para integrar sin rehacer el modelo",
+        insight:
+          "Conectar ecommerce, mensajería, pagos, fiscal o infraestructura no debería fragmentar la semántica del negocio.",
+        manifestation:
+          "Integration Hub y contratos de eventos traducen sistemas externos hacia entidades y compromisos comunes.",
+        value:
+          "Incorporaciones más ágiles y menor dependencia de integraciones punto a punto.",
+        tags: ["Integration Hub", "Eventos", "APIs", "Contratos"],
+      },
+    ],
+  },
+];
+
+const allStrategicCapabilities = capabilityFamilies.flatMap((family) =>
+  family.capabilities.map((capability) => ({
+    ...capability,
+    family: family.title,
+    tone: family.tone,
+  })),
+);
+
 const evidence = [
   ["Matriz de capacidades", "Necesidades → capacidades → experiencias"],
   ["Mapa operativo RFID", "Identidad, movimientos y trazabilidad"],
@@ -218,6 +409,11 @@ function PromiseModel() {
 
 export default function ProposalBlueprintPage() {
   const [activeModel, setActiveModel] = useState<"account" | "triage" | "promise">("account");
+  const [activeCapabilityId, setActiveCapabilityId] = useState("passport");
+  const activeCapability =
+    allStrategicCapabilities.find(
+      (capability) => capability.id === activeCapabilityId,
+    ) ?? allStrategicCapabilities[0];
 
   return (
     <main className="proposal-shell">
@@ -230,6 +426,7 @@ export default function ProposalBlueprintPage() {
         </div>
         <nav aria-label="Navegación de la propuesta">
           <a href="#principles">Principios</a>
+          <a href="#architecture">Arquitectura</a>
           <a href="#model">Modelo</a>
           <a href="#evidence">Evidencia</a>
         </nav>
@@ -298,6 +495,69 @@ export default function ProposalBlueprintPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="architecture-section" id="architecture">
+        <div className="architecture-heading">
+          <div className="section-intro">
+            <p>Una estrategia conectada</p>
+            <h2>No es un catálogo de funciones.<br />Es una arquitectura de capacidades.</h2>
+            <span>
+              Doce decisiones estratégicas organizadas alrededor de cuatro
+              familias. Selecciona una capacidad para explorar su fundamento.
+            </span>
+          </div>
+          <div className="architecture-key">
+            <i />
+            <span>Contenido estratégico sujeto a validación autoritativa</span>
+          </div>
+        </div>
+
+        <div className="capability-architecture">
+          {capabilityFamilies.map((family) => (
+            <div className={`capability-family family-${family.tone}`} key={family.id}>
+              <header>
+                <span>{family.number}</span>
+                <div><strong>{family.title}</strong><small>{family.description}</small></div>
+              </header>
+              <div className="capability-stack">
+                {family.capabilities.map((capability) => (
+                  <button
+                    type="button"
+                    key={capability.id}
+                    className={activeCapabilityId === capability.id ? "is-active" : ""}
+                    onClick={() => setActiveCapabilityId(capability.id)}
+                    aria-pressed={activeCapabilityId === capability.id}
+                  >
+                    <i aria-hidden="true" />
+                    <span><strong>{capability.title}</strong><small>{capability.short}</small></span>
+                    <em>↗</em>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <article className={`capability-detail detail-${activeCapability.tone}`} aria-live="polite">
+          <div className="capability-detail-title">
+            <span>{activeCapability.family}</span>
+            <h3>{activeCapability.title}</h3>
+            <p>{activeCapability.short}</p>
+            <div className="capability-tags">
+              {activeCapability.tags.map((tag) => <small key={tag}>{tag}</small>)}
+            </div>
+          </div>
+          <div className="capability-detail-grid">
+            <div><span>Lo que entendimos</span><p>{activeCapability.insight}</p></div>
+            <div><span>Cómo se manifiesta</span><p>{activeCapability.manifestation}</p></div>
+            <div><span>Valor operativo</span><p>{activeCapability.value}</p></div>
+          </div>
+          <footer>
+            <span>La autoridad y el estado de implementación se asignarán durante la auditoría final.</span>
+            <i>Blueprint de exploración</i>
+          </footer>
+        </article>
       </section>
 
       <section className="model-section" id="model">
