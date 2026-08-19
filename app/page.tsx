@@ -156,6 +156,8 @@ export default function Home() {
       window.location.assign("/presentacion");
     } else if (title === "Demo") {
       window.location.assign("/demo");
+    } else if (title === "Propuesta") {
+      window.location.assign("/propuesta");
     }
   }
 
