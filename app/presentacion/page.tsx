@@ -218,7 +218,7 @@ export default function PresentationPage() {
         <div className="player-header-actions">
           <span className={`version-chip ${manifest.status}`}>{manifest.versionLabel}</span>
           <a className="scrolly-preview-link" href="/presentacion/scrollytelling">
-            Probar versión narrativa
+            Abrir narrativa consolidada
           </a>
           <button type="button" onClick={() => void toggleFullscreen()}>
             Pantalla completa
