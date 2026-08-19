@@ -69,6 +69,29 @@ export default function ScrollytellingPresentation() {
   }, []);
 
   useEffect(() => {
+    let frame = 0;
+    const syncRequestedChapter = () => {
+      const requestedId = window.location.hash.replace(/^#/, "");
+      const requestedIndex = chapters.findIndex(({ id }) => id === requestedId);
+      if (requestedIndex < 0) return;
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        document.getElementById(requestedId)?.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+        });
+        setActiveChapter(requestedIndex);
+      });
+    };
+    syncRequestedChapter();
+    window.addEventListener("hashchange", syncRequestedChapter);
+    return () => {
+      window.removeEventListener("hashchange", syncRequestedChapter);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  useEffect(() => {
     const sections = chapters.map(({ id }) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
     const observer = new IntersectionObserver((entries) => {
       const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
