@@ -85,6 +85,22 @@ button {
   );
 }
 
+.particle-field {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(
+    calc(var(--pointer-x) * -5px),
+    calc(var(--pointer-y) * -4px)
+  );
+  animation: particle-reveal 1100ms 240ms ease-out forwards;
+  transition: transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 .fine-grid {
   position: absolute;
   z-index: -1;
@@ -169,49 +185,10 @@ button {
 .os-stage img {
   position: relative;
   z-index: 3;
-  width: 72%;
-  height: 72%;
+  width: 82%;
+  height: 82%;
   object-fit: contain;
   filter: saturate(0.76) brightness(1.08);
-  animation: breathe 7s 1.2s ease-in-out infinite;
-}
-
-.orbit,
-.os-halo {
-  position: absolute;
-  border-radius: 42%;
-  pointer-events: none;
-}
-
-.orbit {
-  inset: 9%;
-  border: 1px solid rgba(148, 112, 236, 0.24);
-}
-
-.orbit-one {
-  transform: rotate(18deg);
-  animation: orbit-a 22s linear infinite;
-}
-
-.orbit-two {
-  inset: 15%;
-  border-color: rgba(74, 214, 220, 0.2);
-  transform: rotate(45deg);
-  animation: orbit-b 18s linear infinite;
-}
-
-.orbit-three {
-  inset: 4%;
-  border-color: rgba(201, 168, 76, 0.16);
-  transform: rotate(72deg);
-  animation: orbit-a 29s reverse linear infinite;
-}
-
-.os-halo {
-  inset: 20%;
-  background: rgba(124, 86, 231, 0.26);
-  filter: blur(24px);
-  animation: pulse 5.4s ease-in-out infinite;
 }
 
 .hf-logo {
@@ -467,37 +444,9 @@ h1 span {
   }
 }
 
-@keyframes orbit-a {
+@keyframes particle-reveal {
   to {
-    transform: rotate(378deg);
-  }
-}
-
-@keyframes orbit-b {
-  to {
-    transform: rotate(-315deg);
-  }
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(0.97);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.54;
-    transform: scale(0.84);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.16);
+    opacity: 0.78;
   }
 }
 
@@ -633,6 +582,11 @@ h1 span {
   }
 
   .ambient {
+    transform: none;
+  }
+
+  .particle-field {
+    opacity: 0.6;
     transform: none;
   }
 }
