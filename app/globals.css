@@ -714,7 +714,7 @@ button {
   align-items: center;
   gap: 13px;
   color: rgba(255, 255, 255, 0.62);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -733,7 +733,7 @@ button {
 .edition {
   justify-self: end;
   color: rgba(255, 255, 255, 0.4);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -783,7 +783,7 @@ button {
 .eyebrow {
   margin: 0 0 13px;
   color: var(--gold);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -815,11 +815,15 @@ h1 span {
   max-width: 620px;
   margin: 24px 0 0;
   color: var(--muted);
-  font-size: clamp(15px, 1.25vw, 19px);
+  font-size: clamp(18px, 1.25vw, 20px);
   font-weight: 400;
   line-height: 1.6;
   opacity: 0;
   animation: reveal 700ms 570ms forwards;
+}
+
+.hero-copy-line {
+  display: block;
 }
 
 .portal-grid {
@@ -906,7 +910,7 @@ h1 span {
 .portal-number {
   margin-right: 17px;
   color: var(--gold);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -918,14 +922,14 @@ h1 span {
 }
 
 .portal-copy strong {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 650;
   letter-spacing: -0.01em;
 }
 
 .portal-copy small {
   color: rgba(255, 255, 255, 0.46);
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -951,7 +955,7 @@ h1 span {
   gap: 16px;
   padding-top: 18px;
   color: rgba(255, 255, 255, 0.28);
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1066,7 +1070,7 @@ h1 span {
   }
 
   .edition {
-    font-size: 8px;
+    font-size: 12px;
   }
 
   .hero {
@@ -1091,7 +1095,7 @@ h1 span {
   .hero-copy {
     max-width: 390px;
     margin-top: 18px;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .portal-grid {

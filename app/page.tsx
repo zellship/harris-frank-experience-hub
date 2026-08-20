@@ -153,7 +153,7 @@ export default function Home() {
   function openPortal(title: string) {
     setActivePortal(title);
     if (title === "Presentación") {
-      window.location.assign("/presentacion");
+      window.location.assign("/presentacion/scrollytelling");
     } else if (title === "Demo") {
       window.location.assign("/demo");
     } else if (title === "Propuesta") {
@@ -215,7 +215,7 @@ export default function Home() {
         </h1>
         <p className="hero-copy">
           Una operación extraordinaria merece un sistema diseñado para
-          evolucionar con ella.
+          <span className="hero-copy-line">evolucionar con ella.</span>
         </p>
       </section>
 
