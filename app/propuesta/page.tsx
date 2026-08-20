@@ -341,6 +341,48 @@ const foundationExcludes = [
   "Paridad total con LS Retail, automatización o inteligencia avanzada",
 ];
 
+const cellFunctions = [
+  {
+    title: "Program Lead / PM",
+    items: ["Gobierno del programa", "Relación ejecutiva", "Riesgos y dependencias", "QBR y decisiones"],
+  },
+  {
+    title: "Arquitectura de solución",
+    items: ["Coherencia funcional y técnica", "Arquitectura del Business OS", "Datos e integraciones", "Continuidad entre capacidades"],
+  },
+  {
+    title: "Lead de procesos y operaciones",
+    items: ["Estandarización de procesos", "Definición de reglas de negocio", "Adopción operativa", "Medición de resultados"],
+  },
+  {
+    title: "Coordinación de entrega",
+    items: ["Backlog y sprints", "Dependencias", "Evidencias y validación", "Liberaciones"],
+  },
+];
+
+const referenceStack = [
+  ["Ejecución", "Google Cloud · Cloud Run para servicios contenerizados"],
+  ["Datos y evidencia", "Cloud SQL for MySQL · Cloud Storage"],
+  ["Control y observabilidad", "IAM · Secret Manager · HTTPS · balanceo · Cloud Armor · logging · monitoreo · alertamiento"],
+];
+
+const securityLayers = [
+  ["01", "Control", "Cuenta cloud, facturación y administradores bajo control de Harris & Frank."],
+  ["02", "Identidad", "Accesos por función, mínimo privilegio y revocación trazable."],
+  ["03", "Perímetro", "HTTPS, políticas de tráfico y protección de aplicaciones."],
+  ["04", "Aplicación y datos", "Ambientes separados, secretos protegidos y permisos por contexto."],
+  ["05", "Continuidad", "Respaldos, monitoreo, recuperación y reversión controlada."],
+];
+
+const activationSteps = [
+  "Confirmación comercial",
+  "Firma y activación",
+  "Designación de responsables",
+  "Definición de la sucursal piloto",
+  "Baseline de alcance y criterios",
+  "Inicio del Foundation Release",
+];
+
 type ProposalTrack = "blueprint" | "project";
 
 const proposalTracks = {
@@ -366,16 +408,20 @@ const proposalTracks = {
     eyebrow: "Ejecución futura · sujeta a contrato",
     title: "Una trayectoria inicial y una capacidad anual para evolucionar.",
     lead:
-      "Foundation Release, gobierno, inversión y términos para convertir prioridades acordadas en versiones utilizables del Business OS.",
+      "Foundation Release, gobierno, célula, arquitectura, continuidad e inversión para convertir prioridades acordadas en versiones utilizables del Business OS.",
     definition:
       "Describe lo que se propone contratar: alcance inicial, forma de trabajo, inversión, condiciones y responsabilidades.",
     chapters: [
       ["proposal-top", "Portada"],
-      ["programa", "Programa"],
-      ["foundation", "Foundation"],
+      ["foundation", "Activación"],
+      ["programa", "Evolución"],
       ["gobierno", "Gobierno"],
-      ["terminos", "Términos"],
-      ["decision", "Decisión"],
+      ["celula", "Célula"],
+      ["arquitectura-control", "Arquitectura"],
+      ["continuidad", "Continuidad"],
+      ["inversion", "Inversión"],
+      ["decision", "Activación"],
+      ["anexos", "Anexos"],
     ],
   },
 } as const;
@@ -729,71 +775,13 @@ export default function ProposalBlueprintPage() {
       {activeTrack === "project" && (
         <div className="proposal-track-content track-content-project">
 
-      <section className="commercial-section" id="programa">
-        <div className="section-intro is-light commercial-heading">
-          <p>La decisión comercial</p>
-          <h2>Una capacidad continua de evolución con alcance gobernado.</h2>
-          <span>
-            La visión anual orienta el programa. Cada alcance concreto se decide
-            dentro de la capacidad contratada, con criterios y evidencia.
-          </span>
-        </div>
-
-        <div className="program-architecture">
-          <article className="program-card is-foundation">
-            <header><span>Meses 01–02</span><i>8 semanas</i></header>
-            <small>Foundation Release</small>
-            <h3>Un núcleo operativo completo llevado a piloto.</h3>
-            <p>Primera implementación controlada, utilizable y verificable.</p>
-            <footer>Una sucursal · alcance definido · aceptación con evidencia</footer>
-          </article>
-          <div className="program-bridge" aria-hidden="true"><i /><span>aceptación</span><i /></div>
-          <article className="program-card is-evolution">
-            <header><span>Meses 03–12</span><i>10 ciclos</i></header>
-            <small>Managed Innovation Capacity</small>
-            <h3>Prioridades convertidas en incrementos cada quince días.</h3>
-            <p>Un frente principal de evolución, gobernado trimestralmente.</p>
-            <footer>2 sprints/mes · reporte mensual · QBR trimestral</footer>
-          </article>
-        </div>
-
-        <div className="commercial-grid">
-          <article className="investment-summary">
-            <header><span>Inversión del primer año</span><small>MXN + IVA</small></header>
-            <div className="investment-foundation">
-              <span>Foundation Release</span><strong>$299,000</strong>
-              <small>Reconocimiento del Blueprint</small><em>−$55,900</em>
-              <span>Saldo Foundation</span><strong>$243,100</strong>
-            </div>
-            <div className="investment-evolution">
-              <span>Programa de evolución</span>
-              <strong>10 × $65,000</strong>
-            </div>
-            <div className="investment-grand-total">
-              <span>Valor total del primer año</span><strong>$949,000</strong>
-              <small>Nueva inversión pendiente</small><em>$893,100</em>
-            </div>
-          </article>
-
-          <article className="payment-summary">
-            <header><span>Forma de pago</span><small>Secuencia de activación</small></header>
-            <ol>
-              <li><span>01</span><div><strong>$150,000 + IVA</strong><small>A la firma y activación</small></div></li>
-              <li><span>02</span><div><strong>$93,100 + IVA</strong><small>Contra aceptación del Foundation Release</small></div></li>
-              <li><span>03</span><div><strong>10 × $65,000 + IVA</strong><small>Mensualidades anticipadas posteriores a la aceptación</small></div></li>
-            </ol>
-            <footer>Todos los importes se expresan en pesos mexicanos.</footer>
-          </article>
-        </div>
-      </section>
-
       <section className="foundation-section" id="foundation">
         <div className="section-intro">
-          <p>Foundation Release</p>
-          <h2>Una trayectoria operativa completa que llega a piloto.</h2>
+          <p>Qué activamos primero</p>
+          <h2>Un Foundation Release acotado que llega a piloto.</h2>
           <span>
-            El arranque protege una promesa de principio a fin y deja la base
-            para evolucionar con menor riesgo.
+            El inicio protege una trayectoria operativa de principio a fin, con
+            alcance definido, piloto controlado y aceptación basada en evidencia.
           </span>
         </div>
 
@@ -828,9 +816,44 @@ export default function ProposalBlueprintPage() {
         </p>
       </section>
 
+      <section className="commercial-section" id="programa">
+        <div className="section-intro is-light commercial-heading">
+          <p>Cómo evoluciona durante el año</p>
+          <h2>Primero una base aceptada; después, diez ciclos de evolución.</h2>
+          <span>
+            El programa considera doce meses: Foundation Release primero y una
+            capacidad mensual posterior para convertir prioridades aprobadas en incrementos utilizables.
+          </span>
+        </div>
+
+        <div className="program-architecture">
+          <article className="program-card is-foundation">
+            <header><span>Meses 01–02</span><i>8 semanas</i></header>
+            <small>Foundation Release</small>
+            <h3>Un núcleo operativo completo llevado a piloto.</h3>
+            <p>Primera implementación controlada, utilizable y verificable.</p>
+            <footer>Una sucursal · alcance definido · aceptación con evidencia</footer>
+          </article>
+          <div className="program-bridge" aria-hidden="true"><i /><span>aceptación</span><i /></div>
+          <article className="program-card is-evolution">
+            <header><span>Meses 03–12</span><i>10 ciclos</i></header>
+            <small>Programa de evolución</small>
+            <h3>Prioridades convertidas en incrementos cada quince días.</h3>
+            <p>Un frente principal de evolución con planeación trimestral de resultados.</p>
+            <footer>2 sprints/mes · reporte mensual · QBR trimestral</footer>
+          </article>
+        </div>
+
+        <div className="program-cadence" aria-label="Cadencia anual propuesta">
+          <article><span>01</span><strong>Sprints quincenales</strong><p>Compromisos concretos para diseñar, construir, demostrar y validar.</p></article>
+          <article><span>02</span><strong>Plan Trimestral de Resultados</strong><p>Prioridades, capacidad, dependencias y evidencia esperada se congelan por periodo.</p></article>
+          <article><span>03</span><strong>QBR</strong><p>Resultados, adopción y riesgos informan la siguiente decisión ejecutiva.</p></article>
+        </div>
+      </section>
+
       <section className="governance-section" id="gobierno">
         <div className="section-intro is-light">
-          <p>Capacidad gobernada</p>
+          <p>Cómo se gobiernan alcance y resultados</p>
           <h2>Flexibilidad en prioridades.<br />Certeza en capacidad y decisiones.</h2>
           <span>
             Un frente principal de evolución, dos Sprint Commitments por mes y
@@ -898,116 +921,192 @@ export default function ProposalBlueprintPage() {
         </div>
       </section>
 
-      <section className="terms-section" id="terminos">
+      <section className="cell-section" id="celula">
         <div className="section-intro">
-          <p>Vigencia y continuidad</p>
-          <h2>Un compromiso anual con una salida clara.</h2>
+          <p>La célula que convierte prioridades en operación</p>
+          <h2>Una célula multidisciplinaria que evoluciona con las prioridades.</h2>
           <span>
-            El contrato protege la capacidad reservada, los activos pagados y la
-            continuidad ordenada de Harris &amp; Frank.
+            Harris &amp; Frank contará con una célula extendida de innovación,
+            tecnología y mejora continua. La participación de cada función se
+            ajustará de acuerdo con el Plan Trimestral de Resultados, el backlog
+            aprobado y la capacidad contratada.
           </span>
         </div>
 
-        <div className="term-banner">
-          <div><span>Vigencia inicial</span><strong>12 meses</strong><small>2 meses de Foundation + 10 ciclos mensuales</small></div>
-          <i aria-hidden="true">→</i>
-          <div><span>Renovación</span><strong>Anual</strong><small>Referencia año 2: $65,000 mensuales, sujeta a ajuste</small></div>
+        <div className="cell-layout">
+          <div className="cell-functions">
+            {cellFunctions.map((role, index) => (
+              <details key={role.title}>
+                <summary><i>{String(index + 1).padStart(2, "0")}</i><span>{role.title}</span><b>+</b></summary>
+                <ul>{role.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </details>
+            ))}
+          </div>
+          <aside className="cell-operating-note">
+            <span>Participación adaptable</span>
+            <strong>Funciones disponibles, no puestos dedicados.</strong>
+            <p>Los roles representan funciones disponibles dentro de la célula. No implican personal exclusivo, dedicación de tiempo completo ni necesariamente una persona independiente por función.</p>
+          </aside>
         </div>
 
-        <article className="cancellation-card">
-          <header>
-            <div><span>Cláusula comercial propuesta</span><h3>Terminación anticipada por conveniencia</h3></div>
-            <i>Sujeta a revisión contractual</i>
-          </header>
-          <div className="cancellation-grid">
-            <section>
-              <span>Durante el Foundation Release</span>
-              <strong>La activación reserva capacidad y no es reembolsable.</strong>
-              <p>
-                Si Harris &amp; Frank termina por conveniencia, cubre además el
-                trabajo ejecutado, entregado o comprometido, hasta el saldo
-                pendiente del Foundation Release.
-              </p>
-            </section>
-            <section>
-              <span>Después de su aceptación</span>
-              <strong>30 días naturales de aviso por escrito.</strong>
-              <p>
-                La compensación por capacidad reservada será el menor entre tres
-                mensualidades —$195,000 + IVA— o las mensualidades pendientes para
-                completar los doce meses. Sustituye las mensualidades futuras no
-                devengadas; no se cobra además de ellas.
-              </p>
-            </section>
-            <section>
-              <span>Incumplimiento material</span>
-              <strong>15 días hábiles para subsanar.</strong>
-              <p>
-                La compensación anticipada no aplica cuando la terminación deriva
-                de un incumplimiento material de la otra parte que permanezca sin
-                corregir después de la notificación y el periodo de cura.
-              </p>
-            </section>
-          </div>
-          <footer>
-            Al terminar se pagan importes devengados, aceptados y compromisos no
-            cancelables; cesan soporte, evolución y nuevas liberaciones. Harris
-            &amp; Frank conserva el uso perpetuo de versiones pagadas y aceptadas,
-            junto con una entrega ordenada de sus datos, documentación y accesos.
-          </footer>
+        <div className="cross-functional-band">
+          <span>UX/UI</span><span>Frontend</span><span>Backend</span><span>Datos</span>
+          <span>Integraciones</span><span>QA</span><span>DevOps</span><span>Seguridad</span>
+        </div>
+
+        <div className="client-counterpart">
+          <span>Contraparte requerida de Harris &amp; Frank</span>
+          <strong>Sponsor ejecutivo · Responsable operativo · Líderes involucrados · Usuarios validadores</strong>
+        </div>
+      </section>
+
+      <section className="control-architecture-section" id="arquitectura-control">
+        <div className="section-intro is-light">
+          <p>Arquitectura y seguridad</p>
+          <h2>Arquitectura bajo control de Harris &amp; Frank.</h2>
+          <span>La implementación se plantea sobre una cuenta cloud contratada y controlada por Harris &amp; Frank, manteniendo bajo su administración la infraestructura, facturación, credenciales principales y respaldos.</span>
+        </div>
+
+        <article className="reference-architecture">
+          <header><span>Arquitectura de referencia</span><i>Sujeta a dimensionamiento antes de producción</i></header>
+          <div>{referenceStack.map(([label, detail], index) => <span key={label}><i>{String(index + 1).padStart(2, "0")} · {label}</i>{detail}</span>)}</div>
         </article>
 
-        <div className="continuity-grid">
-          <article><span>Harris &amp; Frank controla</span><p>Datos, infraestructura a su nombre, credenciales, respaldos, documentación, configuraciones y activos operativos entregados.</p></article>
-          <article><span>Uso perpetuo</span><p>Las versiones pagadas y aceptadas pueden seguir utilizándose aunque el programa no se renueve.</p></article>
-          <article><span>Zellship conserva</span><p>El núcleo, componentes reutilizables, frameworks, engines, herramientas preexistentes y know-how general.</p></article>
+        <div className="security-layout">
+          <div className="security-copy">
+            <span>Seguridad por capas</span>
+            <h3>Control, identidad, perímetro, datos y continuidad.</h3>
+            <p>Los niveles se diseñan como controles complementarios; su configuración final depende del alcance productivo aprobado.</p>
+          </div>
+          <div className="security-layers">
+            {securityLayers.map(([number, title, detail]) => (
+              <details key={title}>
+                <summary><i>{number}</i><span>{title}</span><b>+</b></summary>
+                <p>{detail}</p>
+              </details>
+            ))}
+          </div>
         </div>
-        <div className="term-details-grid">
+        <p className="architecture-disclaimer">La arquitectura final, región, dimensionamiento, niveles de disponibilidad y objetivos de recuperación se congelarán antes de producción. Los consumos de nube y servicios de terceros no se consideran incluidos salvo indicación expresa.</p>
+      </section>
+
+      <section className="continuity-section" id="continuidad">
+        <div className="section-intro">
+          <p>Continuidad y protección de la inversión</p>
+          <h2>La capacidad permanece; la tecnología puede evolucionar.</h2>
+          <span>La plataforma es el instrumento; el modelo operativo es la partitura; los datos y la trazabilidad son la grabación. Si cambia el instrumento, la música, la partitura y las grabaciones permanecen, aunque su ejecución en una nueva plataforma pueda requerir adaptación.</span>
+        </div>
+
+        <div className="asset-continuity-grid">
+          <article><span>Modelo operativo</span><strong>La partitura</strong><ul><li>Arquitectura y definiciones de negocio entregadas</li><li>Capacidades, procesos, reglas, contratos y eventos documentados</li><li>Ontología, taxonomía y semántica</li></ul></article>
+          <article><span>Datos y evidencia</span><strong>La grabación</strong><ul><li>Datos, historial, evidencia y trazabilidad</li><li>Estructuras y configuraciones entregadas</li><li>Documentación disponible para consulta</li></ul></article>
+          <article><span>Control y uso</span><strong>La libertad de ejecución</strong><ul><li>Infraestructura, credenciales y respaldos bajo control de H&amp;F</li><li>Uso perpetuo de las versiones pagadas y aceptadas</li></ul></article>
+        </div>
+
+        <div className="resilience-grid">
+          <article><span>01 · Protección de datos</span><ul><li>Respaldos automatizados de base de datos</li><li>Recuperación a un punto en el tiempo cuando la configuración contratada lo permita</li><li>Exportaciones lógicas independientes y periódicas</li><li>Respaldo y retención de archivos y evidencias</li></ul></article>
+          <article><span>02 · Recuperación verificable</span><ul><li>Pruebas periódicas de restauración</li><li>Separación de ambientes</li><li>Parámetros de frecuencia, retención y recuperación definidos antes de producción</li></ul></article>
+          <article><span>03 · Liberación controlada</span><ul><li>Liberaciones versionadas y reversión ante incidencias</li><li>Coexistencia controlada durante el piloto</li><li>Sustituciones mayores sólo después de validar evidencia</li></ul></article>
+        </div>
+
+        <article className="decision-freedom">
+          <span>Continuidad y libertad de decisión</span>
+          <h3>Control visible antes, durante y después de cada liberación.</h3>
+          <p>Harris &amp; Frank conserva visibilidad y control sobre sus datos, infraestructura, respaldos, credenciales y versiones pagadas. Si las prioridades cambian o el programa deja de ser conveniente, existe una ruta de transición ordenada, autorizada y trazable.</p>
+        </article>
+
+        <div className="continuity-details">
           <details>
-            <summary><span>Responsabilidades de Harris &amp; Frank</span><i>+</i></summary>
-            <ul>
-              <li>Designar sponsor, responsable operativo y usuarios clave.</li>
-              <li>Facilitar datos, catálogos, procesos, accesos e infraestructura requerida.</li>
-              <li>Validar criterios y demos, participar en pruebas, capacitación y adopción.</li>
-              <li>Comunicar prioridades y resolver dependencias dentro de los tiempos acordados.</li>
-            </ul>
-            <p>Los retrasos por información, accesos, usuarios o decisiones pueden modificar calendario y secuencia; no generan capacidad acumulada.</p>
+            <summary><span>Alcances de continuidad y portabilidad</span><i>+</i></summary>
+            <p>El código fuente del núcleo y los componentes reutilizables de Zellship no forman parte de la transferencia estándar. Frameworks, engines reutilizables, servicios futuros y componentes de terceros conservan sus condiciones propias. Operar sobre otra plataforma puede requerir adaptación.</p>
           </details>
           <details>
-            <summary><span>Exclusiones generales</span><i>+</i></summary>
+            <summary><span>¿Qué ocurre si el programa no continúa?</span><i>+</i></summary>
             <ul>
-              <li>Desarrollo ilimitado, equipo dedicado de tiempo completo o módulos garantizados.</li>
-              <li>Integraciones y migraciones mayores no evaluadas, nube, licencias y terceros.</li>
-              <li>Hardware, viáticos adicionales, soporte 24/7 o SLAs críticos no contratados.</li>
-              <li>Cumplimiento fiscal, legal o regulatorio no especificado y código fuente del núcleo.</li>
-            </ul>
-            <p>El programa considera hasta ocho sucursales de la misma unidad de negocio; no implica implementarlas todas dentro del Foundation Release.</p>
-          </details>
-          <details>
-            <summary><span>Renovación y continuidad del año 2</span><i>+</i></summary>
-            <ul>
-              <li>Referencia: doce mensualidades de $65,000 + IVA.</li>
-              <li>Ajuste de banda según volumen, complejidad y capacidad requerida.</li>
-              <li>Actualización por inflación, costos o cambio material de capacidad.</li>
-              <li>Los derechos adicionales de continuidad técnica o escrow requieren acuerdo separado.</li>
+              <li>Exportación de datos en los formatos acordados.</li>
+              <li>Entrega de documentación y accesos bajo control del cliente.</li>
+              <li>Conservación del derecho de uso sobre versiones pagadas y aceptadas.</li>
+              <li>Revocación ordenada de accesos de Zellship.</li>
+              <li>Cese de nuevas liberaciones, soporte y evolución.</li>
+              <li>Asistencia de transición conforme a las condiciones contratadas.</li>
             </ul>
           </details>
         </div>
-        <p className="legal-note">
-          Este apartado expresa el acuerdo comercial propuesto y debe trasladarse
-          al contrato definitivo con revisión legal. No sustituye el clausulado contractual.
-        </p>
+        <p className="continuity-note">Los parámetros de respaldo, retención, restauración y recuperación, así como la protección de continuidad, se congelarán y formalizarán contractualmente antes de producción. No constituyen una garantía ilimitada.</p>
+      </section>
+
+      <section className="investment-section" id="inversion">
+        <div className="section-intro is-light">
+          <p>Inversión y forma de pago</p>
+          <h2>Primero se activa la base; después comienza la evolución mensual.</h2>
+          <span>El Blueprint ya pagado se reconoce dentro del Foundation Release. La primera mensualidad del programa comienza después de su aceptación.</span>
+        </div>
+
+        <div className="commercial-grid">
+          <article className="investment-summary">
+            <header><span>Inversión del primer año</span><small>MXN + IVA</small></header>
+            <div className="investment-foundation">
+              <span>Foundation Release</span><strong>$299,000</strong>
+              <small>Reconocimiento del Blueprint pagado</small><em>−$55,900</em>
+              <span>Saldo Foundation Release</span><strong>$243,100</strong>
+            </div>
+            <div className="investment-evolution">
+              <span>Programa de evolución</span>
+              <strong>10 × $65,000</strong>
+            </div>
+            <div className="investment-grand-total">
+              <span>Valor total del primer año</span><strong>$949,000</strong>
+              <small>Nueva inversión pendiente</small><em>$893,100</em>
+            </div>
+          </article>
+
+          <article className="payment-summary">
+            <header><span>Forma de pago</span><small>Secuencia de activación</small></header>
+            <ol>
+              <li><span>01</span><div><strong>$150,000 + IVA</strong><small>A la firma y activación</small></div></li>
+              <li><span>02</span><div><strong>$93,100 + IVA</strong><small>Contra aceptación del Foundation Release</small></div></li>
+              <li><span>03</span><div><strong>10 × $65,000 + IVA</strong><small>Mensualidades anticipadas; la primera inicia después de la aceptación</small></div></li>
+            </ol>
+            <footer>Todos los importes se expresan en pesos mexicanos.</footer>
+          </article>
+        </div>
       </section>
 
       <section className="proposal-close" id="decision">
         <p>Decisión solicitada</p>
-        <h2>Activar el Foundation Release y gobernar la evolución durante doce meses.</h2>
-        <div>
-          <Link href="/demo">Ver el sistema en acción <span>→</span></Link>
-          <button type="button" className="secondary" onClick={() => chooseTrack("blueprint")}>Revisar Blueprint consultivo</button>
-          <Link href="/presentacion/scrollytelling" className="secondary">Ver presentación</Link>
+        <h2>Activar el Foundation Release y el programa anual.</h2>
+        <ol className="activation-steps">
+          {activationSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></li>)}
+        </ol>
+        <small>La activación queda sujeta a confirmación comercial, contrato definitivo y baseline aprobado.</small>
+      </section>
+
+      <section className="proposal-annexes" id="anexos">
+        <div className="section-intro is-light">
+          <p>Evidencia y anexos</p>
+          <h2>Material de soporte para consultar, no para interrumpir la decisión.</h2>
+          <span>La narrativa principal termina en la activación. Aquí permanecen los artefactos consultivos, responsabilidades y precisiones que respaldan el acuerdo.</span>
         </div>
-        <small>Propuesta comercial vigente sujeta al contrato definitivo.</small>
+
+        <div className="annex-evidence-grid">
+          {evidence.map(([title, detail], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{title}</strong><p>{detail}</p></div></article>)}
+        </div>
+
+        <div className="annex-details">
+          <details>
+            <summary><span>Responsabilidades de Harris &amp; Frank</span><i>+</i></summary>
+            <ul><li>Designar sponsor, responsable operativo y usuarios clave.</li><li>Facilitar datos, catálogos, procesos, accesos e infraestructura requerida.</li><li>Validar criterios y demos; participar en pruebas, capacitación y adopción.</li><li>Resolver prioridades y dependencias dentro de los tiempos acordados.</li></ul>
+          </details>
+          <details>
+            <summary><span>Exclusiones generales</span><i>+</i></summary>
+            <ul><li>Desarrollo ilimitado, equipo dedicado de tiempo completo o módulos garantizados.</li><li>Integraciones y migraciones mayores no evaluadas, nube, licencias y terceros.</li><li>Hardware, viáticos adicionales, soporte 24/7 o niveles de servicio no contratados.</li><li>Cumplimiento fiscal, legal o regulatorio no especificado.</li></ul>
+          </details>
+          <details>
+            <summary><span>Definiciones que se formalizan antes de producción</span><i>+</i></summary>
+            <ul><li>Región, dimensionamiento y niveles de disponibilidad.</li><li>Frecuencia y retención de respaldos; objetivos de recuperación.</li><li>Formatos de exportación y condiciones de asistencia de transición.</li><li>Condiciones finales de soporte, continuidad y responsabilidad.</li></ul>
+          </details>
+        </div>
+        <p className="legal-note">La arquitectura, la continuidad y los términos descritos constituyen una propuesta de referencia. El contrato definitivo y sus anexos son la fuente de los compromisos exigibles.</p>
       </section>
         </div>
       )}
