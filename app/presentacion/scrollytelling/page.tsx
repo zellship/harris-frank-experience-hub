@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import "./scrollytelling.css";
+import { sitePath } from "../../site-path";
 
 const chapters = [
   ["extraordinario", "La oportunidad"], ["entendimiento", "Lo que entendimos"],
@@ -189,7 +190,7 @@ export default function ScrollytellingPresentation() {
     <main ref={shellRef} className={`story-shell ${controlsVisible ? "controls-visible" : "controls-hidden"}`}>
       <header className="story-header">
         <Link href="/" className="story-back"><span aria-hidden="true">←</span> Experience Hub</Link>
-        <div className="story-brand"><img src="/brand/harris-frank-logo.png" alt="Harris & Frank" /><span>Presentación narrativa</span></div>
+        <div className="story-brand"><img src={sitePath("/brand/harris-frank-logo.png")} alt="Harris & Frank" /><span>Presentación narrativa</span></div>
         <div className="story-header-actions"><button type="button" onClick={() => void toggleFullscreen()}>{isFullscreen ? "Salir" : "Pantalla completa"}</button></div>
       </header>
 
@@ -201,9 +202,9 @@ export default function ScrollytellingPresentation() {
         <div className="story-grid" /><div className="hero-glow glow-one" /><div className="hero-glow glow-two" />
         <div className="story-content hero-story-copy"><span className="story-kicker">Harris &amp; Frank × Zellship</span><h1>Extraordinario<em>por diseño.</em></h1><p>La ventaja de Harris &amp; Frank no está sólo en lo que vende.<span className="hero-second-line">Está en cómo diseña, produce, relaciona y cumple.</span></p><div className="thesis-line"><span>Operación extraordinaria</span><i>→</i><span>Modelo operativo</span><i>→</i><strong>Capacidad ejecutable</strong></div></div>
         <div className="hero-screens" aria-label="Superficies conectadas del sistema">
-          <figure className="screen-card screen-sales"><img src="/demo/sales-terminal.webp" alt="Sales Terminal" /><figcaption>Customer &amp; Commerce</figcaption></figure>
-          <figure className="screen-card screen-collection"><img src="/demo/collection-studio.webp" alt="Collection Studio" /><figcaption>Product &amp; Brand</figcaption></figure>
-          <div className="screen-core"><img src="/brand/os-mark.png" alt="Business OS" /><span>Una misma capacidad operativa</span></div>
+          <figure className="screen-card screen-sales"><img src={sitePath("/demo/sales-terminal.webp")} alt="Sales Terminal" /><figcaption>Customer &amp; Commerce</figcaption></figure>
+          <figure className="screen-card screen-collection"><img src={sitePath("/demo/collection-studio.webp")} alt="Collection Studio" /><figcaption>Product &amp; Brand</figcaption></figure>
+          <div className="screen-core"><img src={sitePath("/brand/os-mark.png")} alt="Business OS" /><span>Una misma capacidad operativa</span></div>
         </div>
         <button type="button" className="scroll-cue" onClick={() => goToChapter(1)}>Descubrir el modelo <span>↓</span></button>
       </section>
@@ -220,7 +221,7 @@ export default function ScrollytellingPresentation() {
       </section>
 
       <section id="capacidad" className="story-chapter chapter-capacity light-chapter">
-        <div className="capacity-asset"><img src="/brand/hf-os-suite-exploded.webp" alt="Capas del Business OS" /></div>
+        <div className="capacity-asset"><img src={sitePath("/brand/hf-os-suite-exploded.webp")} alt="Capas del Business OS" /></div>
         <div className="story-content capacity-copy"><span className="story-kicker">El activo operativo</span><h2>Lo valioso no termina<em>en una pantalla.</em></h2><p>La interfaz es la parte visible. Debajo se materializa una forma compartida de decidir, ejecutar, medir y mejorar.</p><div className="asset-stack"><article><span>01</span><div><strong>Modelo operativo</strong><small>Procesos, reglas, roles y criterios explícitos.</small></div></article><article><span>02</span><div><strong>Capacidad en sistema</strong><small>Datos, engines y experiencias conectadas.</small></div></article><article><span>03</span><div><strong>Adopción verificable</strong><small>Usuarios, transición, uso y evidencia.</small></div></article><article><span>04</span><div><strong>Continuidad operativa</strong><small>Aprendizaje, iteración y siguientes waves.</small></div></article></div><Link className="inline-link" href="/propuesta#architecture">Explorar el blueprint operativo <span>↗</span></Link></div>
       </section>
 
@@ -237,7 +238,7 @@ export default function ScrollytellingPresentation() {
 
       <section id="vision" className="story-chapter chapter-vision">
         <div className="vision-rings"><i /><i /><i /></div>
-        <div className="story-content vision-heading"><span className="story-kicker">Showcase ejecutivo</span><h2>La visión puede recorrerse,<em>no sólo explicarse.</em></h2><p>Las experiencias hacen tangible una operación conectada sin convertir la visión completa en alcance automático.</p><div className="mini-screen-stack"><figure><img src="/demo/collection-studio.webp" alt="" /></figure><figure><img src="/demo/sales-terminal.webp" alt="" /></figure></div></div>
+        <div className="story-content vision-heading"><span className="story-kicker">Showcase ejecutivo</span><h2>La visión puede recorrerse,<em>no sólo explicarse.</em></h2><p>Las experiencias hacen tangible una operación conectada sin convertir la visión completa en alcance automático.</p><div className="mini-screen-stack"><figure><img src={sitePath("/demo/collection-studio.webp")} alt="" /></figure><figure><img src={sitePath("/demo/sales-terminal.webp")} alt="" /></figure></div></div>
         <div className="vision-explorer"><div className="capability-tabs" role="tablist">{capabilities.map((item, index) => <button key={item.marker} type="button" role="tab" aria-selected={index === capability} className={index === capability ? "is-active" : ""} onClick={() => setCapability(index)}><span>{item.marker}</span><strong>{item.title}</strong></button>)}</div><article className="capability-detail"><span className="capability-marker">{capabilities[capability].marker}</span><small>{capabilities[capability].signal}</small><h3>{capabilities[capability].title}</h3><p>{capabilities[capability].statement}</p><Link href="/demo">Entrar a la Demo <span>↗</span></Link></article></div>
       </section>
 
@@ -264,7 +265,7 @@ export default function ScrollytellingPresentation() {
       </section>
 
       <section id="decision" className="story-chapter chapter-close">
-        <div className="close-asset"><img src="/brand/hf-os-suite-exploded.webp" alt="" /></div>
+        <div className="close-asset"><img src={sitePath("/brand/hf-os-suite-exploded.webp")} alt="" /></div>
         <div className="story-content close-copy"><span className="story-kicker">Siguiente decisión</span><h2>Proteger lo extraordinario.<em>Hacerlo ejecutable. Mejorarlo con evidencia.</em></h2><p>El siguiente paso es validar la dirección estratégica y definir el primer problema prioritario, sus responsables y criterios de éxito.</p><div className="decision-steps"><span><i>01</i>Validar la dirección</span><span><i>02</i>Priorizar el problema</span><span><i>03</i>Definir la evidencia</span></div><div className="close-actions"><Link className="primary" href="/demo">Recorrer la Demo <span>↗</span></Link><Link href="/propuesta">Explorar la propuesta</Link><Link href="/">Volver al Hub</Link></div><small className="prototype-note">La propuesta comercial se revisa por separado una vez validada la dirección.</small></div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { sitePath } from "./site-path";
 
 type Particle = {
   angle: number;
@@ -16,10 +17,12 @@ function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    if (!context) return;
+    const canvasElement = canvasRef.current;
+    if (!canvasElement) return;
+    const canvas: HTMLCanvasElement = canvasElement;
+    const canvasContext = canvas.getContext("2d");
+    if (!canvasContext) return;
+    const context: CanvasRenderingContext2D = canvasContext;
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -153,11 +156,11 @@ export default function Home() {
   function openPortal(title: string) {
     setActivePortal(title);
     if (title === "Presentación") {
-      window.location.assign("/presentacion/scrollytelling");
+      window.location.assign(sitePath("/presentacion/scrollytelling/"));
     } else if (title === "Demo") {
-      window.location.assign("/demo");
+      window.location.assign(sitePath("/demo/"));
     } else if (title === "Propuesta") {
-      window.location.assign("/propuesta");
+      window.location.assign(sitePath("/propuesta/"));
     }
   }
 
@@ -181,7 +184,7 @@ export default function Home() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="zellship-logo"
-          src="/brand/zellship-logo.png"
+          src={sitePath("/brand/zellship-logo.png")}
           alt="Zellship"
         />
         <div
@@ -198,13 +201,13 @@ export default function Home() {
       <section className="hero" aria-labelledby="hub-title">
         <div className="os-stage" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/os-mark.png" alt="" />
+          <img src={sitePath("/brand/os-mark.png")} alt="" />
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="hf-logo"
-          src="/brand/harris-frank-logo.png"
+          src={sitePath("/brand/harris-frank-logo.png")}
           alt="Harris & Frank"
         />
 

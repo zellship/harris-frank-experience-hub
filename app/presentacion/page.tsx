@@ -7,6 +7,7 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { sitePath } from "../site-path";
 
 type Slide = {
   id: string;
@@ -36,7 +37,7 @@ export default function PresentationPage() {
 
   useEffect(() => {
     let active = true;
-    fetch("/presentation/manifest.json")
+    fetch(sitePath("/presentation/manifest.json"))
       .then((response) => {
         if (!response.ok) throw new Error("Presentation manifest unavailable");
         return response.json() as Promise<PresentationManifest>;
@@ -179,8 +180,7 @@ export default function PresentationPage() {
       <main className="presentation-status">
         <p>No fue posible cargar la presentación provisional.</p>
         {/* Native links preserve compatibility with the Sites Worker runtime. */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a href="/">Volver al Hub</a>
+        <a href={sitePath("/")}>Volver al Hub</a>
       </main>
     );
   }
@@ -205,19 +205,18 @@ export default function PresentationPage() {
     >
       <header className="player-header">
         {/* Native links preserve compatibility with the Sites Worker runtime. */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a className="player-back" href="/" aria-label="Volver al Experience Hub">
+        <a className="player-back" href={sitePath("/")} aria-label="Volver al Experience Hub">
           <span aria-hidden="true">←</span>
           Hub
         </a>
         <div className="player-title">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/harris-frank-logo.png" alt="Harris & Frank" />
+          <img src={sitePath("/brand/harris-frank-logo.png")} alt="Harris & Frank" />
           <span>Presentación ejecutiva</span>
         </div>
         <div className="player-header-actions">
           <span className={`version-chip ${manifest.status}`}>{manifest.versionLabel}</span>
-          <a className="scrolly-preview-link" href="/presentacion/scrollytelling">
+          <a className="scrolly-preview-link" href={sitePath("/presentacion/scrollytelling/")}>
             Abrir narrativa consolidada
           </a>
           <button type="button" onClick={() => void toggleFullscreen()}>
@@ -236,7 +235,7 @@ export default function PresentationPage() {
           <img
             key={slide.src}
             className="active-slide"
-            src={slide.src}
+            src={sitePath(slide.src)}
             alt={`Diapositiva ${current + 1}: ${slide.title}`}
             draggable={false}
           />

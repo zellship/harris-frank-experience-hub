@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./demo.css";
+import { sitePath } from "../site-path";
 
-const SHOWCASE_ENTRY = "/harris-frank-capability-showcase/#/demo";
+const SHOWCASE_ENTRY = sitePath("/harris-frank-capability-showcase/#/demo");
 
 export default function DemoPage() {
   const frameRef = useRef<HTMLIFrameElement>(null);
@@ -34,7 +35,7 @@ export default function DemoPage() {
 
       event.preventDefault();
       event.stopPropagation();
-      window.location.assign("/");
+      window.location.assign(sitePath("/"));
     };
 
     frameDocument.addEventListener("click", handleShowcaseClick, true);

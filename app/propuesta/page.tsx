@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "./propuesta.css";
+import { sitePath } from "../site-path";
 
 type Principle = {
   id: string;
@@ -623,7 +624,7 @@ export default function ProposalBlueprintPage() {
   useEffect(() => {
     const updateActiveChapter = () => {
       const viewportFocus = window.innerHeight * 0.42;
-      let closestId = chapters[0][0];
+      let closestId: string = chapters[0][0];
       let closestDistance = Number.POSITIVE_INFINITY;
       chapters.forEach(([id]) => {
         const element = document.getElementById(id);
@@ -691,7 +692,7 @@ export default function ProposalBlueprintPage() {
         <Link href="/" className="proposal-back">← <span>Experience Hub</span></Link>
         <div className="proposal-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/harris-frank-logo.png" alt="Harris & Frank" />
+          <img src={sitePath("/brand/harris-frank-logo.png")} alt="Harris & Frank" />
           <span>Propuesta ejecutiva</span>
         </div>
         <nav aria-label="Navegación de la propuesta">
