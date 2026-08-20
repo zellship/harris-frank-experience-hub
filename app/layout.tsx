@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { sitePath } from "./site-path";
 
 export const metadata: Metadata = {
   title: "Harris & Frank Experience Hub",
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: sitePath("/favicon.svg"),
+    shortcut: sitePath("/favicon.svg"),
   },
 };
 
