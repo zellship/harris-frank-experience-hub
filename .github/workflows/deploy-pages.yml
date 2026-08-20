@@ -34,6 +34,9 @@ jobs:
       - name: Build static site
         run: npm run build:pages
 
+      - name: Add static deep-link fallback
+        run: cp out/index.html out/404.html
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

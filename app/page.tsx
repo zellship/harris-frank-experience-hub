@@ -97,7 +97,10 @@ function ParticleField() {
         const x = centerX + Math.cos(angle) * particle.radius * ellipse;
         const y = centerY + Math.sin(angle) * particle.radius * 0.62;
         const edgeFade = Math.max(0, 1 - particle.radius / particle.limit);
-        const centerFade = Math.min(1, Math.max(0, (particle.radius - 28) / 90));
+        const centerFade = Math.min(
+          1,
+          Math.max(0, (particle.radius - 28) / 90),
+        );
         const alpha = particle.alpha * (0.34 + edgeFade * 0.66) * centerFade;
 
         context.beginPath();
@@ -120,7 +123,9 @@ function ParticleField() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="particle-field" aria-hidden="true" />;
+  return (
+    <canvas ref={canvasRef} className="particle-field" aria-hidden="true" />
+  );
 }
 
 const portals = [
@@ -195,7 +200,7 @@ export default function Home() {
           <span>Experience Hub</span>
           <span className="header-line" />
         </div>
-        <span className="edition">Executive experience · 2026</span>
+        <span className="edition">Executive experience · Build 2026.08.20</span>
       </header>
 
       <section className="hero" aria-labelledby="hub-title">

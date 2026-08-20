@@ -344,35 +344,123 @@ const foundationExcludes = [
 
 const cellFunctions = [
   {
-    title: "Program Lead / PM",
-    items: ["Gobierno del programa", "Relación ejecutiva", "Riesgos y dependencias", "QBR y decisiones"],
+    title: "Program / Engagement Lead",
+    items: [
+      "Gobierno y prioridades",
+      "Riesgos y decisiones",
+      "Relación ejecutiva",
+    ],
   },
   {
-    title: "Arquitectura de solución",
-    items: ["Coherencia funcional y técnica", "Arquitectura del Business OS", "Datos e integraciones", "Continuidad entre capacidades"],
-  },
-  {
-    title: "Lead de procesos y operaciones",
-    items: ["Estandarización de procesos", "Definición de reglas de negocio", "Adopción operativa", "Medición de resultados"],
+    title: "Solution Architect",
+    items: [
+      "Arquitectura funcional y técnica",
+      "Integración, datos y seguridad",
+      "Continuidad",
+    ],
   },
   {
     title: "Coordinación de entrega",
-    items: ["Backlog y sprints", "Dependencias", "Evidencias y validación", "Liberaciones"],
+    items: ["Secuencia y dependencias", "Avances y evidencias", "Gates"],
   },
+  {
+    title: "Operating Model & Process Lead",
+    items: ["Procesos y reglas", "Capacidades y roles", "Criterios operativos"],
+  },
+  {
+    title: "Product & Experience",
+    items: [
+      "Definición funcional",
+      "Experiencia y prototipos",
+      "Validación con usuarios",
+    ],
+  },
+  {
+    title: "Engineering transversal",
+    items: [
+      "Configuración y desarrollo",
+      "Integraciones autorizadas",
+      "Calidad y observabilidad",
+    ],
+  },
+  {
+    title: "Adopción, soporte y asistencia",
+    items: ["Estabilización", "Acompañamiento y aprendizaje", "Continuidad"],
+  },
+];
+
+const waveDefinitionFields = [
+  "Problema y resultado operativo esperado",
+  "Alcance incluido y exclusiones",
+  "Capacidades, procesos, datos e integraciones",
+  "Entregables y evidencia requerida",
+  "Criterios de aceptación y responsables",
+  "Dependencias y responsabilidades",
+  "Capacidad, prioridades y secuencia",
+  "Condiciones para estabilizar, ampliar, diferir o detener",
+];
+
+const waveGates = [
+  "Definir y autorizar",
+  "Diseñar y materializar",
+  "Demostrar y probar",
+  "Aceptar",
+  "Adoptar y estabilizar",
+  "Autorizar siguiente wave",
+];
+
+const policyCoverage = [
+  "Soporte remoto y atención de incidentes sobre el alcance instalado",
+  "Diagnóstico y corrección de fallas atribuibles a las capacidades entregadas",
+  "Mantenimiento preventivo",
+  "Seguimiento, priorización y asistencia funcional y técnica",
+  "Actualizaciones correctivas, de seguridad y compatibilidad dentro de la versión vigente",
+  "Hasta 8 horas mensuales no acumulables para ajustes técnicos menores, sujetas a priorización conjunta",
+];
+
+const policyExclusions = [
+  "Nuevas capacidades, módulos o Business Apps",
+  "Integraciones nuevas o ampliaciones materiales de integraciones existentes",
+  "Migraciones, rediseños o upgrades mayores",
+  "Infraestructura, hardware, comunicaciones, licencias y servicios de terceros",
+  "Desarrollo mayor o asistencia extendida que exceda la capacidad base acordada",
 ];
 
 const referenceStack = [
   ["Ejecución", "Google Cloud · Cloud Run para servicios contenerizados"],
   ["Datos y evidencia", "Cloud SQL for MySQL · Cloud Storage"],
-  ["Control y observabilidad", "IAM · Secret Manager · HTTPS · balanceo · Cloud Armor · logging · monitoreo · alertamiento"],
+  [
+    "Control y observabilidad",
+    "IAM · Secret Manager · HTTPS · balanceo · Cloud Armor · logging · monitoreo · alertamiento",
+  ],
 ];
 
 const securityLayers = [
-  ["01", "Control", "Cuenta cloud, facturación y administradores bajo control de Harris & Frank."],
-  ["02", "Identidad", "Accesos por función, mínimo privilegio y revocación trazable."],
-  ["03", "Perímetro", "HTTPS, políticas de tráfico y protección de aplicaciones."],
-  ["04", "Aplicación y datos", "Ambientes separados, secretos protegidos y permisos por contexto."],
-  ["05", "Continuidad", "Respaldos, monitoreo, recuperación y reversión controlada."],
+  [
+    "01",
+    "Control",
+    "Cuenta cloud, facturación y administradores bajo control de Harris & Frank.",
+  ],
+  [
+    "02",
+    "Identidad",
+    "Accesos por función, mínimo privilegio y revocación trazable.",
+  ],
+  [
+    "03",
+    "Perímetro",
+    "HTTPS, políticas de tráfico y protección de aplicaciones.",
+  ],
+  [
+    "04",
+    "Aplicación y datos",
+    "Ambientes separados, secretos protegidos y permisos por contexto.",
+  ],
+  [
+    "05",
+    "Continuidad",
+    "Respaldos, monitoreo, recuperación y reversión controlada.",
+  ],
 ];
 
 const activationSteps = [
@@ -391,8 +479,7 @@ const proposalTracks = {
     shortLabel: "Blueprint consultivo",
     eyebrow: "Resultado consultivo · activo ya construido",
     title: "El entendimiento operativo convertido en un activo arquitectónico.",
-    lead:
-      "Hallazgos, definiciones, modelos y evidencia que explican cómo debe organizarse la operación antes de decidir qué construir.",
+    lead: "Hallazgos, definiciones, modelos y evidencia que explican cómo debe organizarse la operación antes de decidir qué construir.",
     definition:
       "Documenta lo que ya se entendió y definió. Orienta decisiones futuras, pero no equivale por sí mismo al alcance contratado.",
     chapters: [
@@ -408,8 +495,7 @@ const proposalTracks = {
     shortLabel: "Propuesta de proyecto",
     eyebrow: "Ejecución futura · sujeta a contrato",
     title: "Una trayectoria inicial y una capacidad anual para evolucionar.",
-    lead:
-      "Foundation Release, gobierno, célula, arquitectura, continuidad e inversión para convertir prioridades acordadas en versiones utilizables del Business OS.",
+    lead: "Foundation Release, gobierno, célula, arquitectura, continuidad e inversión para convertir prioridades acordadas en versiones utilizables del Business OS.",
     definition:
       "Describe lo que se propone contratar: alcance inicial, forma de trabajo, inversión, condiciones y responsabilidades.",
     chapters: [
@@ -421,6 +507,7 @@ const proposalTracks = {
       ["arquitectura-control", "Arquitectura"],
       ["continuidad", "Continuidad"],
       ["inversion", "Inversión"],
+      ["despues-primer-ano", "Después del primer año"],
       ["decision", "Activación"],
       ["anexos", "Anexos"],
     ],
@@ -429,7 +516,10 @@ const proposalTracks = {
 
 function AccountModel() {
   return (
-    <div className="account-model" aria-label="Modelo visual de cuenta y partidas">
+    <div
+      className="account-model"
+      aria-label="Modelo visual de cuenta y partidas"
+    >
       <div className="model-client">
         <span>Cliente</span>
         <strong>Carlos Martínez</strong>
@@ -475,7 +565,10 @@ function TriageModel() {
     ["Recuperabilidad", "46%"],
   ];
   return (
-    <div className="triage-model" aria-label="Modelo visual de Triage operativo">
+    <div
+      className="triage-model"
+      aria-label="Modelo visual de Triage operativo"
+    >
       <div className="triage-score">
         <span>Triage operativo</span>
         <strong>Atender ahora</strong>
@@ -496,14 +589,16 @@ function TriageModel() {
         <span>Siguiente mejor acción</span>
         <strong>Confirmar material alternativo</strong>
         <p>
-          El ETA de producción amenaza el fitting. Existe una alternativa en
-          red que conserva la fecha comprometida.
+          El ETA de producción amenaza el fitting. Existe una alternativa en red
+          que conserva la fecha comprometida.
         </p>
         <div className="decision-meta">
           <small>Responsable · Compras</small>
           <small>Ventana · 3 h 20 min</small>
         </div>
-        <button type="button">Revisar ruta de recuperación <span>→</span></button>
+        <button type="button">
+          Revisar ruta de recuperación <span>→</span>
+        </button>
       </div>
     </div>
   );
@@ -538,7 +633,9 @@ function PromiseModel() {
 }
 
 export default function ProposalBlueprintPage() {
-  const [activeModel, setActiveModel] = useState<"account" | "triage" | "promise">("account");
+  const [activeModel, setActiveModel] = useState<
+    "account" | "triage" | "promise"
+  >("account");
   const [activeCapabilityId, setActiveCapabilityId] = useState("passport");
   const [activeTrack, setActiveTrack] = useState<ProposalTrack>("blueprint");
   const [activeChapter, setActiveChapter] = useState("proposal-top");
@@ -689,10 +786,15 @@ export default function ProposalBlueprintPage() {
   return (
     <main className="proposal-shell">
       <header className="proposal-header">
-        <Link href="/" className="proposal-back">← <span>Experience Hub</span></Link>
+        <Link href="/" className="proposal-back">
+          ← <span>Experience Hub</span>
+        </Link>
         <div className="proposal-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={sitePath("/brand/harris-frank-logo.png")} alt="Harris & Frank" />
+          <img
+            src={sitePath("/brand/harris-frank-logo.png")}
+            alt="Harris & Frank"
+          />
           <span>Propuesta ejecutiva</span>
         </div>
         <nav aria-label="Navegación de la propuesta">
@@ -713,19 +815,27 @@ export default function ProposalBlueprintPage() {
         </nav>
       </header>
 
-      <section className={`proposal-hero track-${activeTrack}`} id="proposal-top">
+      <section
+        className={`proposal-hero track-${activeTrack}`}
+        id="proposal-top"
+      >
         <div className="blueprint-grid" aria-hidden="true" />
         <div className="hero-orbit orbit-one" aria-hidden="true" />
         <div className="hero-orbit orbit-two" aria-hidden="true" />
         <div className="proposal-hero-copy">
-          <div className="proposal-track-selector" aria-label="Seleccionar documento">
+          <div
+            className="proposal-track-selector"
+            aria-label="Seleccionar documento"
+          >
             <button
               type="button"
               className={activeTrack === "blueprint" ? "is-active" : ""}
               onClick={() => chooseTrack("blueprint")}
             >
               <i>01</i>
-              <span>Blueprint consultivo<small>Lo ya entendido y definido</small></span>
+              <span>
+                Blueprint consultivo<small>Lo ya entendido y definido</small>
+              </span>
             </button>
             <button
               type="button"
@@ -733,10 +843,14 @@ export default function ProposalBlueprintPage() {
               onClick={() => chooseTrack("project")}
             >
               <i>02</i>
-              <span>Propuesta de proyecto<small>Lo que se propone ejecutar</small></span>
+              <span>
+                Propuesta de proyecto<small>Lo que se propone ejecutar</small>
+              </span>
             </button>
           </div>
-          <div className="draft-label"><i /> {track.eyebrow}</div>
+          <div className="draft-label">
+            <i /> {track.eyebrow}
+          </div>
           <p className="proposal-eyebrow">Harris &amp; Frank · Business OS</p>
           <h1>{track.title}</h1>
           <p className="proposal-lead">{track.lead}</p>
@@ -749,7 +863,9 @@ export default function ProposalBlueprintPage() {
             type="button"
             onClick={() => goToChapter(chapters[1][0])}
           >
-            {activeTrack === "blueprint" ? "Explorar el resultado consultivo" : "Explorar la propuesta de ejecución"}
+            {activeTrack === "blueprint"
+              ? "Explorar el resultado consultivo"
+              : "Explorar la propuesta de ejecución"}
             <span>↓</span>
           </button>
         </div>
@@ -757,17 +873,41 @@ export default function ProposalBlueprintPage() {
         <div className="proposal-metrics" aria-label="Estructura del programa">
           {activeTrack === "project" ? (
             <>
-              <div><strong>12</strong><span>meses de compromiso inicial</span></div>
-              <div><strong>8</strong><span>semanas de Foundation Release</span></div>
-              <div><strong>20</strong><span>sprints de evolución estimados</span></div>
-              <div><strong>1</strong><span>sucursal piloto por definir</span></div>
+              <div>
+                <strong>12</strong>
+                <span>meses de compromiso inicial</span>
+              </div>
+              <div>
+                <strong>8</strong>
+                <span>semanas de Foundation Release</span>
+              </div>
+              <div>
+                <strong>20</strong>
+                <span>sprints de evolución estimados</span>
+              </div>
+              <div>
+                <strong>1</strong>
+                <span>sucursal piloto por definir</span>
+              </div>
             </>
           ) : (
             <>
-              <div><strong>6</strong><span>principios de diseño operativo</span></div>
-              <div><strong>4</strong><span>hallazgos convertidos en decisiones</span></div>
-              <div><strong>12</strong><span>capacidades estratégicas conectadas</span></div>
-              <div><strong>6</strong><span>artefactos de evidencia y soporte</span></div>
+              <div>
+                <strong>6</strong>
+                <span>principios de diseño operativo</span>
+              </div>
+              <div>
+                <strong>4</strong>
+                <span>hallazgos convertidos en decisiones</span>
+              </div>
+              <div>
+                <strong>12</strong>
+                <span>capacidades estratégicas conectadas</span>
+              </div>
+              <div>
+                <strong>6</strong>
+                <span>artefactos de evidencia y soporte</span>
+              </div>
             </>
           )}
         </div>
@@ -775,541 +915,1166 @@ export default function ProposalBlueprintPage() {
 
       {activeTrack === "project" && (
         <div className="proposal-track-content track-content-project">
-
-      <section className="foundation-section" id="foundation">
-        <div className="section-intro">
-          <p>Qué activamos primero</p>
-          <h2>Un Foundation Release acotado que llega a piloto.</h2>
-          <span>
-            El inicio protege una trayectoria operativa de principio a fin, con
-            alcance definido, piloto controlado y aceptación basada en evidencia.
-          </span>
-        </div>
-
-        <div className="foundation-path" aria-label="Trayectoria operativa inicial">
-          {["Cliente y cuenta", "Operación comercial", "Pago y saldo", "Cumplimiento", "Entrega y cierre"].map((step, index) => (
-            <div key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong>{index < 4 && <i>→</i>}</div>
-          ))}
-        </div>
-
-        <div className="foundation-scope-grid">
-          <article>
-            <header><span>Incluye de manera acotada</span><i>01</i></header>
-            <ul>{foundationIncludes.map((item) => <li key={item}>{item}</li>)}</ul>
-          </article>
-          <article className="is-excluded">
-            <header><span>Permanece en roadmap</span><i>02</i></header>
-            <ul>{foundationExcludes.map((item) => <li key={item}>{item}</li>)}</ul>
-          </article>
-        </div>
-
-        <div className="milestone-track">
-          {foundationMilestones.map(([period, title, evidenceItem], index) => (
-            <article key={title}>
-              <span>{period}</span><i>{String(index + 1).padStart(2, "0")}</i>
-              <h3>{title}</h3><p>{evidenceItem}</p>
-            </article>
-          ))}
-        </div>
-        <p className="foundation-dependency">
-          La duración estimada de ocho semanas depende de la entrega oportuna de
-          información, accesos, decisiones y usuarios por Harris &amp; Frank.
-        </p>
-      </section>
-
-      <section className="commercial-section" id="programa">
-        <div className="section-intro is-light commercial-heading">
-          <p>Cómo evoluciona durante el año</p>
-          <h2>Primero una base aceptada; después, diez ciclos de evolución.</h2>
-          <span>
-            El programa considera doce meses: Foundation Release primero y una
-            capacidad mensual posterior para convertir prioridades aprobadas en incrementos utilizables.
-          </span>
-        </div>
-
-        <div className="program-architecture">
-          <article className="program-card is-foundation">
-            <header><span>Meses 01–02</span><i>8 semanas</i></header>
-            <small>Foundation Release</small>
-            <h3>Un núcleo operativo completo llevado a piloto.</h3>
-            <p>Primera implementación controlada, utilizable y verificable.</p>
-            <footer>Una sucursal · alcance definido · aceptación con evidencia</footer>
-          </article>
-          <div className="program-bridge" aria-hidden="true"><i /><span>aceptación</span><i /></div>
-          <article className="program-card is-evolution">
-            <header><span>Meses 03–12</span><i>10 ciclos</i></header>
-            <small>Programa de evolución</small>
-            <h3>Prioridades convertidas en incrementos cada quince días.</h3>
-            <p>Un frente principal de evolución con planeación trimestral de resultados.</p>
-            <footer>2 sprints/mes · reporte mensual · QBR trimestral</footer>
-          </article>
-        </div>
-
-        <div className="program-cadence" aria-label="Cadencia anual propuesta">
-          <article><span>01</span><strong>Sprints quincenales</strong><p>Compromisos concretos para diseñar, construir, demostrar y validar.</p></article>
-          <article><span>02</span><strong>Plan Trimestral de Resultados</strong><p>Prioridades, capacidad, dependencias y evidencia esperada se congelan por periodo.</p></article>
-          <article><span>03</span><strong>QBR</strong><p>Resultados, adopción y riesgos informan la siguiente decisión ejecutiva.</p></article>
-        </div>
-      </section>
-
-      <section className="governance-section" id="gobierno">
-        <div className="section-intro is-light">
-          <p>Cómo se gobiernan alcance y resultados</p>
-          <h2>Flexibilidad en prioridades.<br />Certeza en capacidad y decisiones.</h2>
-          <span>
-            Un frente principal de evolución, dos Sprint Commitments por mes y
-            un checkpoint ejecutivo trimestral para sostener el valor.
-          </span>
-        </div>
-
-        <div className="capacity-layout">
-          <article className="capacity-allocation">
-            <div className="allocation-ring" aria-label="Distribución recomendada de capacidad">
-              <div><strong>70</strong><span>%</span><small>resultados prioritarios</small></div>
+          <section className="foundation-section" id="foundation">
+            <div className="section-intro">
+              <p>Qué activamos primero</p>
+              <h2>Un alcance inicial definido. Una evolución gobernada.</h2>
+              <span>
+                El programa inicia con una primera versión operativa de alcance
+                definido, utilizable y verificable. Consolida los sistemas,
+                datos y procesos priorizados dentro del núcleo autorizado
+                mediante una transición controlada.
+              </span>
             </div>
-            <div className="allocation-legend">
-              <span><i className="priority" /><strong>70%</strong> Resultados acordados</span>
-              <span><i className="adoption" /><strong>20%</strong> Validación y adopción</span>
-              <span><i className="stability" /><strong>10%</strong> Estabilización y contingencias</span>
-            </div>
-            <footer>La reserva no utilizada puede reasignarse dentro del periodo; no se acumula.</footer>
-          </article>
 
-          <article className="monthly-cadence">
-            <header><span>Cada ciclo mensual</span><i>1 frente principal</i></header>
-            <div className="sprint-row">
-              <div><span>Semana 01–02</span><strong>Sprint Commitment 01</strong><small>Diseñar · construir · demostrar</small></div>
-              <i>→</i>
-              <div><span>Semana 03–04</span><strong>Sprint Commitment 02</strong><small>Validar · liberar · evidenciar</small></div>
-            </div>
-            <ul>
-              <li>Demo y Evidence Log por sprint</li>
-              <li>Actualización de riesgos, decisiones y dependencias</li>
-              <li>Reporte mensual de transformación</li>
-              <li>Una prioridad nueva sustituye; no amplía silenciosamente</li>
-            </ul>
-          </article>
-        </div>
-
-        <div className="maturity-grid">
-          {maturityStates.map(([number, title, detail]) => (
-            <article key={title}><span>{number}</span><i /><strong>{title}</strong><p>{detail}</p></article>
-          ))}
-        </div>
-
-        <article className="qbr-card">
-          <div>
-            <span>Quarterly Business Review</span>
-            <h3>El QBR verifica evidencia y habilita la siguiente decisión.</h3>
-            <p>
-              Evalúa cumplimiento, adopción y valor; reprioriza el backlog y
-              congela el siguiente Plan Trimestral de Resultados.
+            <p className="foundation-authority-copy">
+              La Foundation Release es aceptable por sí misma y establece la
+              base para retirar de forma controlada los sistemas comprendidos en
+              su alcance. No representa la sustitución inmediata de todos los
+              sistemas actuales ni la ejecución completa del roadmap.
             </p>
-          </div>
-          <div className="qbr-scorecard">
-            {qbrDimensions.map((dimension, index) => <span key={dimension}><i>{String(index + 1).padStart(2, "0")}</i>{dimension}</span>)}
-          </div>
-          <footer>
-            No se prometen mejoras porcentuales sin línea base ni resultados de
-            negocio dependientes de adopción, datos o decisiones del cliente.
-          </footer>
-        </article>
 
-        <div className="acceptance-strip">
-          <div><span>Validación</span><strong>5 días hábiles</strong><small>Aceptar, rechazar contra criterio o solicitar aclaración.</small></div>
-          <div><span>Defecto</span><strong>No consume capacidad adicional</strong><small>Cuando incumple un criterio previamente aprobado.</small></div>
-          <div><span>Cambio</span><strong>Regresa al backlog</strong><small>Cuando modifica reglas, alcance, datos o expectativas.</small></div>
-        </div>
-      </section>
+            <div
+              className="foundation-path"
+              aria-label="Trayectoria operativa inicial"
+            >
+              {[
+                "Cliente y cuenta",
+                "Operación comercial",
+                "Pago y saldo",
+                "Cumplimiento",
+                "Entrega y cierre",
+              ].map((step, index) => (
+                <div key={step}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                  {index < 4 && <i>→</i>}
+                </div>
+              ))}
+            </div>
 
-      <section className="cell-section" id="celula">
-        <div className="section-intro">
-          <p>La célula que convierte prioridades en operación</p>
-          <h2>Una célula multidisciplinaria que evoluciona con las prioridades.</h2>
-          <span>
-            Harris &amp; Frank contará con una célula extendida de innovación,
-            tecnología y mejora continua. La participación de cada función se
-            ajustará de acuerdo con el Plan Trimestral de Resultados, el backlog
-            aprobado y la capacidad contratada.
-          </span>
-        </div>
+            <div className="foundation-scope-grid">
+              <article>
+                <header>
+                  <span>Incluye de manera acotada</span>
+                  <i>01</i>
+                </header>
+                <ul>
+                  {foundationIncludes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+              <article className="is-excluded">
+                <header>
+                  <span>Permanece en roadmap</span>
+                  <i>02</i>
+                </header>
+                <ul>
+                  {foundationExcludes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            </div>
 
-        <div className="cell-layout">
-          <div className="cell-functions">
-            {cellFunctions.map((role, index) => (
-              <details key={role.title}>
-                <summary><i>{String(index + 1).padStart(2, "0")}</i><span>{role.title}</span><b>+</b></summary>
-                <ul>{role.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            <div className="milestone-track">
+              {foundationMilestones.map(
+                ([period, title, evidenceItem], index) => (
+                  <article key={title}>
+                    <span>{period}</span>
+                    <i>{String(index + 1).padStart(2, "0")}</i>
+                    <h3>{title}</h3>
+                    <p>{evidenceItem}</p>
+                  </article>
+                ),
+              )}
+            </div>
+            <p className="foundation-dependency">
+              La duración estimada de ocho semanas depende de la entrega
+              oportuna de información, accesos, decisiones y usuarios por Harris
+              &amp; Frank.
+            </p>
+          </section>
+
+          <section className="commercial-section" id="programa">
+            <div className="section-intro is-light commercial-heading">
+              <p>Cómo evoluciona durante el año</p>
+              <h2>
+                Primero una base aceptada; después, diez ciclos de evolución.
+              </h2>
+              <span>
+                El programa considera doce meses: Foundation Release primero y
+                una capacidad mensual posterior para convertir prioridades
+                aprobadas en incrementos utilizables.
+              </span>
+            </div>
+
+            <div className="program-architecture">
+              <article className="program-card is-foundation">
+                <header>
+                  <span>Meses 01–02</span>
+                  <i>8 semanas</i>
+                </header>
+                <small>Foundation Release</small>
+                <h3>Un núcleo operativo completo llevado a piloto.</h3>
+                <p>
+                  Primera implementación controlada, utilizable y verificable.
+                </p>
+                <footer>
+                  Una sucursal · alcance definido · aceptación con evidencia
+                </footer>
+              </article>
+              <div className="program-bridge" aria-hidden="true">
+                <i />
+                <span>aceptación</span>
+                <i />
+              </div>
+              <article className="program-card is-evolution">
+                <header>
+                  <span>Meses 03–12</span>
+                  <i>10 ciclos</i>
+                </header>
+                <small>Programa de evolución</small>
+                <h3>
+                  Prioridades convertidas en incrementos cada quince días.
+                </h3>
+                <p>
+                  Un frente principal de evolución con planeación trimestral de
+                  resultados.
+                </p>
+                <footer>
+                  2 sprints/mes · reporte mensual · QBR trimestral
+                </footer>
+              </article>
+            </div>
+
+            <div
+              className="program-cadence"
+              aria-label="Cadencia anual propuesta"
+            >
+              <article>
+                <span>01</span>
+                <strong>Sprints quincenales</strong>
+                <p>
+                  Compromisos concretos para diseñar, construir, demostrar y
+                  validar.
+                </p>
+              </article>
+              <article>
+                <span>02</span>
+                <strong>Plan Trimestral de Resultados</strong>
+                <p>
+                  Prioridades, capacidad, dependencias y evidencia esperada se
+                  congelan por periodo.
+                </p>
+              </article>
+              <article>
+                <span>03</span>
+                <strong>QBR</strong>
+                <p>
+                  Resultados, adopción y riesgos informan la siguiente decisión
+                  ejecutiva.
+                </p>
+              </article>
+            </div>
+
+            <article className="wave-definition-card">
+              <header>
+                <span>Wave Definition &amp; Activation Plan</span>
+                <strong>
+                  La siguiente wave se autoriza; no se activa automáticamente.
+                </strong>
+              </header>
+              <div className="wave-definition-grid">
+                {waveDefinitionFields.map((field, index) => (
+                  <span key={field}>
+                    <i>{String(index + 1).padStart(2, "0")}</i>
+                    {field}
+                  </span>
+                ))}
+              </div>
+            </article>
+
+            <div
+              className="wave-gates"
+              aria-label="Gates de avance de una wave"
+            >
+              {waveGates.map((gate, index) => (
+                <div key={gate}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{gate}</strong>
+                  {index < waveGates.length - 1 && <i>→</i>}
+                </div>
+              ))}
+            </div>
+            <p className="wave-closing-copy">
+              Cada etapa avanza por decisión conjunta: primero se define,
+              después se autoriza, se materializa, se demuestra y se acepta con
+              evidencia. Sólo entonces se consolida la capacidad y se decide la
+              siguiente wave.
+            </p>
+          </section>
+
+          <section className="governance-section" id="gobierno">
+            <div className="section-intro is-light">
+              <p>Cómo se gobiernan alcance y resultados</p>
+              <h2>
+                Flexibilidad en prioridades.
+                <br />
+                Certeza en capacidad y decisiones.
+              </h2>
+              <span>
+                Un frente principal de evolución, dos Sprint Commitments por mes
+                y un checkpoint ejecutivo trimestral para sostener el valor.
+              </span>
+            </div>
+
+            <div className="capacity-layout">
+              <article className="capacity-allocation">
+                <div
+                  className="allocation-ring"
+                  aria-label="Distribución recomendada de capacidad"
+                >
+                  <div>
+                    <strong>70</strong>
+                    <span>%</span>
+                    <small>resultados prioritarios</small>
+                  </div>
+                </div>
+                <div className="allocation-legend">
+                  <span>
+                    <i className="priority" />
+                    <strong>70%</strong> Resultados acordados
+                  </span>
+                  <span>
+                    <i className="adoption" />
+                    <strong>20%</strong> Validación y adopción
+                  </span>
+                  <span>
+                    <i className="stability" />
+                    <strong>10%</strong> Estabilización y contingencias
+                  </span>
+                </div>
+                <footer>
+                  La reserva no utilizada puede reasignarse dentro del periodo;
+                  no se acumula.
+                </footer>
+              </article>
+
+              <article className="monthly-cadence">
+                <header>
+                  <span>Cada ciclo mensual</span>
+                  <i>1 frente principal</i>
+                </header>
+                <div className="sprint-row">
+                  <div>
+                    <span>Semana 01–02</span>
+                    <strong>Sprint Commitment 01</strong>
+                    <small>Diseñar · construir · demostrar</small>
+                  </div>
+                  <i>→</i>
+                  <div>
+                    <span>Semana 03–04</span>
+                    <strong>Sprint Commitment 02</strong>
+                    <small>Validar · liberar · evidenciar</small>
+                  </div>
+                </div>
+                <ul>
+                  <li>Demo y Evidence Log por sprint</li>
+                  <li>Actualización de riesgos, decisiones y dependencias</li>
+                  <li>Reporte mensual de transformación</li>
+                  <li>
+                    Una prioridad nueva sustituye; no amplía silenciosamente
+                  </li>
+                </ul>
+              </article>
+            </div>
+
+            <div className="maturity-grid">
+              {maturityStates.map(([number, title, detail]) => (
+                <article key={title}>
+                  <span>{number}</span>
+                  <i />
+                  <strong>{title}</strong>
+                  <p>{detail}</p>
+                </article>
+              ))}
+            </div>
+
+            <article className="qbr-card">
+              <div>
+                <span>Quarterly Business Review</span>
+                <h3>
+                  El QBR verifica evidencia y habilita la siguiente decisión.
+                </h3>
+                <p>
+                  Evalúa cumplimiento, adopción y valor; reprioriza el backlog y
+                  congela el siguiente Plan Trimestral de Resultados.
+                </p>
+              </div>
+              <div className="qbr-scorecard">
+                {qbrDimensions.map((dimension, index) => (
+                  <span key={dimension}>
+                    <i>{String(index + 1).padStart(2, "0")}</i>
+                    {dimension}
+                  </span>
+                ))}
+              </div>
+              <footer>
+                No se prometen mejoras porcentuales sin línea base ni resultados
+                de negocio dependientes de adopción, datos o decisiones del
+                cliente.
+              </footer>
+            </article>
+
+            <div className="acceptance-strip">
+              <div>
+                <span>Validación</span>
+                <strong>5 días hábiles</strong>
+                <small>
+                  Aceptar, rechazar contra criterio o solicitar aclaración.
+                </small>
+              </div>
+              <div>
+                <span>Defecto</span>
+                <strong>No consume capacidad adicional</strong>
+                <small>Cuando incumple un criterio previamente aprobado.</small>
+              </div>
+              <div>
+                <span>Cambio</span>
+                <strong>Regresa al backlog</strong>
+                <small>
+                  Cuando modifica reglas, alcance, datos o expectativas.
+                </small>
+              </div>
+            </div>
+          </section>
+
+          <section className="cell-section" id="celula">
+            <div className="section-intro">
+              <p>La célula que convierte prioridades en operación</p>
+              <h2>
+                Una célula multidisciplinaria que evoluciona con las
+                prioridades.
+              </h2>
+              <span>
+                Harris &amp; Frank contará con una célula extendida de
+                innovación, tecnología y mejora continua. La participación de
+                cada función se ajustará de acuerdo con el Plan Trimestral de
+                Resultados, el backlog aprobado y la capacidad contratada.
+              </span>
+            </div>
+
+            <div className="cell-layout">
+              <div className="cell-functions">
+                {cellFunctions.map((role, index) => (
+                  <details key={role.title}>
+                    <summary>
+                      <i>{String(index + 1).padStart(2, "0")}</i>
+                      <span>{role.title}</span>
+                      <b>+</b>
+                    </summary>
+                    <ul>
+                      {role.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </details>
+                ))}
+              </div>
+              <aside className="cell-operating-note">
+                <span>Participación adaptable</span>
+                <strong>Funciones disponibles, no puestos dedicados.</strong>
+                <p>
+                  Los roles representan funciones disponibles dentro de la
+                  célula. No implican personal exclusivo, dedicación de tiempo
+                  completo ni necesariamente una persona independiente por
+                  función.
+                </p>
+              </aside>
+            </div>
+
+            <div className="cross-functional-band">
+              <span>UX/UI</span>
+              <span>Frontend</span>
+              <span>Backend</span>
+              <span>Datos</span>
+              <span>Integraciones</span>
+              <span>QA</span>
+              <span>DevOps</span>
+              <span>Seguridad</span>
+            </div>
+
+            <div className="client-counterpart">
+              <span>Contraparte requerida de Harris &amp; Frank</span>
+              <strong>
+                Sponsor ejecutivo · Responsable operativo · Líderes involucrados
+                · Usuarios validadores
+              </strong>
+            </div>
+          </section>
+
+          <section
+            className="control-architecture-section"
+            id="arquitectura-control"
+          >
+            <div className="section-intro is-light">
+              <p>Arquitectura y seguridad</p>
+              <h2>Arquitectura bajo control de Harris &amp; Frank.</h2>
+              <span>
+                La implementación se plantea sobre una cuenta cloud contratada y
+                controlada por Harris &amp; Frank, manteniendo bajo su
+                administración la infraestructura, facturación, credenciales
+                principales y respaldos.
+              </span>
+            </div>
+
+            <article className="reference-architecture">
+              <header>
+                <span>Arquitectura de referencia</span>
+                <i>Sujeta a dimensionamiento antes de producción</i>
+              </header>
+              <div>
+                {referenceStack.map(([label, detail], index) => (
+                  <span key={label}>
+                    <i>
+                      {String(index + 1).padStart(2, "0")} · {label}
+                    </i>
+                    {detail}
+                  </span>
+                ))}
+              </div>
+            </article>
+
+            <div className="security-layout">
+              <div className="security-copy">
+                <span>Seguridad por capas</span>
+                <h3>Control, identidad, perímetro, datos y continuidad.</h3>
+                <p>
+                  Los niveles se diseñan como controles complementarios; su
+                  configuración final depende del alcance productivo aprobado.
+                </p>
+              </div>
+              <div className="security-layers">
+                {securityLayers.map(([number, title, detail]) => (
+                  <details key={title}>
+                    <summary>
+                      <i>{number}</i>
+                      <span>{title}</span>
+                      <b>+</b>
+                    </summary>
+                    <p>{detail}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+            <p className="architecture-disclaimer">
+              La arquitectura final, región, dimensionamiento, niveles de
+              disponibilidad y objetivos de recuperación se congelarán antes de
+              producción. Los consumos de nube y servicios de terceros no se
+              consideran incluidos salvo indicación expresa.
+            </p>
+          </section>
+
+          <section className="continuity-section" id="continuidad">
+            <div className="section-intro">
+              <p>Continuidad y protección de la inversión</p>
+              <h2>La capacidad permanece; la tecnología puede evolucionar.</h2>
+              <span>
+                La plataforma es el instrumento; el modelo operativo es la
+                partitura; los datos y la trazabilidad son la grabación. Si
+                cambia el instrumento, la música, la partitura y las grabaciones
+                permanecen, aunque su ejecución en una nueva plataforma pueda
+                requerir adaptación.
+              </span>
+            </div>
+
+            <div className="asset-continuity-grid">
+              <article>
+                <span>Modelo operativo</span>
+                <strong>La partitura</strong>
+                <ul>
+                  <li>Arquitectura y definiciones de negocio entregadas</li>
+                  <li>
+                    Capacidades, procesos, reglas, contratos y eventos
+                    documentados
+                  </li>
+                  <li>Ontología, taxonomía y semántica</li>
+                </ul>
+              </article>
+              <article>
+                <span>Datos y evidencia</span>
+                <strong>La grabación</strong>
+                <ul>
+                  <li>Datos, historial, evidencia y trazabilidad</li>
+                  <li>Estructuras y configuraciones entregadas</li>
+                  <li>Documentación disponible para consulta</li>
+                </ul>
+              </article>
+              <article>
+                <span>Control y uso</span>
+                <strong>La libertad de ejecución</strong>
+                <ul>
+                  <li>
+                    Infraestructura, credenciales y respaldos bajo control de
+                    H&amp;F
+                  </li>
+                  <li>Uso perpetuo de las versiones pagadas y aceptadas</li>
+                </ul>
+              </article>
+            </div>
+
+            <div className="resilience-grid">
+              <article>
+                <span>01 · Protección de datos</span>
+                <ul>
+                  <li>Respaldos automatizados de base de datos</li>
+                  <li>
+                    Recuperación a un punto en el tiempo cuando la configuración
+                    contratada lo permita
+                  </li>
+                  <li>Exportaciones lógicas independientes y periódicas</li>
+                  <li>Respaldo y retención de archivos y evidencias</li>
+                </ul>
+              </article>
+              <article>
+                <span>02 · Recuperación verificable</span>
+                <ul>
+                  <li>Pruebas periódicas de restauración</li>
+                  <li>Separación de ambientes</li>
+                  <li>
+                    Parámetros de frecuencia, retención y recuperación definidos
+                    antes de producción
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <span>03 · Liberación controlada</span>
+                <ul>
+                  <li>Liberaciones versionadas y reversión ante incidencias</li>
+                  <li>Coexistencia controlada durante el piloto</li>
+                  <li>
+                    Sustituciones mayores sólo después de validar evidencia
+                  </li>
+                </ul>
+              </article>
+            </div>
+
+            <article className="decision-freedom">
+              <span>Continuidad y libertad de decisión</span>
+              <h3>
+                Control visible antes, durante y después de cada liberación.
+              </h3>
+              <p>
+                Harris &amp; Frank conserva visibilidad y control sobre sus
+                datos, infraestructura, respaldos, credenciales y versiones
+                pagadas. Si las prioridades cambian o el programa deja de ser
+                conveniente, existe una ruta de transición ordenada, autorizada
+                y trazable.
+              </p>
+            </article>
+
+            <div className="continuity-details">
+              <details>
+                <summary>
+                  <span>Alcances de continuidad y portabilidad</span>
+                  <i>+</i>
+                </summary>
+                <p>
+                  El código fuente del núcleo y los componentes reutilizables de
+                  Zellship no forman parte de la transferencia estándar.
+                  Frameworks, engines reutilizables, servicios futuros y
+                  componentes de terceros conservan sus condiciones propias.
+                  Operar sobre otra plataforma puede requerir adaptación.
+                </p>
               </details>
-            ))}
-          </div>
-          <aside className="cell-operating-note">
-            <span>Participación adaptable</span>
-            <strong>Funciones disponibles, no puestos dedicados.</strong>
-            <p>Los roles representan funciones disponibles dentro de la célula. No implican personal exclusivo, dedicación de tiempo completo ni necesariamente una persona independiente por función.</p>
-          </aside>
-        </div>
-
-        <div className="cross-functional-band">
-          <span>UX/UI</span><span>Frontend</span><span>Backend</span><span>Datos</span>
-          <span>Integraciones</span><span>QA</span><span>DevOps</span><span>Seguridad</span>
-        </div>
-
-        <div className="client-counterpart">
-          <span>Contraparte requerida de Harris &amp; Frank</span>
-          <strong>Sponsor ejecutivo · Responsable operativo · Líderes involucrados · Usuarios validadores</strong>
-        </div>
-      </section>
-
-      <section className="control-architecture-section" id="arquitectura-control">
-        <div className="section-intro is-light">
-          <p>Arquitectura y seguridad</p>
-          <h2>Arquitectura bajo control de Harris &amp; Frank.</h2>
-          <span>La implementación se plantea sobre una cuenta cloud contratada y controlada por Harris &amp; Frank, manteniendo bajo su administración la infraestructura, facturación, credenciales principales y respaldos.</span>
-        </div>
-
-        <article className="reference-architecture">
-          <header><span>Arquitectura de referencia</span><i>Sujeta a dimensionamiento antes de producción</i></header>
-          <div>{referenceStack.map(([label, detail], index) => <span key={label}><i>{String(index + 1).padStart(2, "0")} · {label}</i>{detail}</span>)}</div>
-        </article>
-
-        <div className="security-layout">
-          <div className="security-copy">
-            <span>Seguridad por capas</span>
-            <h3>Control, identidad, perímetro, datos y continuidad.</h3>
-            <p>Los niveles se diseñan como controles complementarios; su configuración final depende del alcance productivo aprobado.</p>
-          </div>
-          <div className="security-layers">
-            {securityLayers.map(([number, title, detail]) => (
-              <details key={title}>
-                <summary><i>{number}</i><span>{title}</span><b>+</b></summary>
-                <p>{detail}</p>
+              <details>
+                <summary>
+                  <span>¿Qué ocurre si el programa no continúa?</span>
+                  <i>+</i>
+                </summary>
+                <ul>
+                  <li>Exportación de datos en los formatos acordados.</li>
+                  <li>
+                    Entrega de documentación y accesos bajo control del cliente.
+                  </li>
+                  <li>
+                    Conservación del derecho de uso sobre versiones pagadas y
+                    aceptadas.
+                  </li>
+                  <li>Revocación ordenada de accesos de Zellship.</li>
+                  <li>Cese de nuevas liberaciones, soporte y evolución.</li>
+                  <li>
+                    Asistencia de transición conforme a las condiciones
+                    contratadas.
+                  </li>
+                </ul>
               </details>
-            ))}
-          </div>
-        </div>
-        <p className="architecture-disclaimer">La arquitectura final, región, dimensionamiento, niveles de disponibilidad y objetivos de recuperación se congelarán antes de producción. Los consumos de nube y servicios de terceros no se consideran incluidos salvo indicación expresa.</p>
-      </section>
-
-      <section className="continuity-section" id="continuidad">
-        <div className="section-intro">
-          <p>Continuidad y protección de la inversión</p>
-          <h2>La capacidad permanece; la tecnología puede evolucionar.</h2>
-          <span>La plataforma es el instrumento; el modelo operativo es la partitura; los datos y la trazabilidad son la grabación. Si cambia el instrumento, la música, la partitura y las grabaciones permanecen, aunque su ejecución en una nueva plataforma pueda requerir adaptación.</span>
-        </div>
-
-        <div className="asset-continuity-grid">
-          <article><span>Modelo operativo</span><strong>La partitura</strong><ul><li>Arquitectura y definiciones de negocio entregadas</li><li>Capacidades, procesos, reglas, contratos y eventos documentados</li><li>Ontología, taxonomía y semántica</li></ul></article>
-          <article><span>Datos y evidencia</span><strong>La grabación</strong><ul><li>Datos, historial, evidencia y trazabilidad</li><li>Estructuras y configuraciones entregadas</li><li>Documentación disponible para consulta</li></ul></article>
-          <article><span>Control y uso</span><strong>La libertad de ejecución</strong><ul><li>Infraestructura, credenciales y respaldos bajo control de H&amp;F</li><li>Uso perpetuo de las versiones pagadas y aceptadas</li></ul></article>
-        </div>
-
-        <div className="resilience-grid">
-          <article><span>01 · Protección de datos</span><ul><li>Respaldos automatizados de base de datos</li><li>Recuperación a un punto en el tiempo cuando la configuración contratada lo permita</li><li>Exportaciones lógicas independientes y periódicas</li><li>Respaldo y retención de archivos y evidencias</li></ul></article>
-          <article><span>02 · Recuperación verificable</span><ul><li>Pruebas periódicas de restauración</li><li>Separación de ambientes</li><li>Parámetros de frecuencia, retención y recuperación definidos antes de producción</li></ul></article>
-          <article><span>03 · Liberación controlada</span><ul><li>Liberaciones versionadas y reversión ante incidencias</li><li>Coexistencia controlada durante el piloto</li><li>Sustituciones mayores sólo después de validar evidencia</li></ul></article>
-        </div>
-
-        <article className="decision-freedom">
-          <span>Continuidad y libertad de decisión</span>
-          <h3>Control visible antes, durante y después de cada liberación.</h3>
-          <p>Harris &amp; Frank conserva visibilidad y control sobre sus datos, infraestructura, respaldos, credenciales y versiones pagadas. Si las prioridades cambian o el programa deja de ser conveniente, existe una ruta de transición ordenada, autorizada y trazable.</p>
-        </article>
-
-        <div className="continuity-details">
-          <details>
-            <summary><span>Alcances de continuidad y portabilidad</span><i>+</i></summary>
-            <p>El código fuente del núcleo y los componentes reutilizables de Zellship no forman parte de la transferencia estándar. Frameworks, engines reutilizables, servicios futuros y componentes de terceros conservan sus condiciones propias. Operar sobre otra plataforma puede requerir adaptación.</p>
-          </details>
-          <details>
-            <summary><span>¿Qué ocurre si el programa no continúa?</span><i>+</i></summary>
-            <ul>
-              <li>Exportación de datos en los formatos acordados.</li>
-              <li>Entrega de documentación y accesos bajo control del cliente.</li>
-              <li>Conservación del derecho de uso sobre versiones pagadas y aceptadas.</li>
-              <li>Revocación ordenada de accesos de Zellship.</li>
-              <li>Cese de nuevas liberaciones, soporte y evolución.</li>
-              <li>Asistencia de transición conforme a las condiciones contratadas.</li>
-            </ul>
-          </details>
-        </div>
-        <p className="continuity-note">Los parámetros de respaldo, retención, restauración y recuperación, así como la protección de continuidad, se congelarán y formalizarán contractualmente antes de producción. No constituyen una garantía ilimitada.</p>
-      </section>
-
-      <section className="investment-section" id="inversion">
-        <div className="section-intro is-light">
-          <p>Inversión y forma de pago</p>
-          <h2>Primero se activa la base; después comienza la evolución mensual.</h2>
-          <span>El Blueprint ya pagado se reconoce dentro del Foundation Release. La primera mensualidad del programa comienza después de su aceptación.</span>
-        </div>
-
-        <div className="commercial-grid">
-          <article className="investment-summary">
-            <header><span>Inversión del primer año</span><small>MXN + IVA</small></header>
-            <div className="investment-foundation">
-              <span>Foundation Release</span><strong>$299,000</strong>
-              <small>Reconocimiento del Blueprint pagado</small><em>−$55,900</em>
-              <span>Saldo Foundation Release</span><strong>$243,100</strong>
             </div>
-            <div className="investment-evolution">
-              <span>Programa de evolución</span>
-              <strong>10 × $65,000</strong>
-            </div>
-            <div className="investment-grand-total">
-              <span>Valor total del primer año</span><strong>$949,000</strong>
-              <small>Nueva inversión pendiente</small><em>$893,100</em>
-            </div>
-          </article>
+            <p className="continuity-note">
+              Los parámetros de respaldo, retención, restauración y
+              recuperación, así como la protección de continuidad, se congelarán
+              y formalizarán contractualmente antes de producción. No
+              constituyen una garantía ilimitada.
+            </p>
+          </section>
 
-          <article className="payment-summary">
-            <header><span>Forma de pago</span><small>Secuencia de activación</small></header>
-            <ol>
-              <li><span>01</span><div><strong>$150,000 + IVA</strong><small>A la firma y activación</small></div></li>
-              <li><span>02</span><div><strong>$93,100 + IVA</strong><small>Contra aceptación del Foundation Release</small></div></li>
-              <li><span>03</span><div><strong>10 × $65,000 + IVA</strong><small>Mensualidades anticipadas; la primera inicia después de la aceptación</small></div></li>
+          <section className="investment-section" id="inversion">
+            <div className="section-intro is-light">
+              <p>Inversión y forma de pago</p>
+              <h2>
+                Primero se activa la base; después comienza la evolución
+                mensual.
+              </h2>
+              <span>
+                El Blueprint ya pagado se reconoce dentro del Foundation
+                Release. La primera mensualidad del programa comienza después de
+                su aceptación.
+              </span>
+            </div>
+
+            <div className="commercial-grid">
+              <article className="investment-summary">
+                <header>
+                  <span>Inversión del primer año</span>
+                  <small>MXN + IVA</small>
+                </header>
+                <div className="investment-foundation">
+                  <span>Foundation Release</span>
+                  <strong>$299,000</strong>
+                  <small>Reconocimiento del Blueprint pagado</small>
+                  <em>−$55,900</em>
+                  <span>Saldo Foundation Release</span>
+                  <strong>$243,100</strong>
+                </div>
+                <div className="investment-evolution">
+                  <span>Programa de evolución</span>
+                  <strong>10 × $65,000</strong>
+                </div>
+                <div className="investment-grand-total">
+                  <span>Valor total del primer año</span>
+                  <strong>$949,000</strong>
+                  <small>Nueva inversión pendiente</small>
+                  <em>$893,100</em>
+                </div>
+              </article>
+
+              <article className="payment-summary">
+                <header>
+                  <span>Forma de pago</span>
+                  <small>Secuencia de activación</small>
+                </header>
+                <ol>
+                  <li>
+                    <span>01</span>
+                    <div>
+                      <strong>$150,000 + IVA</strong>
+                      <small>A la firma y activación</small>
+                    </div>
+                  </li>
+                  <li>
+                    <span>02</span>
+                    <div>
+                      <strong>$93,100 + IVA</strong>
+                      <small>Contra aceptación del Foundation Release</small>
+                    </div>
+                  </li>
+                  <li>
+                    <span>03</span>
+                    <div>
+                      <strong>10 × $65,000 + IVA</strong>
+                      <small>
+                        Mensualidades anticipadas; la primera inicia después de
+                        la aceptación
+                      </small>
+                    </div>
+                  </li>
+                </ol>
+                <footer>
+                  Todos los importes se expresan en pesos mexicanos.
+                </footer>
+              </article>
+            </div>
+          </section>
+
+          <section className="post-year-section" id="despues-primer-ano">
+            <div className="section-intro">
+              <p>Continuidad posterior</p>
+              <h2>Después del primer año</h2>
+              <span>
+                Después de la estabilización final o a partir del mes 13 —lo que
+                ocurra después—, la continuidad del servicio de mantenimiento,
+                soporte y asistencia se formaliza mediante una póliza base para
+                toda la operación habilitada, sin cobro adicional por usuario o
+                sucursal.
+              </span>
+            </div>
+
+            <div className="post-year-grid">
+              <article className="policy-price-card">
+                <span>Póliza base de mantenimiento, soporte y asistencia</span>
+                <strong>$12,500</strong>
+                <small>MXN + IVA al mes</small>
+                <p>
+                  Continuidad del mantenimiento, soporte, asistencia y capacidad
+                  menor de ajuste.
+                </p>
+              </article>
+              <article className="policy-coverage-card">
+                <header>Cobertura base</header>
+                <ul>
+                  {policyCoverage.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+
+            <article className="expandable-capacity-card">
+              <span>Capacidad ampliable</span>
+              <p>
+                La póliza puede ampliarse de acuerdo con las necesidades de
+                Harris &amp; Frank para incorporar mayor capacidad de
+                desarrollo, consultoría, nuevas integraciones, auditorías o
+                asistencia operativa y técnica extendida como equipo de TI.
+              </p>
+              <small>
+                Las ampliaciones se definen y cotizan por separado antes de su
+                ejecución.
+              </small>
+            </article>
+
+            <article className="indefinite-use-card">
+              <span>Derecho de uso independiente</span>
+              <p>
+                El derecho de uso indefinido de las versiones pagadas y
+                aceptadas no depende de la contratación o renovación de esta
+                póliza.
+              </p>
+            </article>
+
+            <details className="policy-exclusions">
+              <summary>
+                <span>Fuera de la cobertura base</span>
+                <i>+</i>
+              </summary>
+              <ul>
+                {policyExclusions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </details>
+          </section>
+
+          <section className="proposal-close" id="decision">
+            <p>Decisión solicitada</p>
+            <h2>Activar el Foundation Release y el programa anual.</h2>
+            <ol className="activation-steps">
+              {activationSteps.map((step, index) => (
+                <li key={step}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </li>
+              ))}
             </ol>
-            <footer>Todos los importes se expresan en pesos mexicanos.</footer>
-          </article>
-        </div>
-      </section>
+            <small>
+              La activación queda sujeta a confirmación comercial, contrato
+              definitivo y baseline aprobado.
+            </small>
+          </section>
 
-      <section className="proposal-close" id="decision">
-        <p>Decisión solicitada</p>
-        <h2>Activar el Foundation Release y el programa anual.</h2>
-        <ol className="activation-steps">
-          {activationSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></li>)}
-        </ol>
-        <small>La activación queda sujeta a confirmación comercial, contrato definitivo y baseline aprobado.</small>
-      </section>
+          <section className="proposal-annexes" id="anexos">
+            <div className="section-intro is-light">
+              <p>Evidencia y anexos</p>
+              <h2>
+                Material de soporte para consultar, no para interrumpir la
+                decisión.
+              </h2>
+              <span>
+                La narrativa principal termina en la activación. Aquí permanecen
+                los artefactos consultivos, responsabilidades y precisiones que
+                respaldan el acuerdo.
+              </span>
+            </div>
 
-      <section className="proposal-annexes" id="anexos">
-        <div className="section-intro is-light">
-          <p>Evidencia y anexos</p>
-          <h2>Material de soporte para consultar, no para interrumpir la decisión.</h2>
-          <span>La narrativa principal termina en la activación. Aquí permanecen los artefactos consultivos, responsabilidades y precisiones que respaldan el acuerdo.</span>
-        </div>
+            <div className="annex-evidence-grid">
+              {evidence.map(([title, detail], index) => (
+                <article key={title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{detail}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
 
-        <div className="annex-evidence-grid">
-          {evidence.map(([title, detail], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{title}</strong><p>{detail}</p></div></article>)}
-        </div>
-
-        <div className="annex-details">
-          <details>
-            <summary><span>Responsabilidades de Harris &amp; Frank</span><i>+</i></summary>
-            <ul><li>Designar sponsor, responsable operativo y usuarios clave.</li><li>Facilitar datos, catálogos, procesos, accesos e infraestructura requerida.</li><li>Validar criterios y demos; participar en pruebas, capacitación y adopción.</li><li>Resolver prioridades y dependencias dentro de los tiempos acordados.</li></ul>
-          </details>
-          <details>
-            <summary><span>Exclusiones generales</span><i>+</i></summary>
-            <ul><li>Desarrollo ilimitado, equipo dedicado de tiempo completo o módulos garantizados.</li><li>Integraciones y migraciones mayores no evaluadas, nube, licencias y terceros.</li><li>Hardware, viáticos adicionales, soporte 24/7 o niveles de servicio no contratados.</li><li>Cumplimiento fiscal, legal o regulatorio no especificado.</li></ul>
-          </details>
-          <details>
-            <summary><span>Definiciones que se formalizan antes de producción</span><i>+</i></summary>
-            <ul><li>Región, dimensionamiento y niveles de disponibilidad.</li><li>Frecuencia y retención de respaldos; objetivos de recuperación.</li><li>Formatos de exportación y condiciones de asistencia de transición.</li><li>Condiciones finales de soporte, continuidad y responsabilidad.</li></ul>
-          </details>
-        </div>
-        <p className="legal-note">La arquitectura, la continuidad y los términos descritos constituyen una propuesta de referencia. El contrato definitivo y sus anexos son la fuente de los compromisos exigibles.</p>
-      </section>
+            <div className="annex-details">
+              <details>
+                <summary>
+                  <span>Responsabilidades de Harris &amp; Frank</span>
+                  <i>+</i>
+                </summary>
+                <ul>
+                  <li>
+                    Designar sponsor, responsable operativo y usuarios clave.
+                  </li>
+                  <li>
+                    Facilitar datos, catálogos, procesos, accesos e
+                    infraestructura requerida.
+                  </li>
+                  <li>
+                    Validar criterios y demos; participar en pruebas,
+                    capacitación y adopción.
+                  </li>
+                  <li>
+                    Resolver prioridades y dependencias dentro de los tiempos
+                    acordados.
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary>
+                  <span>Exclusiones generales</span>
+                  <i>+</i>
+                </summary>
+                <ul>
+                  <li>
+                    Desarrollo ilimitado, equipo dedicado de tiempo completo o
+                    módulos garantizados.
+                  </li>
+                  <li>
+                    Integraciones y migraciones mayores no evaluadas, nube,
+                    licencias y terceros.
+                  </li>
+                  <li>
+                    Hardware, viáticos adicionales, soporte 24/7 o niveles de
+                    servicio no contratados.
+                  </li>
+                  <li>
+                    Cumplimiento fiscal, legal o regulatorio no especificado.
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary>
+                  <span>
+                    Definiciones que se formalizan antes de producción
+                  </span>
+                  <i>+</i>
+                </summary>
+                <ul>
+                  <li>Región, dimensionamiento y niveles de disponibilidad.</li>
+                  <li>
+                    Frecuencia y retención de respaldos; objetivos de
+                    recuperación.
+                  </li>
+                  <li>
+                    Formatos de exportación y condiciones de asistencia de
+                    transición.
+                  </li>
+                  <li>
+                    Condiciones finales de soporte, continuidad y
+                    responsabilidad.
+                  </li>
+                </ul>
+              </details>
+            </div>
+            <p className="legal-note">
+              La arquitectura, la continuidad y los términos descritos
+              constituyen una propuesta de referencia. El contrato definitivo y
+              sus anexos son la fuente de los compromisos exigibles.
+            </p>
+          </section>
         </div>
       )}
 
       {activeTrack === "blueprint" && (
         <div className="proposal-track-content track-content-blueprint">
+          <section className="principles-section" id="principles">
+            <div className="section-intro">
+              <p>Por qué podemos hacerlo</p>
+              <h2>Seis decisiones que orientan el diseño del sistema</h2>
+              <span>
+                Principios derivados del entendimiento operativo; no una lista
+                de funciones de software.
+              </span>
+            </div>
+            <div className="principles-grid">
+              {principles.map((principle) => (
+                <article
+                  className={`principle-card accent-${principle.accent}`}
+                  key={principle.id}
+                >
+                  <span className="principle-number">{principle.number}</span>
+                  <div className="principle-icon" aria-hidden="true">
+                    <i />
+                  </div>
+                  <h3>{principle.title}</h3>
+                  <p>{principle.statement}</p>
+                  <footer>
+                    <span>{principle.implication}</span>
+                    <i>↗</i>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          </section>
 
-      <section className="principles-section" id="principles">
-        <div className="section-intro">
-          <p>Por qué podemos hacerlo</p>
-          <h2>Seis decisiones que orientan el diseño del sistema</h2>
-          <span>
-            Principios derivados del entendimiento operativo; no una lista de
-            funciones de software.
-          </span>
-        </div>
-        <div className="principles-grid">
-          {principles.map((principle) => (
-            <article className={`principle-card accent-${principle.accent}`} key={principle.id}>
-              <span className="principle-number">{principle.number}</span>
-              <div className="principle-icon" aria-hidden="true"><i /></div>
-              <h3>{principle.title}</h3>
-              <p>{principle.statement}</p>
-              <footer><span>{principle.implication}</span><i>↗</i></footer>
-            </article>
-          ))}
-        </div>
-      </section>
+          <section className="discoveries-section" id="discoveries">
+            <div className="section-intro is-light">
+              <p>Hallazgos convertidos en diseño</p>
+              <h2>Definiciones operativas que orientan decisiones de diseño</h2>
+            </div>
+            <div className="discoveries-list">
+              {discoveries.map((discovery, index) => (
+                <article key={discovery.title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <small>{discovery.signal}</small>
+                    <h3>{discovery.title}</h3>
+                  </div>
+                  <p>{discovery.description}</p>
+                  <i aria-hidden="true">→</i>
+                </article>
+              ))}
+            </div>
+          </section>
 
-      <section className="discoveries-section" id="discoveries">
-        <div className="section-intro is-light">
-          <p>Hallazgos convertidos en diseño</p>
-          <h2>Definiciones operativas que orientan decisiones de diseño</h2>
-        </div>
-        <div className="discoveries-list">
-          {discoveries.map((discovery, index) => (
-            <article key={discovery.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div><small>{discovery.signal}</small><h3>{discovery.title}</h3></div>
-              <p>{discovery.description}</p>
-              <i aria-hidden="true">→</i>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="architecture-section" id="architecture">
-        <div className="architecture-heading">
-          <div className="section-intro">
-            <p>Una estrategia conectada</p>
-            <h2>Una arquitectura de capacidades conectadas.</h2>
-            <span>
-              Doce decisiones estratégicas organizadas alrededor de cuatro
-              familias. Selecciona una capacidad para explorar su fundamento.
-            </span>
-          </div>
-          <div className="architecture-key">
-            <i />
-            <span>Blueprint estratégico derivado del entendimiento operativo</span>
-          </div>
-        </div>
-
-        <div className="capability-architecture">
-          {capabilityFamilies.map((family) => (
-            <div className={`capability-family family-${family.tone}`} key={family.id}>
-              <header>
-                <span>{family.number}</span>
-                <div><strong>{family.title}</strong><small>{family.description}</small></div>
-              </header>
-              <div className="capability-stack">
-                {family.capabilities.map((capability) => (
-                  <button
-                    type="button"
-                    key={capability.id}
-                    className={activeCapabilityId === capability.id ? "is-active" : ""}
-                    onClick={() => setActiveCapabilityId(capability.id)}
-                    aria-pressed={activeCapabilityId === capability.id}
-                  >
-                    <i aria-hidden="true" />
-                    <span><strong>{capability.title}</strong><small>{capability.short}</small></span>
-                    <em>↗</em>
-                  </button>
-                ))}
+          <section className="architecture-section" id="architecture">
+            <div className="architecture-heading">
+              <div className="section-intro">
+                <p>Una estrategia conectada</p>
+                <h2>Una arquitectura de capacidades conectadas.</h2>
+                <span>
+                  Doce decisiones estratégicas organizadas alrededor de cuatro
+                  familias. Selecciona una capacidad para explorar su
+                  fundamento.
+                </span>
+              </div>
+              <div className="architecture-key">
+                <i />
+                <span>
+                  Blueprint estratégico derivado del entendimiento operativo
+                </span>
               </div>
             </div>
-          ))}
-        </div>
 
-        <article className={`capability-detail detail-${activeCapability.tone}`} aria-live="polite">
-          <div className="capability-detail-title">
-            <span>{activeCapability.family}</span>
-            <h3>{activeCapability.title}</h3>
-            <p>{activeCapability.short}</p>
-            <div className="capability-tags">
-              {activeCapability.tags.map((tag) => <small key={tag}>{tag}</small>)}
+            <div className="capability-architecture">
+              {capabilityFamilies.map((family) => (
+                <div
+                  className={`capability-family family-${family.tone}`}
+                  key={family.id}
+                >
+                  <header>
+                    <span>{family.number}</span>
+                    <div>
+                      <strong>{family.title}</strong>
+                      <small>{family.description}</small>
+                    </div>
+                  </header>
+                  <div className="capability-stack">
+                    {family.capabilities.map((capability) => (
+                      <button
+                        type="button"
+                        key={capability.id}
+                        className={
+                          activeCapabilityId === capability.id
+                            ? "is-active"
+                            : ""
+                        }
+                        onClick={() => setActiveCapabilityId(capability.id)}
+                        aria-pressed={activeCapabilityId === capability.id}
+                      >
+                        <i aria-hidden="true" />
+                        <span>
+                          <strong>{capability.title}</strong>
+                          <small>{capability.short}</small>
+                        </span>
+                        <em>↗</em>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-          <div className="capability-detail-grid">
-            <div><span>Lo que entendimos</span><p>{activeCapability.insight}</p></div>
-            <div><span>Cómo se manifiesta</span><p>{activeCapability.manifestation}</p></div>
-            <div><span>Valor operativo</span><p>{activeCapability.value}</p></div>
-          </div>
-          <footer>
-            <span>La demo materializa una parte de esta arquitectura; la visión completa no equivale a alcance automático.</span>
-            <i>Blueprint operativo</i>
-          </footer>
-        </article>
 
-        <article className="semantic-foundation">
-          <div className="semantic-foundation-copy">
-            <span>Activo arquitectónico transversal</span>
-            <h3>Taxonomía, ontología y semántica compartida</h3>
-            <p>
-              Definir con precisión conceptos, entidades, relaciones, estados y
-              eventos reduce ambigüedad entre personas, procesos, datos e
-              integraciones.
-            </p>
-          </div>
-          <div className="semantic-foundation-grid">
-            <div>
-              <i>01</i>
-              <strong>Taxonomía</strong>
-              <p>Ordena el vocabulario y las clasificaciones del negocio.</p>
-            </div>
-            <div>
-              <i>02</i>
-              <strong>Ontología</strong>
-              <p>Define qué existe y cómo se relaciona dentro de la operación.</p>
-            </div>
-            <div>
-              <i>03</i>
-              <strong>Semántica</strong>
-              <p>Conserva significados comunes en reglas, datos y eventos.</p>
-            </div>
-          </div>
-          <footer>
-            Esta base facilita incorporar IA con menor dependencia de un proveedor
-            o modelo específico; no implica una capacidad de IA incluida
-            automáticamente en Foundation.
-          </footer>
-        </article>
-      </section>
-
-      <section className="model-section" id="model">
-        <div className="model-heading">
-          <div className="section-intro is-light">
-            <p>Modelo operativo ejecutable</p>
-            <h2>De la definición a la decisión</h2>
-            <span>
-              Tres vistas para entender cómo el modelo conecta contexto,
-              prioridades y promesas.
-            </span>
-          </div>
-          <div className="model-tabs" role="tablist" aria-label="Vistas del modelo">
-            <button className={activeModel === "account" ? "is-active" : ""} onClick={() => setActiveModel("account")} role="tab" aria-selected={activeModel === "account"}>Cuenta y partidas</button>
-            <button className={activeModel === "triage" ? "is-active" : ""} onClick={() => setActiveModel("triage")} role="tab" aria-selected={activeModel === "triage"}>Triage operativo</button>
-            <button className={activeModel === "promise" ? "is-active" : ""} onClick={() => setActiveModel("promise")} role="tab" aria-selected={activeModel === "promise"}>Cadena de promesa</button>
-          </div>
-        </div>
-        <div className="model-stage" role="tabpanel">
-          {activeModel === "account" && <AccountModel />}
-          {activeModel === "triage" && <TriageModel />}
-          {activeModel === "promise" && <PromiseModel />}
-        </div>
-        <div className="model-caption">
-          <span>Lectura ejecutiva</span>
-          <p>
-            El software es la manifestación visible. El activo es el modelo que
-            organiza entidades, compromisos, reglas y decisiones.
-          </p>
-        </div>
-      </section>
-
-      <section className="evidence-section" id="evidence">
-        <div className="section-intro">
-          <p>La profundidad detrás de la propuesta</p>
-          <h2>Evidencia que permite verificar el trabajo</h2>
-          <span>
-            Una biblioteca curada para profundizar sin convertir la experiencia
-            ejecutiva en un repositorio documental.
-          </span>
-        </div>
-        <div className="evidence-grid">
-          {evidence.map(([title, detail], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div><h3>{title}</h3><p>{detail}</p></div>
-              <i>↗</i>
+            <article
+              className={`capability-detail detail-${activeCapability.tone}`}
+              aria-live="polite"
+            >
+              <div className="capability-detail-title">
+                <span>{activeCapability.family}</span>
+                <h3>{activeCapability.title}</h3>
+                <p>{activeCapability.short}</p>
+                <div className="capability-tags">
+                  {activeCapability.tags.map((tag) => (
+                    <small key={tag}>{tag}</small>
+                  ))}
+                </div>
+              </div>
+              <div className="capability-detail-grid">
+                <div>
+                  <span>Lo que entendimos</span>
+                  <p>{activeCapability.insight}</p>
+                </div>
+                <div>
+                  <span>Cómo se manifiesta</span>
+                  <p>{activeCapability.manifestation}</p>
+                </div>
+                <div>
+                  <span>Valor operativo</span>
+                  <p>{activeCapability.value}</p>
+                </div>
+              </div>
+              <footer>
+                <span>
+                  La demo materializa una parte de esta arquitectura; la visión
+                  completa no equivale a alcance automático.
+                </span>
+                <i>Blueprint operativo</i>
+              </footer>
             </article>
-          ))}
-        </div>
-      </section>
 
-      <section className="proposal-close blueprint-close">
-        <p>Siguiente lectura</p>
-        <h2>Del activo consultivo a una trayectoria de ejecución delimitada.</h2>
-        <div>
-          <button type="button" onClick={() => chooseTrack("project")}>Revisar propuesta de proyecto <span>→</span></button>
-          <Link href="/" className="secondary">Volver al Hub</Link>
-        </div>
-        <small>El Blueprint orienta la propuesta; no amplía automáticamente el alcance de ejecución.</small>
-      </section>
+            <article className="semantic-foundation">
+              <div className="semantic-foundation-copy">
+                <span>Activo arquitectónico transversal</span>
+                <h3>Taxonomía, ontología y semántica compartida</h3>
+                <p>
+                  Definir con precisión conceptos, entidades, relaciones,
+                  estados y eventos reduce ambigüedad entre personas, procesos,
+                  datos e integraciones.
+                </p>
+              </div>
+              <div className="semantic-foundation-grid">
+                <div>
+                  <i>01</i>
+                  <strong>Taxonomía</strong>
+                  <p>
+                    Ordena el vocabulario y las clasificaciones del negocio.
+                  </p>
+                </div>
+                <div>
+                  <i>02</i>
+                  <strong>Ontología</strong>
+                  <p>
+                    Define qué existe y cómo se relaciona dentro de la
+                    operación.
+                  </p>
+                </div>
+                <div>
+                  <i>03</i>
+                  <strong>Semántica</strong>
+                  <p>
+                    Conserva significados comunes en reglas, datos y eventos.
+                  </p>
+                </div>
+              </div>
+              <footer>
+                Esta base facilita incorporar IA con menor dependencia de un
+                proveedor o modelo específico; no implica una capacidad de IA
+                incluida automáticamente en Foundation.
+              </footer>
+            </article>
+          </section>
+
+          <section className="model-section" id="model">
+            <div className="model-heading">
+              <div className="section-intro is-light">
+                <p>Modelo operativo ejecutable</p>
+                <h2>De la definición a la decisión</h2>
+                <span>
+                  Tres vistas para entender cómo el modelo conecta contexto,
+                  prioridades y promesas.
+                </span>
+              </div>
+              <div
+                className="model-tabs"
+                role="tablist"
+                aria-label="Vistas del modelo"
+              >
+                <button
+                  className={activeModel === "account" ? "is-active" : ""}
+                  onClick={() => setActiveModel("account")}
+                  role="tab"
+                  aria-selected={activeModel === "account"}
+                >
+                  Cuenta y partidas
+                </button>
+                <button
+                  className={activeModel === "triage" ? "is-active" : ""}
+                  onClick={() => setActiveModel("triage")}
+                  role="tab"
+                  aria-selected={activeModel === "triage"}
+                >
+                  Triage operativo
+                </button>
+                <button
+                  className={activeModel === "promise" ? "is-active" : ""}
+                  onClick={() => setActiveModel("promise")}
+                  role="tab"
+                  aria-selected={activeModel === "promise"}
+                >
+                  Cadena de promesa
+                </button>
+              </div>
+            </div>
+            <div className="model-stage" role="tabpanel">
+              {activeModel === "account" && <AccountModel />}
+              {activeModel === "triage" && <TriageModel />}
+              {activeModel === "promise" && <PromiseModel />}
+            </div>
+            <div className="model-caption">
+              <span>Lectura ejecutiva</span>
+              <p>
+                El software es la manifestación visible. El activo es el modelo
+                que organiza entidades, compromisos, reglas y decisiones.
+              </p>
+            </div>
+          </section>
+
+          <section className="evidence-section" id="evidence">
+            <div className="section-intro">
+              <p>La profundidad detrás de la propuesta</p>
+              <h2>Evidencia que permite verificar el trabajo</h2>
+              <span>
+                Una biblioteca curada para profundizar sin convertir la
+                experiencia ejecutiva en un repositorio documental.
+              </span>
+            </div>
+            <div className="evidence-grid">
+              {evidence.map(([title, detail], index) => (
+                <article key={title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{detail}</p>
+                  </div>
+                  <i>↗</i>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="proposal-close blueprint-close">
+            <p>Siguiente lectura</p>
+            <h2>
+              Del activo consultivo a una trayectoria de ejecución delimitada.
+            </h2>
+            <div>
+              <button type="button" onClick={() => chooseTrack("project")}>
+                Revisar propuesta de proyecto <span>→</span>
+              </button>
+              <Link href="/" className="secondary">
+                Volver al Hub
+              </Link>
+            </div>
+            <small>
+              El Blueprint orienta la propuesta; no amplía automáticamente el
+              alcance de ejecución.
+            </small>
+          </section>
         </div>
       )}
 
@@ -1339,7 +2104,9 @@ export default function ProposalBlueprintPage() {
       >
         <button
           type="button"
-          onClick={() => goToChapter(chapters[Math.max(activeChapterIndex - 1, 0)][0])}
+          onClick={() =>
+            goToChapter(chapters[Math.max(activeChapterIndex - 1, 0)][0])
+          }
           disabled={activeChapterIndex === 0}
           tabIndex={controlsVisible ? 0 : -1}
           aria-label="Capítulo anterior"
@@ -1355,11 +2122,19 @@ export default function ProposalBlueprintPage() {
         >
           <span>{track.shortLabel}</span>
           <strong>{chapters[activeChapterIndex][1]}</strong>
-          <i>{activeChapterIndex + 1} / {chapters.length}</i>
+          <i>
+            {activeChapterIndex + 1} / {chapters.length}
+          </i>
         </button>
         <button
           type="button"
-          onClick={() => goToChapter(chapters[Math.min(activeChapterIndex + 1, chapters.length - 1)][0])}
+          onClick={() =>
+            goToChapter(
+              chapters[
+                Math.min(activeChapterIndex + 1, chapters.length - 1)
+              ][0],
+            )
+          }
           disabled={activeChapterIndex === chapters.length - 1}
           tabIndex={controlsVisible ? 0 : -1}
           aria-label="Capítulo siguiente"
@@ -1369,10 +2144,20 @@ export default function ProposalBlueprintPage() {
       </div>
 
       {indexOpen && controlsVisible && (
-        <div className="proposal-index" role="dialog" aria-label="Índice de la propuesta">
+        <div
+          className="proposal-index"
+          role="dialog"
+          aria-label="Índice de la propuesta"
+        >
           <header>
             <span>{track.shortLabel}</span>
-            <button type="button" onClick={() => setIndexOpen(false)} aria-label="Cerrar índice">×</button>
+            <button
+              type="button"
+              onClick={() => setIndexOpen(false)}
+              aria-label="Cerrar índice"
+            >
+              ×
+            </button>
           </header>
           <div>
             {chapters.map(([id, label], index) => (
@@ -1388,7 +2173,9 @@ export default function ProposalBlueprintPage() {
               </button>
             ))}
           </div>
-          <footer>← → · avanzar &nbsp; I · índice &nbsp; Home / End · inicio / cierre</footer>
+          <footer>
+            ← → · avanzar &nbsp; I · índice &nbsp; Home / End · inicio / cierre
+          </footer>
         </div>
       )}
     </main>
