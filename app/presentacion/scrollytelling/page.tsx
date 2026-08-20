@@ -8,10 +8,10 @@ import "./scrollytelling.css";
 const chapters = [
   ["extraordinario", "La oportunidad"], ["entendimiento", "Lo que entendimos"],
   ["categoria", "Una categoría distinta"], ["capacidad", "Capacidad ejecutable"],
-  ["servicio", "El servicio"], ["equipo", "Equipo extendido"],
+  ["servicio", "Modelo de evolución"], ["equipo", "Gobierno compartido"],
   ["vision", "Prueba de visión"], ["valor", "Valor temprano"],
   ["adopcion", "Adopción gobernada"], ["continuidad", "Control y continuidad"],
-  ["inversion", "Inversión"], ["decision", "Activar el programa"],
+  ["inversion", "Marco de decisión"], ["decision", "Siguiente paso"],
 ].map(([id, label], index) => ({ id, label, number: String(index + 1).padStart(2, "0") }));
 
 const domains = [
@@ -24,17 +24,17 @@ const domains = [
 const approaches = [
   { title: "SaaS / ERP", label: "Adoptar una estructura existente", line: "Acelera capacidades estándar; el ajuste fino depende de la flexibilidad de la plataforma." },
   { title: "Proyecto de software", label: "Construir una solución puntual", line: "Puede resolver un alcance concreto; continuidad, adopción y evolución requieren gobierno adicional." },
-  { title: "Business OS", label: "Instalar capacidad de evolución", line: "Conecta modelo operativo, sistema, implementación, soporte y mejora en un mismo servicio." },
+  { title: "Business OS", label: "Materializar capacidad de evolución", line: "Conecta modelo operativo, sistema, adopción y evolución sobre una misma base." },
 ];
 
 const serviceStages = [
   { number: "01", title: "Entender", detail: "Prioridades y contexto", output: "Una lectura compartida de la operación y de aquello que debe protegerse." },
   { number: "02", title: "Estandarizar", detail: "Procesos y reglas", output: "Un modelo operativo explícito que reduce dependencia e interpretación." },
   { number: "03", title: "Diseñar", detail: "Modelo y experiencia", output: "Capacidades, decisiones y experiencias conectadas al trabajo real." },
-  { number: "04", title: "Desarrollar", detail: "Configuración y sistema", output: "La capacidad se materializa en software verificable y reutilizable." },
-  { number: "05", title: "Implementar", detail: "Adopción y transición", output: "Usuarios, datos y operación avanzan mediante una transición controlada." },
-  { number: "06", title: "Asistir", detail: "Soporte e hypercare", output: "El equipo acompaña la operación hasta estabilizar el nuevo modelo." },
-  { number: "07", title: "Mejorar", detail: "Evidencia y siguiente wave", output: "La evidencia define qué evolucionar, ampliar, corregir o detener." },
+  { number: "04", title: "Materializar", detail: "Modelo y sistema", output: "La capacidad se expresa en una base verificable y reutilizable." },
+  { number: "05", title: "Validar", detail: "Uso y evidencia", output: "Usuarios, datos y operación prueban el modelo en contexto real." },
+  { number: "06", title: "Estabilizar", detail: "Adopción y soporte", output: "La operación consolida el nuevo modelo antes de ampliar." },
+  { number: "07", title: "Evolucionar", detail: "Siguiente decisión", output: "La evidencia define qué ampliar, corregir, mantener o detener." },
 ];
 
 const capabilities = [
@@ -46,10 +46,10 @@ const capabilities = [
 
 const gates = ["Congelar alcance", "Preparar datos", "Coexistir", "Probar", "Aceptar con evidencia", "Estabilizar", "Ampliar o detener"];
 const teamRoles = [
-  ["01", "Dirección", "Prioridad, inversión, decisiones y criterio de valor."],
+  ["01", "Dirección y Gobierno", "Prioridades, decisiones, riesgos y criterio de valor."],
   ["02", "Producto & Operación", "Reglas, procesos, experiencia y aceptación funcional."],
-  ["03", "Tecnología aplicada", "Arquitectura, construcción, datos, seguridad y calidad."],
-  ["04", "Adopción & Evolución", "Implementación, soporte, evidencia y siguiente ciclo."],
+  ["03", "Arquitectura & Tecnología", "Diseño, integración, datos, seguridad y calidad."],
+  ["04", "Adopción & Evolución", "Uso, estabilización, evidencia y siguiente decisión."],
 ];
 
 export default function ScrollytellingPresentation() {
@@ -216,23 +216,23 @@ export default function ScrollytellingPresentation() {
 
       <section id="categoria" className="story-chapter chapter-category">
         <div className="category-aura" /><div className="story-content category-copy"><span className="story-kicker">La decisión estratégica</span><h2>La decisión no es<em>“estándar o a medida”.</em></h2><p>Es qué modelo protege lo extraordinario, reduce el riesgo de cambio y conserva capacidad de evolución.</p></div>
-        <div className="approach-explorer"><div className="approach-tabs" role="tablist" aria-label="Modelos de inversión">{approaches.map((item, index) => <button key={item.title} type="button" role="tab" aria-selected={index === approach} className={index === approach ? "is-active" : ""} onClick={() => setApproach(index)}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.title}</strong><small>{item.label}</small></button>)}</div><article className="approach-detail"><small>Una lente para decidir</small><h3>{approaches[approach].title}</h3><p>{approaches[approach].line}</p><div><span>Modelo operativo</span><span>Sistema</span><span>Adopción</span><span>Evolución</span></div></article></div>
+        <div className="approach-explorer"><div className="approach-tabs" role="tablist" aria-label="Enfoques de evolución">{approaches.map((item, index) => <button key={item.title} type="button" role="tab" aria-selected={index === approach} className={index === approach ? "is-active" : ""} onClick={() => setApproach(index)}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.title}</strong><small>{item.label}</small></button>)}</div><article className="approach-detail"><small>Una lente para decidir</small><h3>{approaches[approach].title}</h3><p>{approaches[approach].line}</p><div><span>Modelo operativo</span><span>Sistema</span><span>Adopción</span><span>Evolución</span></div></article></div>
       </section>
 
       <section id="capacidad" className="story-chapter chapter-capacity light-chapter">
         <div className="capacity-asset"><img src="/brand/hf-os-suite-exploded.webp" alt="Capas del Business OS" /></div>
-        <div className="story-content capacity-copy"><span className="story-kicker">El activo operativo</span><h2>Lo valioso no termina<em>en una pantalla.</em></h2><p>La interfaz es la parte visible. Debajo se instala una forma compartida de decidir, ejecutar, medir y mejorar.</p><div className="asset-stack"><article><span>01</span><div><strong>Modelo operativo</strong><small>Procesos, reglas, roles y criterios explícitos.</small></div></article><article><span>02</span><div><strong>Capacidad en sistema</strong><small>Datos, engines y experiencias conectadas.</small></div></article><article><span>03</span><div><strong>Implementación utilizable</strong><small>Usuarios, transición, soporte y evidencia.</small></div></article><article><span>04</span><div><strong>Continuidad evolutiva</strong><small>Aprendizaje, iteración y siguientes waves.</small></div></article></div><Link className="inline-link" href="/propuesta#architecture">Explorar el blueprint operativo <span>↗</span></Link></div>
+        <div className="story-content capacity-copy"><span className="story-kicker">El activo operativo</span><h2>Lo valioso no termina<em>en una pantalla.</em></h2><p>La interfaz es la parte visible. Debajo se materializa una forma compartida de decidir, ejecutar, medir y mejorar.</p><div className="asset-stack"><article><span>01</span><div><strong>Modelo operativo</strong><small>Procesos, reglas, roles y criterios explícitos.</small></div></article><article><span>02</span><div><strong>Capacidad en sistema</strong><small>Datos, engines y experiencias conectadas.</small></div></article><article><span>03</span><div><strong>Adopción verificable</strong><small>Usuarios, transición, uso y evidencia.</small></div></article><article><span>04</span><div><strong>Continuidad evolutiva</strong><small>Aprendizaje, iteración y siguientes waves.</small></div></article></div><Link className="inline-link" href="/propuesta#architecture">Explorar el blueprint operativo <span>↗</span></Link></div>
       </section>
 
       <section id="servicio" className="story-chapter chapter-service light-chapter">
-        <div className="chapter-orb service-orb" /><div className="story-content service-copy"><span className="story-kicker">El modelo de la oferta</span><h2>El servicio cubre el ciclo completo;<em>el software es sólo una parte.</em></h2><p>Cada etapa entrega una salida verificable y prepara la siguiente decisión.</p></div>
-        <div className="service-explorer"><div className="service-stage-list" role="tablist" aria-label="Etapas del servicio">{serviceStages.map((stage, index) => <button key={stage.title} type="button" role="tab" aria-selected={index === serviceStage} className={index === serviceStage ? "is-active" : ""} onClick={() => setServiceStage(index)}><span>{stage.number}</span><strong>{stage.title}</strong><small>{stage.detail}</small></button>)}</div><article className="service-stage-detail"><span>Salida verificable · {serviceStages[serviceStage].number}</span><h3>{serviceStages[serviceStage].title}</h3><p>{serviceStages[serviceStage].output}</p><footer><i />El valor empieza antes del desarrollo y continúa después.</footer></article></div>
+        <div className="chapter-orb service-orb" /><div className="story-content service-copy"><span className="story-kicker">Modelo de evolución</span><h2>La evolución recorre el ciclo completo;<em>el software es sólo una parte.</em></h2><p>Cada etapa deja una salida verificable y prepara la siguiente decisión.</p></div>
+        <div className="service-explorer"><div className="service-stage-list" role="tablist" aria-label="Etapas del modelo de evolución">{serviceStages.map((stage, index) => <button key={stage.title} type="button" role="tab" aria-selected={index === serviceStage} className={index === serviceStage ? "is-active" : ""} onClick={() => setServiceStage(index)}><span>{stage.number}</span><strong>{stage.title}</strong><small>{stage.detail}</small></button>)}</div><article className="service-stage-detail"><span>Salida verificable · {serviceStages[serviceStage].number}</span><h3>{serviceStages[serviceStage].title}</h3><p>{serviceStages[serviceStage].output}</p><footer><i />El valor se construye desde la definición y se confirma en uso.</footer></article></div>
       </section>
 
       <section id="equipo" className="story-chapter chapter-team">
-        <div className="story-content team-copy"><span className="story-kicker">Capacidad extendida</span><h2>No un proveedor que entrega y se retira.<em>Un equipo que permanece.</em></h2><p>La continuidad reúne criterio de negocio, operación, tecnología y adopción dentro de un mismo sistema de trabajo.</p></div>
+        <div className="story-content team-copy"><span className="story-kicker">Gobierno compartido</span><h2>Una evolución de esta escala requiere<em>responsabilidad compartida.</em></h2><p>Harris &amp; Frank conserva las decisiones de negocio; el equipo de evolución conecta operación, diseño, tecnología y evidencia.</p></div>
         <div className="team-grid">{teamRoles.map(([code, title, line]) => <article key={code}><span>{code}</span><strong>{title}</strong><p>{line}</p></article>)}</div>
-        <div className="cadence-line"><span><i />Quincenal<strong>compromiso, demo y evidencia</strong></span><span><i />Mensual<strong>transformación y prioridades</strong></span><span><i />Trimestral<strong>QBR y plan de resultados</strong></span><span><i />Anual<strong>continuidad y renovación</strong></span></div>
+        <div className="cadence-line"><span><i />Semanal<strong>avance y bloqueos</strong></span><span><i />Quincenal<strong>evidencia funcional</strong></span><span><i />Mensual<strong>valor, riesgo y prioridad</strong></span><span><i />Por milestone<strong>aceptar, corregir, ampliar o detener</strong></span></div>
       </section>
 
       <section id="vision" className="story-chapter chapter-vision">
@@ -242,30 +242,30 @@ export default function ScrollytellingPresentation() {
       </section>
 
       <section id="valor" className="story-chapter chapter-value light-chapter">
-        <div className="story-content value-copy"><span className="story-kicker">Valor desde las primeras ocho semanas</span><h2>No hay que esperar al cierre<em>para recibir valor utilizable.</em></h2><p>El Foundation Release deja una base que puede verse, probarse, aceptarse y evolucionar.</p></div>
+        <div className="story-content value-copy"><span className="story-kicker">Valor desde el primer ciclo</span><h2>No hay que esperar al cierre<em>para recibir valor utilizable.</em></h2><p>Una primera base controlada debe poder verse, probarse, aceptarse y evolucionar.</p></div>
         <div className="value-path"><article><span>01</span><strong>Decisión congelada</strong><p>Alcance, datos, responsables, criterios y límites explícitos.</p><small>Menos ambigüedad</small></article><article><span>02</span><strong>Capacidad utilizable</strong><p>Una experiencia funcional en contexto real, acompañada y medible.</p><small>Valor visible</small></article><article><span>03</span><strong>Evidencia para ampliar</strong><p>Resultados, aprendizaje y una siguiente decisión informada.</p><small>Riesgo controlado</small></article></div>
         <div className="value-ribbon"><span>Definición</span><i /><span>Configuración</span><i /><span>Uso</span><i /><span>Evidencia</span><i /><strong>Siguiente wave</strong></div>
       </section>
 
       <section id="adopcion" className="story-chapter chapter-gates">
         <div className="gate-layers">{Array.from({ length: 7 }, (_, index) => <i key={index} style={{ "--layer": index } as CSSProperties} />)}</div>
-        <div className="story-content gate-copy"><span className="story-kicker">Adopción gobernada</span><h2>No proponemos un “big bang”.<em>Cada gate reduce riesgo antes de ampliar.</em></h2><p>El primer ciclo comienza con alcance, datos, responsables y criterios explícitos. La evidencia permite evolucionar, detener o corregir.</p><div className="gate-flow">{gates.map((gate, index) => <span key={gate}><i>{String(index + 1).padStart(2, "0")}</i>{gate}</span>)}</div></div>
+        <div className="story-content gate-copy"><span className="story-kicker">Adopción gobernada</span><h2>La evolución no requiere un “big bang”.<em>Cada gate reduce riesgo antes de ampliar.</em></h2><p>El primer ciclo comienza con alcance, datos, responsables y criterios explícitos. La evidencia permite evolucionar, detener o corregir.</p><div className="gate-flow">{gates.map((gate, index) => <span key={gate}><i>{String(index + 1).padStart(2, "0")}</i>{gate}</span>)}</div></div>
       </section>
 
       <section id="continuidad" className="story-chapter chapter-control light-chapter">
-        <div className="story-content control-copy"><span className="story-kicker">Control y continuidad</span><h2>El programa debe crear<em>un activo, no una dependencia.</em></h2><p>Cada aceptación deja reglas, datos, evidencia y una versión utilizable bajo condiciones explícitas.</p></div>
-        <div className="control-grid"><article className="control-keeps"><small>Lo que permanece</small><h3>Capacidad aceptada</h3><ul><li>Modelo operativo y decisiones documentadas</li><li>Datos, estructuras y evidencia exportable</li><li>Versiones aceptadas y derecho de uso acordado</li><li>Respaldos, responsables y playbooks de continuidad</li></ul></article><article className="control-agrees"><small>Lo que se acuerda</small><h3>Límites explícitos</h3><ul><li>Nuevas capacidades y siguientes waves</li><li>Integraciones, infraestructura y servicios de terceros</li><li>Niveles de soporte y ventanas de atención</li><li>Derechos adicionales sobre código sólo si se pactan</li></ul></article></div>
-        <Link className="inline-link dark-link" href="/propuesta">Ver metodología, respaldo y mitigación de riesgo <span>↗</span></Link>
+        <div className="story-content control-copy"><span className="story-kicker">Control y continuidad</span><h2>La continuidad depende de mantener<em>los activos críticos bajo control.</em></h2><p>Modelo operativo, datos, evidencia y criterios de aceptación deben permanecer visibles y verificables.</p></div>
+        <div className="control-grid"><article className="control-keeps"><small>Activos críticos</small><h3>Lo que debe preservarse</h3><ul><li>Modelo operativo y decisiones documentadas</li><li>Datos, estructuras y evidencia exportable</li><li>Configuración, versiones e historial de cambios</li><li>Respaldos, responsables y playbooks de continuidad</li></ul></article><article className="control-agrees"><small>Condiciones por definir</small><h3>Lo que debe acordarse</h3><ul><li>Prioridades y siguientes waves</li><li>Integraciones, infraestructura y terceros</li><li>Niveles de soporte y ventanas de atención</li><li>Reversión, recuperación y transición</li></ul></article></div>
+        <Link className="inline-link dark-link" href="/propuesta">Ver criterios de continuidad y mitigación de riesgo <span>↗</span></Link>
       </section>
 
       <section id="inversion" className="story-chapter chapter-investment">
-        <div className="story-content investment-copy"><span className="story-kicker">Programa anual de evolución operativa</span><h2>La inversión compra<em>capacidad continua de evolución.</em></h2><p>Doce meses: un Foundation Release de ocho semanas y diez ciclos mensuales de innovación, tecnología y mejora continua.</p><div className="investment-includes"><span>Modelo operativo</span><span>Equipo extendido</span><span>Implementación</span><span>QBR</span><span>Mejora continua</span></div></div>
-        <article className="investment-card"><small>Términos comerciales vigentes · MXN + IVA</small><div><span>Foundation Release</span><strong>$299,000</strong><i>Reconocimiento Blueprint −$55,900 · saldo $243,100</i></div><div className="credit"><span>Programa de evolución</span><strong>10 × $65,000</strong><i>Mensualidades anticipadas después de aceptar Foundation</i></div><div className="investment-total"><span>Valor total del primer año</span><strong>$949,000</strong><i>Nueva inversión pendiente · $893,100</i></div><footer>$150,000 a la firma · $93,100 contra aceptación · compromiso inicial de 12 meses.</footer></article>
+        <div className="story-content investment-copy"><span className="story-kicker">Marco de decisión</span><h2>El business case debe evaluarse por<em>valor, riesgo, control y evolución.</em></h2><p>Esta etapa valida la dirección estratégica; todavía no define alcance contratado, inversión ni condiciones comerciales.</p><div className="investment-includes"><span>Valor</span><span>Evidencia</span><span>Riesgo</span><span>Control</span><span>Evolución</span></div></div>
+        <article className="investment-card"><small>Criterios del business case</small><div><span>Valor operativo</span><strong>Resultado</strong><i>Qué mejora, para quién y con qué evidencia.</i></div><div className="credit"><span>Riesgo y continuidad</span><strong>Control</strong><i>Qué debe preservarse antes de ampliar.</i></div><div className="investment-total"><span>Capacidad de evolución</span><strong>Evolución</strong><i>Qué puede crecer sobre una base común.</i></div><footer>La dirección se valida antes de definir alcance, inversión o compromisos.</footer></article>
       </section>
 
       <section id="decision" className="story-chapter chapter-close">
         <div className="close-asset"><img src="/brand/hf-os-suite-exploded.webp" alt="" /></div>
-        <div className="story-content close-copy"><span className="story-kicker">La decisión</span><h2>Proteger lo extraordinario.<em>Hacerlo ejecutable. Evolucionarlo juntos.</em></h2><p>El Foundation Release activa un primer núcleo controlado; el programa anual lo convierte en una capacidad que aprende y evoluciona con evidencia.</p><div className="decision-steps"><span><i>01</i>Aprobar el programa anual</span><span><i>02</i>Congelar alcance y contrato</span><span><i>03</i>Activar Foundation Release</span></div><div className="close-actions"><Link className="primary" href="/demo">Recorrer la Demo <span>↗</span></Link><Link href="/propuesta">Explorar la propuesta</Link><Link href="/">Volver al Hub</Link></div><small className="prototype-note">Términos comerciales vigentes sujetos al contrato definitivo.</small></div>
+        <div className="story-content close-copy"><span className="story-kicker">Siguiente decisión</span><h2>Proteger lo extraordinario.<em>Hacerlo ejecutable. Evolucionarlo con evidencia.</em></h2><p>El siguiente paso es validar la dirección estratégica y definir el primer problema prioritario, sus responsables y criterios de éxito.</p><div className="decision-steps"><span><i>01</i>Validar la dirección</span><span><i>02</i>Priorizar el problema</span><span><i>03</i>Definir la evidencia</span></div><div className="close-actions"><Link className="primary" href="/demo">Recorrer la Demo <span>↗</span></Link><Link href="/propuesta">Explorar la propuesta</Link><Link href="/">Volver al Hub</Link></div><small className="prototype-note">La propuesta comercial se revisa por separado una vez validada la dirección.</small></div>
       </section>
 
       <nav className="story-controller" aria-label="Control de capítulos" aria-hidden={!controlsVisible}><button type="button" onClick={() => goToChapter(activeChapter - 1)} disabled={activeChapter === 0} tabIndex={controlsVisible ? 0 : -1}>← <span>Anterior</span></button><button type="button" className="story-position" onClick={() => setIndexOpen(true)} tabIndex={controlsVisible ? 0 : -1} aria-label={`Abrir índice. Capítulo ${activeChapter + 1} de ${chapters.length}`}><span>{chapters[activeChapter].number}</span><i><b style={{ width: `${((activeChapter + 1) / chapters.length) * 100}%` } as CSSProperties} /></i><span>{String(chapters.length).padStart(2, "0")}</span></button><button type="button" onClick={() => goToChapter(activeChapter + 1)} disabled={activeChapter === chapters.length - 1} tabIndex={controlsVisible ? 0 : -1}><span>Siguiente</span> →</button></nav>
